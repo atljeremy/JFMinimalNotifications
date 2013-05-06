@@ -17,6 +17,11 @@ typedef enum {
 @interface JFMinimalNotification : UIView
 
 /**
+ *
+ */
++ (JFMinimalNotification*)notificationWithStyle:(JFMinimalNotificationStytle)style superView:(UIView*)view;
+
+/**
  * Custom Initialization
  *
  * @return JFMinimalNotification This is the required init method that must be used to initialize a JFMinimalNotification view.

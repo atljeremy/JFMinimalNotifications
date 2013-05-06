@@ -21,6 +21,7 @@
 		3F0A97791735E3E700528BA7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0A97781735E3E700528BA7 /* ViewController.m */; };
 		3F0A97861735E4C500528BA7 /* JFMinimalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0A97851735E4C500528BA7 /* JFMinimalNotification.m */; };
 		3F0A97881736C4C700528BA7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0A97871736C4C700528BA7 /* QuartzCore.framework */; };
+		3F0A979017373F7000528BA7 /* JFMinimalNotification.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3F0A978F17373F7000528BA7 /* JFMinimalNotification.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		3F0A97841735E4C500528BA7 /* JFMinimalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFMinimalNotification.h; sourceTree = "<group>"; };
 		3F0A97851735E4C500528BA7 /* JFMinimalNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFMinimalNotification.m; sourceTree = "<group>"; };
 		3F0A97871736C4C700528BA7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		3F0A978F17373F7000528BA7 /* JFMinimalNotification.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = JFMinimalNotification.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 		3F0A97831735E4C500528BA7 /* JFMinimalNotification */ = {
 			isa = PBXGroup;
 			children = (
+				3F0A978F17373F7000528BA7 /* JFMinimalNotification.bundle */,
 				3F0A97841735E4C500528BA7 /* JFMinimalNotification.h */,
 				3F0A97851735E4C500528BA7 /* JFMinimalNotification.m */,
 			);
@@ -185,6 +188,7 @@
 				3F0A97701735E3E700528BA7 /* Default-568h@2x.png in Resources */,
 				3F0A97731735E3E700528BA7 /* MainStoryboard_iPhone.storyboard in Resources */,
 				3F0A97761735E3E700528BA7 /* MainStoryboard_iPad.storyboard in Resources */,
+				3F0A979017373F7000528BA7 /* JFMinimalNotification.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
