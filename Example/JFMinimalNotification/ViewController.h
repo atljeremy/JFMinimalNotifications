@@ -11,5 +11,8 @@
 @interface ViewController : UIViewController
 - (IBAction)show:(id)sender;
 - (IBAction)dismiss:(id)sender;
+- (IBAction)setErrorStyle:(id)sender;
+- (IBAction)setSuccessStyle:(id)sender;
+- (IBAction)setDefaultStyle:(id)sender;
 
 @end

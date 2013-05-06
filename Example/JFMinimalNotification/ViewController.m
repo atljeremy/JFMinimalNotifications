@@ -23,7 +23,7 @@
     self.minimalNotification = [[JFMinimalNotification alloc] initWithSuperView:self.view];
     [self.minimalNotification setTitle:@"My Test Title" withSubTitle:@"My Test Sub-Title"];
     [self.minimalNotification setTitleColor:[UIColor whiteColor]];
-    [self.minimalNotification setSubTitleColor:[UIColor lightGrayColor]];
+    [self.minimalNotification setSubTitleColor:[UIColor colorWithRed:215.0f/255.0f green:215.0f/255.0f blue:215.0f/255.0f alpha:1.0]];
     UIFont* titleFont = [UIFont fontWithName:@"STHeitiK-Light" size:22];
     [self.minimalNotification setTitleFont:titleFont];
     UIFont* subTitleFont = [UIFont fontWithName:@"STHeitiK-Light" size:16];
@@ -43,5 +43,17 @@
 
 - (IBAction)dismiss:(id)sender {
     [self.minimalNotification dismiss];
+}
+
+- (IBAction)setErrorStyle:(id)sender {
+    [self.minimalNotification setStyle:JFMinimalNotificationStyleError];
+}
+
+- (IBAction)setSuccessStyle:(id)sender {
+    [self.minimalNotification setStyle:JFMinimalNotificationStyleSuccess];
+}
+
+- (IBAction)setDefaultStyle:(id)sender {
+    [self.minimalNotification setStyle:JFMinimalNotificationStyleDefault];
 }
 @end

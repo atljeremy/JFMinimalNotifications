@@ -19,6 +19,11 @@ typedef enum {
 /**
  *
  */
+@property (nonatomic, readonly) JFMinimalNotificationStytle currentStyle;
+
+/**
+ *
+ */
 + (JFMinimalNotification*)notificationWithStyle:(JFMinimalNotificationStytle)style superView:(UIView*)view;
 
 /**

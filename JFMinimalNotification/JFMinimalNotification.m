@@ -100,9 +100,9 @@
         // Calculate frame for close button
         CGFloat closeButtonX = self.superView.frame.size.width - kDefaultCloseButtonWidth - kDefaultImageViewXPadding;
         CGRect closeButtonFrame = CGRectMake(closeButtonX,
-                                            0,
-                                            kDefaultCloseButtonWidth,
-                                            kDefaultClosebuttonHeight);
+                                             0,
+                                             kDefaultCloseButtonWidth,
+                                             kDefaultClosebuttonHeight);
         
         _contentView = [[UIView alloc] initWithFrame:contentFrame];
         
@@ -112,6 +112,7 @@
         _titleLabel.backgroundColor = [UIColor clearColor];
         [_titleLabel setShadowColor:[UIColor blackColor]];
         [_titleLabel setShadowOffset:CGSizeMake(1, 1)];
+        [_titleLabel setTextColor:[UIColor whiteColor]];
         
         _subTitleLabel = [[UILabel alloc] initWithFrame:subTitleLabelFrame];
         _subTitleLabel.text = @"JFMinimalNotification Sub-title";
@@ -119,11 +120,14 @@
         _subTitleLabel.backgroundColor = [UIColor clearColor];
         [_subTitleLabel setShadowColor:[UIColor blackColor]];
         [_subTitleLabel setShadowOffset:CGSizeMake(1, 1)];
+        [_subTitleLabel setTextColor:[UIColor colorWithRed:215.0f/255.0f green:215.0f/255.0f blue:215.0f/255.0f alpha:1.0]];
         
         _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _closeButton.frame = closeButtonFrame;
         [_closeButton setImage:[UIImage imageNamed:@"JFMinimalNotification.bundle/x.png"] forState:UIControlStateNormal];
         [_closeButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+        
+        _currentStyle = JFMinimalNotificationStyleDefault;
     }
     return self;
 }
@@ -137,7 +141,7 @@
     if (![self.contentView.subviews containsObject:self.rightImageView]) [self.contentView addSubview:self.rightImageView];
     if (![self.subviews containsObject:self.contentView]) [self addSubview:self.contentView];
     if (![self.subviews containsObject:self.closeButton]) [self addSubview:self.closeButton];
-
+    
     [UIView animateWithDuration:0.3 animations:^{
         self.frame = endFrame;
     }];
@@ -167,12 +171,18 @@
 
 - (void)setStyle:(JFMinimalNotificationStytle)style
 {
+    _currentStyle = style;
     switch (style) {
         case JFMinimalNotificationStyleError: {
             CAGradientLayer *gradient = [CAGradientLayer layer];
             gradient.frame = self.bounds;
             gradient.colors = @[(id)[[UIColor redColor] CGColor], (id)[[UIColor blackColor] CGColor]];
-            [self.contentView.layer insertSublayer:gradient atIndex:0];
+            CALayer* currentLayer = [self.contentView.layer.sublayers objectAtIndex:0];
+            if (currentLayer) {
+                [self.contentView.layer replaceSublayer:currentLayer with:gradient];
+            } else {
+                [self.contentView.layer insertSublayer:gradient atIndex:0];
+            }
             break;
         }
             
@@ -180,7 +190,12 @@
             CAGradientLayer *gradient = [CAGradientLayer layer];
             gradient.frame = self.bounds;
             gradient.colors = @[(id)[[UIColor greenColor] CGColor], (id)[[UIColor blackColor] CGColor]];
-            [self.contentView.layer insertSublayer:gradient atIndex:0];
+            CALayer* currentLayer = [self.contentView.layer.sublayers objectAtIndex:0];
+            if (currentLayer) {
+                [self.contentView.layer replaceSublayer:currentLayer with:gradient];
+            } else {
+                [self.contentView.layer insertSublayer:gradient atIndex:0];
+            }
             break;
         }
             
@@ -189,7 +204,12 @@
             CAGradientLayer *gradient = [CAGradientLayer layer];
             gradient.frame = self.bounds;
             gradient.colors = @[(id)[[UIColor lightGrayColor] CGColor], (id)[[UIColor darkGrayColor] CGColor]];
-            [self.contentView.layer insertSublayer:gradient atIndex:0];
+            CALayer* currentLayer = [self.contentView.layer.sublayers objectAtIndex:0];
+            if (currentLayer) {
+                [self.contentView.layer replaceSublayer:currentLayer with:gradient];
+            } else {
+                [self.contentView.layer insertSublayer:gradient atIndex:0];
+            }
             break;
         }
     }
