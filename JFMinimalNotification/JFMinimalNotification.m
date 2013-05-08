@@ -34,29 +34,31 @@
 
 @implementation JFMinimalNotification
 
-+ (JFMinimalNotification*)notificationWithStyle:(JFMinimalNotificationStytle)style superView:(UIView*)view
++ (JFMinimalNotification*)notificationWithStyle:(JFMinimalNotificationStytle)style
+                                          title:(NSString*)title
+                                       subTitle:(NSString*)subTitle
+                                      superView:(UIView*)view
 {
-    if (!view) @throw [NSException exceptionWithName:@"JFMinimalNotification: Invalid Initialization" reason:@"Must provide a superView in which this JFMinimalNotification will be presented in" userInfo:nil];
-    
     JFMinimalNotification* notification = [[self alloc] initWithSuperView:view];
     [notification setStyle:style];
+    [notification setTitle:title withSubTitle:subTitle];
     
     return notification;
 }
 
 - (id)init
 {
-    @throw [NSException exceptionWithName:@"JFMinimalNotification: Invalid Initialization" reason:@"Must use initWithSuperView:" userInfo:nil];
+    @throw [NSException exceptionWithName:@"JFMinimalNotificationInvalidInitializationException" reason:@"Must use initWithSuperView:" userInfo:nil];
 }
 
 - (id)initWithFrame:(CGRect)frame
 {
-    @throw [NSException exceptionWithName:@"JFMinimalNotification: Invalid Initialization" reason:@"Must use initWithSuperView:" userInfo:nil];
+    @throw [NSException exceptionWithName:@"JFMinimalNotificationInvalidInitializationException" reason:@"Must use initWithSuperView:" userInfo:nil];
 }
 
 - (id)initWithSuperView:(UIView*)view
 {
-    if (!view) @throw [NSException exceptionWithName:@"JFMinimalNotification: Invalid Initialization" reason:@"Must provide a superView in which this JFMinimalNotification will be presented in" userInfo:nil];
+    if (!view) @throw [NSException exceptionWithName:@"JFMinimalNotificationInvalidInitializationException" reason:@"Must provide a superView in which this JFMinimalNotification will be presented in" userInfo:nil];
     
     // Calculate frame for entire notification view
     CGFloat selfY = view.frame.size.height - kDefaultFullViewHeight;

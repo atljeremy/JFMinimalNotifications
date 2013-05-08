@@ -20,23 +20,29 @@
     [super viewDidLoad];
     
     /**
+     * Create the notification
      *
+     * You can also use the following to each the same result:
+     * self.minimalNotification = [[JFMinimalNotification alloc] initWithSuperView:self.view];
+     * [self.minimalNotification setTitle:@"My Test Title" withSubTitle:@"My Test Sub-Title"];
+     * [self.minimalNotification setStyle:JFMinimalNotificationStyleDefault];
      */
-    self.minimalNotification = [[JFMinimalNotification alloc] initWithSuperView:self.view];
-    
+    self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleDefault
+                                                                      title:@"This is my awesome title"
+                                                                   subTitle:@"This is my awesome sub-title"
+                                                                  superView:self.view];
     /**
-     *
-     */
-    [self.minimalNotification setTitle:@"My Test Title" withSubTitle:@"My Test Sub-Title"];
-    
-    /**
-     *
+     * Set the desired colors for the title and sub-title labels text
+     * Defaults:
+     * - Title: [UIColor whiteColor]
+     * - Sub-Title: [UIColor colorWithRed:215.0f/255.0f green:215.0f/255.0f blue:215.0f/255.0f alpha:1.0]
      */
     [self.minimalNotification setTitleColor:[UIColor whiteColor]];
     [self.minimalNotification setSubTitleColor:[UIColor colorWithRed:215.0f/255.0f green:215.0f/255.0f blue:215.0f/255.0f alpha:1.0]];
     
     /**
-     *
+     * Set the desired font for the title and sub-title labels
+     * Default is System Normal
      */
     UIFont* titleFont = [UIFont fontWithName:@"STHeitiK-Light" size:22];
     [self.minimalNotification setTitleFont:titleFont];
@@ -44,12 +50,8 @@
     [self.minimalNotification setSubTitleFont:subTitleFont];
     
     /**
-     *
-     */
-    [self.minimalNotification setStyle:JFMinimalNotificationStyleSuccess];
-    
-    /**
-     *
+     * Set the desired close button position
+     * Deffault is JFMinimalNotificationCloseBtnPositionRight
      */
     [self.minimalNotification setCloseButtonPosition:JFMinimalNotificationCloseBtnPositionLeft];
 }
