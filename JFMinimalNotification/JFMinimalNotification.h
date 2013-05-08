@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol JFMinimalNotificationDelegate;
+
 typedef enum {
     JFMinimalNotificationStyleDefault,
     JFMinimalNotificationStyleError,
@@ -21,10 +23,20 @@ typedef enum {
 
 @interface JFMinimalNotification : UIView
 
+
+/*****************************************************************************
+ * Properties
+ ****************************************************************************/
+
 /**
  * @return The current JFMinimalNotificationStytle of the notification
  */
 @property (nonatomic, readonly) JFMinimalNotificationStytle currentStyle;
+
+/**
+ * @return The JFMinimalNotificationDelegate
+ */
+@property (nonatomic, weak) id<JFMinimalNotificationDelegate> delegate;
 
 
 /*****************************************************************************
@@ -125,5 +137,15 @@ typedef enum {
  * @param position The desired JFMinimalNotificationCloseBtnPosition to be used for the close button position
  */
 - (void)setCloseButtonPosition:(JFMinimalNotificationCloseBtnPosition)positon;
+
+@end
+
+@protocol JFMinimalNotificationDelegate <NSObject>
+
+@optional
+- (void)willShowNotification:(JFMinimalNotification*)notification;
+- (void)didShowNotification:(JFMinimalNotification*)notification;
+- (void)willDisimissNotification:(JFMinimalNotification*)notification;
+- (void)didDismissNotification:(JFMinimalNotification*)notification;
 
 @end

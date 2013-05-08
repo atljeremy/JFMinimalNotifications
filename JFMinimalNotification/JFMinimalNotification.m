@@ -137,6 +137,9 @@
 
 - (void)show
 {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(willShowNotification:)]) {
+        [self.delegate willShowNotification:self];
+    }
     if (![self.superView.subviews containsObject:self]) [self.superView addSubview:self];
     if (![self.contentView.subviews containsObject:self.titleLabel]) [self.contentView addSubview:self.titleLabel];
     if (![self.contentView.subviews containsObject:self.subTitleLabel]) [self.contentView addSubview:self.subTitleLabel];
@@ -147,13 +150,24 @@
     
     [UIView animateWithDuration:0.3 animations:^{
         self.frame = endFrame;
+    } completion:^(BOOL finished) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didShowNotification:)]) {
+            [self.delegate didShowNotification:self];
+        }
     }];
 }
 
 - (void)dismiss
 {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(willDisimissNotification:)]) {
+        [self.delegate willDisimissNotification:self];
+    }
     [UIView animateWithDuration:0.3 animations:^{
         self.frame = startFrame;
+    } completion:^(BOOL finished) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didDismissNotification:)]) {
+            [self.delegate didDismissNotification:self];
+        }
     }];
 }
 
@@ -206,8 +220,8 @@
         default: {
             CAGradientLayer *gradient = [CAGradientLayer layer];
             gradient.frame = self.bounds;
-            UIColor* lighterGray = [UIColor colorWithRed:225.0f/255.0f green:225.0f/255.0f blue:225.0f/255.0f alpha:1.0];
-            UIColor* darkerGray = [UIColor colorWithRed:50.0f/255.0f green:50.0f/255.0f blue:50.0f/255.0f alpha:1.0];
+            UIColor* lighterGray = [UIColor colorWithRed:215.0f/255.0f green:215.0f/255.0f blue:215.0f/255.0f alpha:1.0];
+            UIColor* darkerGray = [UIColor colorWithRed:40.0f/255.0f green:40.0f/255.0f blue:40.0f/255.0f alpha:1.0];
             gradient.colors = @[(id)[lighterGray CGColor], (id)[darkerGray CGColor]];
             CALayer* currentLayer = [self.contentView.layer.sublayers objectAtIndex:0];
             if (currentLayer) {
