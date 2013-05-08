@@ -14,5 +14,9 @@
 - (IBAction)setErrorStyle:(id)sender;
 - (IBAction)setSuccessStyle:(id)sender;
 - (IBAction)setDefaultStyle:(id)sender;
+- (IBAction)setLeftView:(id)sender;
+- (IBAction)setRightView:(id)sender;
+- (IBAction)removeLeftView:(id)sender;
+- (IBAction)removeRightView:(id)sender;
 
 @end

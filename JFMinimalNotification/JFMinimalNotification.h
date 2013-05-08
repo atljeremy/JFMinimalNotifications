@@ -14,6 +14,11 @@ typedef enum {
     JFMinimalNotificationStyleSuccess
 } JFMinimalNotificationStytle;
 
+typedef enum {
+    JFMinimalNotificationCloseBtnPositionLeft,
+    JFMinimalNotificationCloseBtnPositionRight
+} JFMinimalNotificationCloseBtnPosition;
+
 @interface JFMinimalNotification : UIView
 
 /**
@@ -74,11 +79,16 @@ typedef enum {
 /**
  *
  */
-- (void)setLeftImage:(UIImage*)image;
+- (void)setLeftView:(UIView*)view;
 
 /**
  *
  */
-- (void)setRightImage:(UIImage*)image;
+- (void)setRightView:(UIView*)view;
+
+/**
+ *
+ */
+- (void)setCloseButtonPosition:(JFMinimalNotificationCloseBtnPosition)positon;
 
 @end

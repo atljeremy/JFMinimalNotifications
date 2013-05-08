@@ -11,9 +11,9 @@
 
 #define kDefaultFullViewHeight 112
 #define kDefaultContentHeight 90
-#define kDefaultImageViewXPadding 15
-#define kDefaultImageViewHeight 50
-#define kDefaultImageViewWidth 50
+#define kDefaultViewXPadding 15
+#define kDefaultViewHeight 50
+#define kDefaultViewWidth 50
 #define kDefaultClosebuttonHeight 30
 #define kDefaultCloseButtonWidth 30
 #define kDefaultXPadding 10
@@ -27,10 +27,8 @@
 @property (nonatomic, strong, readonly) UIView* contentView;
 @property (nonatomic, strong, readonly) UILabel* titleLabel;
 @property (nonatomic, strong, readonly) UILabel* subTitleLabel;
-@property (nonatomic, strong, readonly) UIImage* leftImage;
-@property (nonatomic, strong, readonly) UIImage* rightImage;
-@property (nonatomic, strong, readonly) UIImageView* leftImageView;
-@property (nonatomic, strong, readonly) UIImageView* rightImageView;
+@property (nonatomic, strong, readonly) UIView* leftView;
+@property (nonatomic, strong, readonly) UIView* rightView;
 @property (nonatomic, strong, readonly) UIButton* closeButton;
 @end
 
@@ -98,7 +96,7 @@
                                                subTitleHeight);
         
         // Calculate frame for close button
-        CGFloat closeButtonX = self.superView.frame.size.width - kDefaultCloseButtonWidth - kDefaultImageViewXPadding;
+        CGFloat closeButtonX = self.superView.frame.size.width - kDefaultCloseButtonWidth - kDefaultViewXPadding;
         CGRect closeButtonFrame = CGRectMake(closeButtonX,
                                              0,
                                              kDefaultCloseButtonWidth,
@@ -128,6 +126,9 @@
         [_closeButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
         
         _currentStyle = JFMinimalNotificationStyleDefault;
+        
+        _leftView = nil;
+        _rightView = nil;
     }
     return self;
 }
@@ -137,8 +138,8 @@
     if (![self.superView.subviews containsObject:self]) [self.superView addSubview:self];
     if (![self.contentView.subviews containsObject:self.titleLabel]) [self.contentView addSubview:self.titleLabel];
     if (![self.contentView.subviews containsObject:self.subTitleLabel]) [self.contentView addSubview:self.subTitleLabel];
-    if (![self.contentView.subviews containsObject:self.leftImageView]) [self.contentView addSubview:self.leftImageView];
-    if (![self.contentView.subviews containsObject:self.rightImageView]) [self.contentView addSubview:self.rightImageView];
+    if (self.leftView && ![self.contentView.subviews containsObject:self.leftView]) [self.contentView addSubview:self.leftView];
+    if (self.rightView && ![self.contentView.subviews containsObject:self.rightView]) [self.contentView addSubview:self.rightView];
     if (![self.subviews containsObject:self.contentView]) [self addSubview:self.contentView];
     if (![self.subviews containsObject:self.closeButton]) [self addSubview:self.closeButton];
     
@@ -159,14 +160,12 @@
     if ([self.superView.subviews containsObject:self]) {
         [self removeFromSuperview];
     }
-    _superView      = nil;
-    _titleLabel     = nil;
-    _subTitleLabel  = nil;
-    _leftImage      = nil;
-    _leftImageView  = nil;
-    _rightImage     = nil;
-    _rightImageView = nil;
-    _contentView    = nil;
+    _superView     = nil;
+    _titleLabel    = nil;
+    _subTitleLabel = nil;
+    _leftView      = nil;
+    _rightView     = nil;
+    _contentView   = nil;
 }
 
 - (void)setStyle:(JFMinimalNotificationStytle)style
@@ -176,7 +175,8 @@
         case JFMinimalNotificationStyleError: {
             CAGradientLayer *gradient = [CAGradientLayer layer];
             gradient.frame = self.bounds;
-            gradient.colors = @[(id)[[UIColor redColor] CGColor], (id)[[UIColor blackColor] CGColor]];
+            UIColor* darkRed = [UIColor colorWithRed:50.0f/255.0f green:0.0f blue:0.0f alpha:1.0];
+            gradient.colors = @[(id)[[UIColor redColor] CGColor], (id)[darkRed CGColor]];
             CALayer* currentLayer = [self.contentView.layer.sublayers objectAtIndex:0];
             if (currentLayer) {
                 [self.contentView.layer replaceSublayer:currentLayer with:gradient];
@@ -189,7 +189,8 @@
         case JFMinimalNotificationStyleSuccess: {
             CAGradientLayer *gradient = [CAGradientLayer layer];
             gradient.frame = self.bounds;
-            gradient.colors = @[(id)[[UIColor greenColor] CGColor], (id)[[UIColor blackColor] CGColor]];
+            UIColor* darkGreen = [UIColor colorWithRed:0.0f green:50.0f/255.0f blue:0.0f alpha:1.0];
+            gradient.colors = @[(id)[[UIColor greenColor] CGColor], (id)[darkGreen CGColor]];
             CALayer* currentLayer = [self.contentView.layer.sublayers objectAtIndex:0];
             if (currentLayer) {
                 [self.contentView.layer replaceSublayer:currentLayer with:gradient];
@@ -203,7 +204,9 @@
         default: {
             CAGradientLayer *gradient = [CAGradientLayer layer];
             gradient.frame = self.bounds;
-            gradient.colors = @[(id)[[UIColor lightGrayColor] CGColor], (id)[[UIColor darkGrayColor] CGColor]];
+            UIColor* lighterGray = [UIColor colorWithRed:225.0f/255.0f green:225.0f/255.0f blue:225.0f/255.0f alpha:1.0];
+            UIColor* darkerGray = [UIColor colorWithRed:50.0f/255.0f green:50.0f/255.0f blue:50.0f/255.0f alpha:1.0];
+            gradient.colors = @[(id)[lighterGray CGColor], (id)[darkerGray CGColor]];
             CALayer* currentLayer = [self.contentView.layer.sublayers objectAtIndex:0];
             if (currentLayer) {
                 [self.contentView.layer replaceSublayer:currentLayer with:gradient];
@@ -241,37 +244,160 @@
     [self.subTitleLabel setTextColor:color];
 }
 
-- (void)setLeftImage:(UIImage*)image
+- (void)setLeftView:(UIView*)view
 {
-    _leftImage = image;
-    // Calculate frame for left image
-    CGFloat leftImageY = (kDefaultContentHeight / 2) - (kDefaultImageViewHeight / 2);
-    CGRect leftImageFrame = CGRectMake(kDefaultImageViewXPadding,
-                                       leftImageY,
-                                       kDefaultImageViewWidth,
-                                       kDefaultImageViewHeight);
-    _leftImageView = [[UIImageView alloc] initWithFrame:leftImageFrame];
-    _leftImageView.image = self.leftImage;
-    if (![self.subviews containsObject:self.leftImageView]) {
-        [self addSubview:self.leftImageView];
+    if (view) {
+        if (![self.contentView.subviews containsObject:self.leftView]) {
+            _leftView = view;
+        
+            // Calculate frame for left view
+            CGFloat y = (kDefaultContentHeight / 2) - (kDefaultViewHeight / 2);
+            CGRect leftViewFrame = CGRectMake(kDefaultViewXPadding,
+                                              y,
+                                              kDefaultViewWidth,
+                                              kDefaultViewHeight);
+            
+            CGFloat width = self.titleLabel.frame.size.width - leftViewFrame.size.width - kDefaultXPadding;
+            CGRect newTitleFrame = CGRectMake(self.titleLabel.frame.origin.x + leftViewFrame.size.width + kDefaultXPadding,
+                                              self.titleLabel.frame.origin.y,
+                                              width,
+                                              self.titleLabel.frame.size.height);
+            
+            CGRect newSubtitleFrame = CGRectMake(self.subTitleLabel.frame.origin.x + leftViewFrame.size.width + kDefaultXPadding,
+                                                 self.subTitleLabel.frame.origin.y,
+                                                 width,
+                                                 self.subTitleLabel.frame.size.height);
+
+            
+            [self.contentView addSubview:self.leftView];
+            self.leftView.contentMode = UIViewContentModeScaleAspectFit;
+            self.leftView.frame = leftViewFrame;
+            self.leftView.alpha = 0.0f;
+            [UIView animateWithDuration:0.3 animations:^{
+                self.leftView.alpha = 1.0f;
+                self.titleLabel.frame = newTitleFrame;
+                self.subTitleLabel.frame = newSubtitleFrame;
+            }];
+        }
+    } else {
+        if ([self.contentView.subviews containsObject:self.leftView]) {
+            [UIView animateWithDuration:0.3 animations:^{
+                self.leftView.alpha = 0.0f;
+            } completion:^(BOOL finished) {
+                [self.leftView removeFromSuperview];
+            }];
+        }
+        _leftView = nil;
+        
+        BOOL hasRightView = (self.rightView != nil && [self.contentView.subviews containsObject:self.rightView]);
+        CGFloat width = (hasRightView) ? self.rightView.frame.origin.x - kDefaultXPadding
+                                       : self.superView.frame.size.width - (kDefaultXPadding * 2);
+        CGRect newTitleFrame = CGRectMake(kDefaultXPadding,
+                                          self.titleLabel.frame.origin.y,
+                                          width,
+                                          self.titleLabel.frame.size.height);
+        
+        CGRect newSubtitleFrame = CGRectMake(kDefaultXPadding,
+                                             self.subTitleLabel.frame.origin.y,
+                                             width,
+                                             self.subTitleLabel.frame.size.height);
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.titleLabel.frame = newTitleFrame;
+            self.subTitleLabel.frame = newSubtitleFrame;
+        }];
     }
 }
 
-- (void)setRightImage:(UIImage*)image
+- (void)setRightView:(UIView*)view
 {
-    _rightImage = image;
-    // Calculate frame for right image
-    CGFloat rightImageY = (kDefaultContentHeight / 2) - (kDefaultImageViewHeight / 2);
-    CGFloat rightImageX = self.superView.frame.size.width - kDefaultImageViewWidth - kDefaultImageViewXPadding;
-    CGRect rightImageFrame = CGRectMake(rightImageX,
-                                        rightImageY,
-                                        kDefaultImageViewWidth,
-                                        kDefaultImageViewHeight);
-    _rightImageView = [[UIImageView alloc] initWithFrame:rightImageFrame];
-    _rightImageView.image = self.rightImage;
-    if (![self.subviews containsObject:self.rightImageView]) {
-        [self addSubview:self.rightImageView];
+    if (view) {
+        if (![self.contentView.subviews containsObject:self.rightView]) {
+            _rightView = view;
+            
+            // Calculate frame for right view
+            CGFloat y = (kDefaultContentHeight / 2) - (kDefaultViewHeight / 2);
+            CGFloat x = self.superView.frame.size.width - kDefaultXPadding - kDefaultViewWidth;
+            CGRect rightViewFrame = CGRectMake(x,
+                                               y,
+                                               kDefaultViewWidth,
+                                               kDefaultViewHeight);
+
+            CGFloat width = self.titleLabel.frame.size.width - rightViewFrame.size.width - kDefaultXPadding;
+            CGRect newTitleFrame = CGRectMake(self.titleLabel.frame.origin.x,
+                                              self.titleLabel.frame.origin.y,
+                                              width,
+                                              self.titleLabel.frame.size.height);
+            
+            CGRect newSubtitleFrame = CGRectMake(self.subTitleLabel.frame.origin.x,
+                                                 self.subTitleLabel.frame.origin.y,
+                                                 width,
+                                                 self.subTitleLabel.frame.size.height);
+            
+            
+            [self.contentView addSubview:self.rightView];
+            self.rightView.contentMode = UIViewContentModeScaleAspectFit;
+            self.rightView.frame = rightViewFrame;
+            self.rightView.alpha = 0.0f;
+            [UIView animateWithDuration:0.3 animations:^{
+                self.rightView.alpha = 1.0f;
+                self.titleLabel.frame = newTitleFrame;
+                self.subTitleLabel.frame = newSubtitleFrame;
+            }];
+        }
+    } else {
+        if ([self.contentView.subviews containsObject:self.rightView]) {
+            [UIView animateWithDuration:0.3 animations:^{
+                self.rightView.alpha = 0.0f;
+            } completion:^(BOOL finished) {
+                [self.rightView removeFromSuperview];
+            }];
+        }
+        _rightView = nil;
+        
+        BOOL hasLeftView = (self.leftView != nil && [self.contentView.subviews containsObject:self.leftView]);
+        CGFloat x = self.titleLabel.frame.origin.x;
+        CGFloat width = (hasLeftView) ? self.superView.frame.size.width - x - kDefaultXPadding : self.superView.frame.size.width - (kDefaultXPadding * 2);
+        CGRect newTitleFrame = CGRectMake(x,
+                                          self.titleLabel.frame.origin.y,
+                                          width,
+                                          self.titleLabel.frame.size.height);
+        
+        CGRect newSubtitleFrame = CGRectMake(x,
+                                             self.subTitleLabel.frame.origin.y,
+                                             width,
+                                             self.subTitleLabel.frame.size.height);
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.titleLabel.frame = newTitleFrame;
+            self.subTitleLabel.frame = newSubtitleFrame;
+        }];
     }
+}
+
+- (void)setCloseButtonPosition:(JFMinimalNotificationCloseBtnPosition)positon
+{
+    // Calculate frame for close button
+    CGFloat closeButtonX;
+    switch (positon) {
+        case JFMinimalNotificationCloseBtnPositionLeft:
+            closeButtonX = kDefaultViewXPadding;
+            break;
+            
+        case JFMinimalNotificationCloseBtnPositionRight:
+        default:
+            closeButtonX = self.superView.frame.size.width - kDefaultCloseButtonWidth - kDefaultViewXPadding;
+            break;
+    }
+    
+    CGRect closeButtonFrame = CGRectMake(closeButtonX,
+                                         0,
+                                         kDefaultCloseButtonWidth,
+                                         kDefaultClosebuttonHeight);
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.closeButton.frame = closeButtonFrame;
+    }];
 }
 
 @end
