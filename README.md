@@ -15,6 +15,7 @@ New screen shots coming soon. For now, just clone and run the sample project. :)
 ![Default](https://imageshack.us/a/img856/7325/screenshot20130508at125.png) -->
 
 ### iPad
+New screen shots coming soon. For now, just clone and run the sample project. :)
 <!-- ![Error With Right View](https://imageshack.us/a/img62/7325/screenshot20130508at125.png)
 ![Success With Left View](https://imageshack.us/a/img10/7325/screenshot20130508at125.png)
 ![Success](https://imageshack.us/a/img201/7325/screenshot20130508at125.png)
