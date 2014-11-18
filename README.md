@@ -99,14 +99,14 @@ Delegate Methods:
 Installation:
 ------------
 
-### Add JFMinimalNotification to your project
+### Add JFMinimalNotification to your projects
 
 - Simply copy the source files from the "JFMinimalNotification" folder into your project.
 
 ### Add Dependencies
 
 - In your application's project app target settings, find the "Build Phases" section and open the "Link Binary With Libraries" block
-- Click the "+" button and select the "QuartzCore.framework".
+- Click the "+" button and select the "CoreGraphics.framework".
 
 License
 -------

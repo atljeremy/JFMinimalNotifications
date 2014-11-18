@@ -12,9 +12,9 @@
 		1A06FD9D1A1B887300EC399D /* UIColor+JFMinimalNotificationColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A06FD9C1A1B887300EC399D /* UIColor+JFMinimalNotificationColors.m */; };
 		1A06FDD81A1BB0DC00EC399D /* NSInvocation+Constructors.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A06FDD71A1BB0DC00EC399D /* NSInvocation+Constructors.m */; };
 		1A06FDE01A1BF1F300EC399D /* thumbs-up.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1A06FDDF1A1BF1F300EC399D /* thumbs-up.jpg */; };
+		1A06FDE11A1BF7E200EC399D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0A975D1735E3E700528BA7 /* CoreGraphics.framework */; };
 		3F0A975A1735E3E700528BA7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0A97591735E3E700528BA7 /* UIKit.framework */; };
 		3F0A975C1735E3E700528BA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0A975B1735E3E700528BA7 /* Foundation.framework */; };
-		3F0A975E1735E3E700528BA7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0A975D1735E3E700528BA7 /* CoreGraphics.framework */; };
 		3F0A97641735E3E700528BA7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3F0A97621735E3E700528BA7 /* InfoPlist.strings */; };
 		3F0A97661735E3E700528BA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0A97651735E3E700528BA7 /* main.m */; };
 		3F0A976A1735E3E700528BA7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0A97691735E3E700528BA7 /* AppDelegate.m */; };
@@ -25,7 +25,6 @@
 		3F0A97761735E3E700528BA7 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0A97741735E3E700528BA7 /* MainStoryboard_iPad.storyboard */; };
 		3F0A97791735E3E700528BA7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0A97781735E3E700528BA7 /* ViewController.m */; };
 		3F0A97861735E4C500528BA7 /* JFMinimalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0A97851735E4C500528BA7 /* JFMinimalNotification.m */; };
-		3F0A97881736C4C700528BA7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0A97871736C4C700528BA7 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,10 +64,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F0A97881736C4C700528BA7 /* QuartzCore.framework in Frameworks */,
+				1A06FDE11A1BF7E200EC399D /* CoreGraphics.framework in Frameworks */,
 				3F0A975A1735E3E700528BA7 /* UIKit.framework in Frameworks */,
 				3F0A975C1735E3E700528BA7 /* Foundation.framework in Frameworks */,
-				3F0A975E1735E3E700528BA7 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
