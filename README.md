@@ -101,7 +101,7 @@ Installation:
 
 ### Add JFMinimalNotification to your project
 
-- Simply copy the JFMinimalNotification folder containing the .h, .m, and .bundle files into your project.
+- Simply copy the source files from the "JFMinimalNotification" folder into your project.
 
 ### Add Dependencies
 
