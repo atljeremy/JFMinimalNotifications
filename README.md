@@ -1,7 +1,7 @@
 JFMinimalNotification
 ===========
 
-This is an iOS UIView for presenting minimal notification view on both iPhone and iPad. JFMinimalNotification is only available in ARC and targets iOS 5.0+.
+This is an iOS UIView for presenting minimal notification view on both iPhone and iPad. JFMinimalNotification is only available in ARC and targets iOS 7.0+.
 
 What It Looks Like:
 ------------------
