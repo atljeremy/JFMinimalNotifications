@@ -28,7 +28,7 @@
      * [self.minimalNotification setStyle:JFMinimalNotificationStyleDefault];
      */
     self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleError title:@"This is my awesome title" subTitle:@"This is my awesome sub-title" dismissalDelay:0.0 touchHandler:^{
-        NSLog(@"BOOM!");
+        [self.minimalNotification dismiss];
     }];
     
     [self.view addSubview:self.minimalNotification];

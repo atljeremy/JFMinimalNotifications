@@ -6,21 +6,20 @@ This is an iOS UIView for presenting minimal notification view on both iPhone an
 What It Looks Like:
 ------------------
 
-See a short video here: [https://www.youtube.com/watch?v=5p0vpTzR3Sc](https://www.youtube.com/watch?v=5p0vpTzR3Sc)
-
 ### iPhone
-![Error With Right View](https://imageshack.us/a/img194/7325/screenshot20130508at125.png)
+New screen shots coming soon. For now, just clone and run the sample project. :)
+<!-- ![Error With Right View](https://imageshack.us/a/img194/7325/screenshot20130508at125.png)
 ![Success With Left View](https://imageshack.us/a/img713/7325/screenshot20130508at125.png)
 ![Success](https://imageshack.us/a/img560/7325/screenshot20130508at125.png)
 ![Error](https://imageshack.us/a/img43/7325/screenshot20130508at125.png)
-![Default](https://imageshack.us/a/img856/7325/screenshot20130508at125.png)
+![Default](https://imageshack.us/a/img856/7325/screenshot20130508at125.png) -->
 
 ### iPad
-![Error With Right View](https://imageshack.us/a/img62/7325/screenshot20130508at125.png)
+<!-- ![Error With Right View](https://imageshack.us/a/img62/7325/screenshot20130508at125.png)
 ![Success With Left View](https://imageshack.us/a/img10/7325/screenshot20130508at125.png)
 ![Success](https://imageshack.us/a/img201/7325/screenshot20130508at125.png)
 ![Error](https://imageshack.us/a/img197/7325/screenshot20130508at125.png)
-![Default](https://imageshack.us/a/img163/7325/screenshot20130508at125.png)
+![Default](https://imageshack.us/a/img163/7325/screenshot20130508at125.png) -->
 
 How To Use It:
 -------------
@@ -38,24 +37,10 @@ How To Use It:
     
     /**
      * Create the notification
-     *
-     * You can also use the following to each the same result:
-     * self.minimalNotification = [[JFMinimalNotification alloc] initWithSuperView:self.view];
-     * [self.minimalNotification setTitle:@"My Test Title" withSubTitle:@"My Test Sub-Title"];
-     * [self.minimalNotification setStyle:JFMinimalNotificationStyleDefault];
      */
     self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleDefault
                                                                       title:@"This is my awesome title"
-                                                                   subTitle:@"This is my awesome sub-title"
-                                                                  superView:self.view];
-    /**
-     * Set the desired colors for the title and sub-title labels text
-     * Defaults:
-     * - Title: [UIColor whiteColor]
-     * - Sub-Title: [UIColor colorWithRed:215.0f/255.0f green:215.0f/255.0f blue:215.0f/255.0f alpha:1.0]
-     */
-    [self.minimalNotification setTitleColor:[UIColor whiteColor]];
-    [self.minimalNotification setSubTitleColor:[UIColor colorWithRed:215.0f/255.0f green:215.0f/255.0f blue:215.0f/255.0f alpha:1.0]];
+                                                                   subTitle:@"This is my awesome sub-title"];
     
     /**
      * Set the desired font for the title and sub-title labels
@@ -65,22 +50,39 @@ How To Use It:
     [self.minimalNotification setTitleFont:titleFont];
     UIFont* subTitleFont = [UIFont fontWithName:@"STHeitiK-Light" size:16];
     [self.minimalNotification setSubTitleFont:subTitleFont];
-    
+
     /**
-     * Set the desired close button position
-     * Deffault is JFMinimalNotificationCloseBtnPositionRight
-     */
-    [self.minimalNotification setCloseButtonPosition:JFMinimalNotificationCloseBtnPositionRight];
+    * Add the notification to a view
+    */
+    [self.view addSubview:self.minimalNotification];
 }
 
-// Here is are a couple IBAction's that are called via UIButton
+/**
+ * Showing the notification from a button handler
+ */
 - (IBAction)show:(id)sender {
     [self.minimalNotification show];
 }
 
+/**
+ * Hiding the notification from a button handler
+ */
 - (IBAction)dismiss:(id)sender {
     [self.minimalNotification dismiss];
 }
+```
+
+### Constructors / Options
+```objective-c
+/**
+ * Note: passing a dismissalDelay of 0 means the notification will NOT be automatically dismissed, you will need to 
+ * dismiss the notification yourself by calling -dismiss on the notification object. If you pass a dismissalDelay 
+ * value greater than 0, this will be the length of time the notification will remain visisble before being 
+ * automatically dismissed.
+ */
+self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleError title:@"This is my awesome title" subTitle:@"This is my awesome sub-title" dismissalDelay:0.0 touchHandler:^{
+    [self.minimalNotification dismiss];
+}];
 ```
 
 Please see the example project include in this repo for an example of how to use this notification.
