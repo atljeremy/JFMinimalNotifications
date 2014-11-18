@@ -10,23 +10,41 @@
 
 @protocol JFMinimalNotificationDelegate;
 
-typedef enum {
+typedef NS_ENUM(NSInteger, JFMinimalNotificationStytle) {
     JFMinimalNotificationStyleDefault,
     JFMinimalNotificationStyleError,
-    JFMinimalNotificationStyleSuccess
-} JFMinimalNotificationStytle;
+    JFMinimalNotificationStyleSuccess,
+    JFMinimalNotificationStyleInfo
+};
 
-typedef enum {
-    JFMinimalNotificationCloseBtnPositionLeft,
-    JFMinimalNotificationCloseBtnPositionRight
-} JFMinimalNotificationCloseBtnPosition;
+typedef void (^JFMinimalNotificationTouchHandler)(void);
 
 @interface JFMinimalNotification : UIView
 
 
-/*****************************************************************************
- * Properties
- ****************************************************************************/
+#pragma mark ----------------------
+#pragma mark Properties
+#pragma mark ----------------------
+
+/**
+ * @return The titleLabel used to display the title text in the notification.
+ */
+@property (nonatomic, strong, readonly) UILabel* titleLabel;
+
+/**
+ * @return The subTitleLabel used to display the title text in the notification.
+ */
+@property (nonatomic, strong, readonly) UILabel* subTitleLabel;
+
+/**
+ * @return The UIView displayed in the left accessory view of the notification.
+ */
+@property (nonatomic, strong, readonly) UIView* leftAccessoryView;
+
+/**
+ * @return The UIView displayed in the right accessory view of the notification.
+ */
+@property (nonatomic, strong, readonly) UIView* rightAccessoryView;
 
 /**
  * @return The current JFMinimalNotificationStytle of the notification
@@ -39,34 +57,52 @@ typedef enum {
 @property (nonatomic, weak) id<JFMinimalNotificationDelegate> delegate;
 
 
-/*****************************************************************************
- * Custom Initialization
- ****************************************************************************/
+#pragma mark ----------------------
+#pragma mark Custom Initialization
+#pragma mark ----------------------
 
 /**
  * @return a helper class method to instantiate a notification and set the desired style and super view.
  * @param style The desired JFMinimalNotificationStytle for this notification
- * @param view the super UIView that this notification will be presented in
  * @param title The desired title string
  * @param subTitle The desired sub-title string
  * @exception JFMinimalNotificationInvalidInitializationException This exception will be thrown if you try to create a new notification without passing in a super view.
  */
-+ (JFMinimalNotification*)notificationWithStyle:(JFMinimalNotificationStytle)style
-                                          title:(NSString*)title
-                                       subTitle:(NSString*)subTitle
-                                      superView:(UIView*)view;
++ (instancetype)notificationWithStyle:(JFMinimalNotificationStytle)style
+                                title:(NSString*)title
+                             subTitle:(NSString*)subTitle;
 
 /**
- * @return JFMinimalNotification This is the required init method that must be used to initialize a JFMinimalNotification view.
- * @param view the view in which to present the JFMinimalNotification in
+ * @return a helper class method to instantiate a notification and set the desired style and super view.
+ * @param style The desired JFMinimalNotificationStytle for this notification
+ * @param title The desired title string
+ * @param subTitle The desired sub-title string
+ * @param dismissalDelay The amount of time the notification should be displayed before being dismissed.
  * @exception JFMinimalNotificationInvalidInitializationException This exception will be thrown if you try to create a new notification without passing in a super view.
  */
-- (id)initWithSuperView:(UIView*)view;
++ (instancetype)notificationWithStyle:(JFMinimalNotificationStytle)style
+                                title:(NSString*)title
+                             subTitle:(NSString*)subTitle
+                       dismissalDelay:(NSTimeInterval)dismissalDelay;
 
+/**
+ * @return a helper class method to instantiate a notification and set the desired style and super view.
+ * @param style The desired JFMinimalNotificationStytle for this notification
+ * @param title The desired title string
+ * @param subTitle The desired sub-title string
+ * @param dismissalDelay The amount of time the notification should be displayed before being dismissed.
+ * @param touchHandler The touch handler callback block that will be invoked when the notification is tapped.
+ * @exception JFMinimalNotificationInvalidInitializationException This exception will be thrown if you try to create a new notification without passing in a super view.
+ */
++ (instancetype)notificationWithStyle:(JFMinimalNotificationStytle)style
+                                title:(NSString*)title
+                             subTitle:(NSString*)subTitle
+                       dismissalDelay:(NSTimeInterval)dismissalDelay
+                         touchHandler:(JFMinimalNotificationTouchHandler)touchHandler;
 
-/*****************************************************************************
- * Presentation
- ****************************************************************************/
+#pragma mark ----------------------
+#pragma mark Presentation
+#pragma mark ----------------------
 
 /**
  * @return presents the notification
@@ -79,9 +115,9 @@ typedef enum {
 - (void)dismiss;
 
 
-/*****************************************************************************
- * Appearance
- ****************************************************************************/
+#pragma mark ----------------------
+#pragma mark Appearance
+#pragma mark ----------------------
 
 /**
  * @return Updates the JFMinimalNotificationStytle of the notification
@@ -109,34 +145,16 @@ typedef enum {
 - (void)setSubTitleFont:(UIFont*)font;
 
 /**
- * @return Sets the title label text color
- * @param color The desired UIColor to be set as the title label text color
- */
-- (void)setTitleColor:(UIColor*)color;
-
-/**
- * @return Sets the title label text color
- * @param color The desired UIColor to be set as the sub-title label text color
- */
-- (void)setSubTitleColor:(UIColor*)color;
-
-/**
  * @return Sets the left view
  * @param view The desired UIView to be set as the left view
  */
-- (void)setLeftView:(UIView*)view;
+- (void)setLeftAccessoryView:(UIView*)view;
 
 /**
  * @return Sets the right view
  * @param view The desired UIView to be set as the right view
  */
-- (void)setRightView:(UIView*)view;
-
-/**
- * @return Sets the position of the close button
- * @param position The desired JFMinimalNotificationCloseBtnPosition to be used for the close button position
- */
-- (void)setCloseButtonPosition:(JFMinimalNotificationCloseBtnPosition)positon;
+- (void)setRightAccessoryView:(UIView*)view;
 
 @end
 

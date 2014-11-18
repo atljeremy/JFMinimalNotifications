@@ -27,24 +27,16 @@
      * [self.minimalNotification setTitle:@"My Test Title" withSubTitle:@"My Test Sub-Title"];
      * [self.minimalNotification setStyle:JFMinimalNotificationStyleDefault];
      */
-    self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleDefault
-                                                                      title:@"This is my awesome title"
-                                                                   subTitle:@"This is my awesome sub-title"
-                                                                  superView:self.view];
+    self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleError title:@"This is my awesome title" subTitle:@"This is my awesome sub-title" dismissalDelay:0.0 touchHandler:^{
+        NSLog(@"BOOM!");
+    }];
+    
+    [self.view addSubview:self.minimalNotification];
     
     /**
      * Set the delegate
      */
     self.minimalNotification.delegate = self;
-    
-    /**
-     * Set the desired colors for the title and sub-title labels text
-     * Defaults:
-     * - Title: [UIColor whiteColor]
-     * - Sub-Title: [UIColor colorWithRed:215.0f/255.0f green:215.0f/255.0f blue:215.0f/255.0f alpha:1.0]
-     */
-    [self.minimalNotification setTitleColor:[UIColor whiteColor]];
-    [self.minimalNotification setSubTitleColor:[UIColor colorWithRed:215.0f/255.0f green:215.0f/255.0f blue:215.0f/255.0f alpha:1.0]];
     
     /**
      * Set the desired font for the title and sub-title labels
@@ -54,12 +46,6 @@
     [self.minimalNotification setTitleFont:titleFont];
     UIFont* subTitleFont = [UIFont fontWithName:@"STHeitiK-Light" size:16];
     [self.minimalNotification setSubTitleFont:subTitleFont];
-    
-    /**
-     * Set the desired close button position
-     * Deffault is JFMinimalNotificationCloseBtnPositionRight
-     */
-    [self.minimalNotification setCloseButtonPosition:JFMinimalNotificationCloseBtnPositionRight];
 }
 
 - (void)didReceiveMemoryWarning
@@ -87,11 +73,15 @@
     [self.minimalNotification setStyle:JFMinimalNotificationStyleDefault];
 }
 
+- (IBAction)setInfoStyle:(id)sender {
+    [self.minimalNotification setStyle:JFMinimalNotificationStyleInfo];
+}
+
 - (IBAction)setLeftView:(id)sender {
     /**
      * Set the left view with any UIView or UIView subclass.
      */
-    [self.minimalNotification setLeftView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"JFMinimalNotification.bundle/check-bw.png"]]];
+    [self.minimalNotification setLeftAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"thumbs-up.jpg"]]];
 }
 
 - (IBAction)setRightView:(id)sender {
@@ -99,7 +89,7 @@
      * Set the right view with any UIView or UIView subclass
      * This will automatically recalculate the title and sub-title frame and animate to the new position
      */
-    [self.minimalNotification setRightView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"JFMinimalNotification.bundle/x-error-bw.png"]]];
+    [self.minimalNotification setRightAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"thumbs-up.jpg"]]];
 }
 
 - (IBAction)removeLeftView:(id)sender {
@@ -107,7 +97,7 @@
      * Remove an existing left view by passing in nil
      * This will automatically recalculate the title and sub-title frame and animate to the new position
      */
-    [self.minimalNotification setLeftView:nil];
+    [self.minimalNotification setLeftAccessoryView:nil];
 }
 
 - (IBAction)removeRightView:(id)sender {
@@ -115,7 +105,7 @@
      * Remove an existing right view by passing in nil
      * This will automatically recalculate the title and sub-title frame and animate to the new position
      */
-    [self.minimalNotification setRightView:nil];
+    [self.minimalNotification setRightAccessoryView:nil];
 }
 
 #pragma mark - JFMinimalNotificationDelegate

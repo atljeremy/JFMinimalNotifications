@@ -18,5 +18,6 @@
 - (IBAction)setRightView:(id)sender;
 - (IBAction)removeLeftView:(id)sender;
 - (IBAction)removeRightView:(id)sender;
+- (IBAction)setInfoStyle:(id)sender;
 
 @end
