@@ -6,6 +6,8 @@ This is an iOS UIView for presenting minimal notification view on both iPhone an
 What It Looks Like:
 ------------------
 
+See a short video of this control here: [https://www.youtube.com/watch?v=jDYC-NYKl9A](https://www.youtube.com/watch?v=jDYC-NYKl9A)
+
 ### iPhone
 ![Examples](http://imageshack.com/a/img909/8210/Wuc17g.png)
 <!-- ![Success With Left View](https://imageshack.us/a/img713/7325/screenshot20130508at125.png)
