@@ -8,11 +8,11 @@ What It Looks Like:
 
 ### iPhone
 New screen shots coming soon. For now, just clone and run the sample project. :)
-<!-- ![Error With Right View](https://imageshack.us/a/img194/7325/screenshot20130508at125.png)
-![Success With Left View](https://imageshack.us/a/img713/7325/screenshot20130508at125.png)
+![Examples](http://imageshack.com/a/img909/8210/Wuc17g.png)
+<!-- ![Success With Left View](https://imageshack.us/a/img713/7325/screenshot20130508at125.png)
 ![Success](https://imageshack.us/a/img560/7325/screenshot20130508at125.png)
 ![Error](https://imageshack.us/a/img43/7325/screenshot20130508at125.png)
-![Default](https://imageshack.us/a/img856/7325/screenshot20130508at125.png) -->
+![Default](https://imageshack.us/a/img856/7325/screenshot20130508at125.png)  -->
 
 ### iPad
 New screen shots coming soon. For now, just clone and run the sample project. :)
