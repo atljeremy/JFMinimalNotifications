@@ -22,7 +22,7 @@
 
 + (instancetype)notificationYellowColor
 {
-    return hsb(48, 99, 100);
+    return hsb(48, 83, 100);
 }
 
 + (instancetype)notificationBlueColor

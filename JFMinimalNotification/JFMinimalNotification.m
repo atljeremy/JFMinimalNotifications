@@ -49,14 +49,17 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     if ([self.superview.subviews containsObject:self]) {
         [self removeFromSuperview];
     }
-    _titleLabel              = nil;
-    _subTitleLabel           = nil;
-    _leftAccessoryView       = nil;
-    _rightAccessoryView      = nil;
-    _accessoryView           = nil;
-    _contentView             = nil;
-    _touchHandler            = nil;
-    _notificationYConstraint = nil;
+    _titleLabel                         = nil;
+    _subTitleLabel                      = nil;
+    _leftAccessoryView                  = nil;
+    _rightAccessoryView                 = nil;
+    _accessoryView                      = nil;
+    _contentView                        = nil;
+    _touchHandler                       = nil;
+    _notificationYConstraint            = nil;
+    _titleLabelHorizontalConsraints     = nil;
+    _subTitleLabelHorizontalConsraints  = nil;
+    _dismissalTimer                     = nil;
 }
 
 + (instancetype)notificationWithStyle:(JFMinimalNotificationStytle)style title:(NSString*)title subTitle:(NSString*)subTitle
@@ -285,15 +288,17 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
             break;
         }
     }
-    
+
     UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     imageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.accessoryView addSubview:imageView];
     NSDictionary* views = NSDictionaryOfVariableBindings(imageView);
     NSDictionary* metrics = @{@"padding": @(kNotificationAccessoryPadding)};
-    [self.accessoryView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-padding-[imageView(<=40)]-padding-|" options:0 metrics:metrics views:views]];
-    [self.accessoryView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-padding-[imageView(<=40)]-padding-|" options:0 metrics:metrics views:views]];
+    [self.accessoryView addConstraint:[NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.accessoryView attribute:NSLayoutAttributeCenterY multiplier:1.f constant:0.f]];
+    [self.accessoryView addConstraint:[NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.accessoryView attribute:NSLayoutAttributeCenterX multiplier:1.f constant:0.f]];
+    [self.accessoryView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[imageView(<=25)]" options:0 metrics:metrics views:views]];
+    [self.accessoryView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[imageView(<=25)]" options:0 metrics:metrics views:views]];
     [self setLeftAccessoryView:self.accessoryView];
 }
 
