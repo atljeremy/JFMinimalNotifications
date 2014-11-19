@@ -1,27 +1,19 @@
 JFMinimalNotification
 ===========
 
-This is an iOS UIView for presenting minimal notification view on both iPhone and iPad. JFMinimalNotification is only available in ARC and targets iOS 7.0+.
+This is an iOS UIView for presenting minimal notification view on both iPhone and iPad. JFMinimalNotification is only available in ARC and targets iOS 7.0+. JFMinimalNotification works for both iPhone and iPad.
 
 What It Looks Like:
 ------------------
 
 See a short video of this control here: [https://www.youtube.com/watch?v=jDYC-NYKl9A](https://www.youtube.com/watch?v=jDYC-NYKl9A)
 
-### iPhone
+### Screen Shots
 ![Examples](http://imageshack.com/a/img909/8210/Wuc17g.png)
 <!-- ![Success With Left View](https://imageshack.us/a/img713/7325/screenshot20130508at125.png)
 ![Success](https://imageshack.us/a/img560/7325/screenshot20130508at125.png)
 ![Error](https://imageshack.us/a/img43/7325/screenshot20130508at125.png)
 ![Default](https://imageshack.us/a/img856/7325/screenshot20130508at125.png)  -->
-
-### iPad
-New screen shots coming soon. For now, just clone and run the sample project. :)
-<!-- ![Error With Right View](https://imageshack.us/a/img62/7325/screenshot20130508at125.png)
-![Success With Left View](https://imageshack.us/a/img10/7325/screenshot20130508at125.png)
-![Success](https://imageshack.us/a/img201/7325/screenshot20130508at125.png)
-![Error](https://imageshack.us/a/img197/7325/screenshot20130508at125.png)
-![Default](https://imageshack.us/a/img163/7325/screenshot20130508at125.png) -->
 
 How To Use It:
 -------------
