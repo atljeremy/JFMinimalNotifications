@@ -7,7 +7,6 @@ What It Looks Like:
 ------------------
 
 ### iPhone
-New screen shots coming soon. For now, just clone and run the sample project. :)
 ![Examples](http://imageshack.com/a/img909/8210/Wuc17g.png)
 <!-- ![Success With Left View](https://imageshack.us/a/img713/7325/screenshot20130508at125.png)
 ![Success](https://imageshack.us/a/img560/7325/screenshot20130508at125.png)
