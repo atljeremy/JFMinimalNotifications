@@ -18,5 +18,6 @@
 + (instancetype)notificationBlueColor;
 + (instancetype)notificationBlackColor;
 + (instancetype)notificationWhiteColor;
++ (instancetype)notificationOrangeColor;
 
 @end

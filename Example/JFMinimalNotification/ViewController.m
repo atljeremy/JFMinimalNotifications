@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "JFMinimalNotification.h"
 
-@interface ViewController () <JFMinimalNotificationDelegate>
+@interface ViewController () <JFMinimalNotificationDelegate, UITextFieldDelegate>
 @property (nonatomic, strong) JFMinimalNotification* minimalNotification;
 @end
 
@@ -19,6 +19,9 @@
 {
     [super viewDidLoad];
     
+    self.titleLabelTextField.text = @"Testing";
+    self.subTitleLabelTextField.text = @"This is my awesome sub-title";
+    
     /**
      * Create the notification
      *
@@ -27,7 +30,7 @@
      * [self.minimalNotification setTitle:@"My Test Title" withSubTitle:@"My Test Sub-Title"];
      * [self.minimalNotification setStyle:JFMinimalNotificationStyleDefault];
      */
-    self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleError title:@"This is my awesome title" subTitle:@"This is my awesome sub-title" dismissalDelay:0.0 touchHandler:^{
+    self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleError title:self.titleLabelTextField.text subTitle:self.subTitleLabelTextField.text dismissalDelay:0.0 touchHandler:^{
         [self.minimalNotification dismiss];
     }];
     
@@ -62,26 +65,30 @@
 }
 
 - (IBAction)setErrorStyle:(id)sender {
-    [self.minimalNotification setStyle:JFMinimalNotificationStyleError];
+    [self.minimalNotification setStyle:JFMinimalNotificationStyleError animated:YES];
 }
 
 - (IBAction)setSuccessStyle:(id)sender {
-    [self.minimalNotification setStyle:JFMinimalNotificationStyleSuccess];
+    [self.minimalNotification setStyle:JFMinimalNotificationStyleSuccess animated:YES];
 }
 
 - (IBAction)setDefaultStyle:(id)sender {
-    [self.minimalNotification setStyle:JFMinimalNotificationStyleDefault];
+    [self.minimalNotification setStyle:JFMinimalNotificationStyleDefault animated:YES];
 }
 
 - (IBAction)setInfoStyle:(id)sender {
-    [self.minimalNotification setStyle:JFMinimalNotificationStyleInfo];
+    [self.minimalNotification setStyle:JFMinimalNotificationStyleInfo animated:YES];
+}
+
+- (IBAction)setWarningStyle:(id)sender {
+    [self.minimalNotification setStyle:JFMinimalNotificationStyleWarning animated:YES];
 }
 
 - (IBAction)setLeftView:(id)sender {
     /**
      * Set the left view with any UIView or UIView subclass.
      */
-    [self.minimalNotification setLeftAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"thumbs-up.jpg"]]];
+    [self.minimalNotification setLeftAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"thumbs-up.jpg"]] animated:YES];
 }
 
 - (IBAction)setRightView:(id)sender {
@@ -89,7 +96,7 @@
      * Set the right view with any UIView or UIView subclass
      * This will automatically recalculate the title and sub-title frame and animate to the new position
      */
-    [self.minimalNotification setRightAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"thumbs-up.jpg"]]];
+    [self.minimalNotification setRightAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"thumbs-up.jpg"]] animated:YES];
 }
 
 - (IBAction)removeLeftView:(id)sender {
@@ -97,7 +104,7 @@
      * Remove an existing left view by passing in nil
      * This will automatically recalculate the title and sub-title frame and animate to the new position
      */
-    [self.minimalNotification setLeftAccessoryView:nil];
+    [self.minimalNotification setLeftAccessoryView:nil animated:YES];
 }
 
 - (IBAction)removeRightView:(id)sender {
@@ -105,10 +112,37 @@
      * Remove an existing right view by passing in nil
      * This will automatically recalculate the title and sub-title frame and animate to the new position
      */
-    [self.minimalNotification setRightAccessoryView:nil];
+    [self.minimalNotification setRightAccessoryView:nil animated:YES];
 }
 
-#pragma mark - JFMinimalNotificationDelegate
+#pragma mark ----------------------
+#pragma mark UITextFieldDelegate
+#pragma mark ----------------------
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    JFMinimalNotificationStytle style = self.minimalNotification.currentStyle;
+    [self.minimalNotification removeFromSuperview];
+    self.minimalNotification = nil;
+    self.minimalNotification = [JFMinimalNotification notificationWithStyle:style title:self.titleLabelTextField.text subTitle:self.subTitleLabelTextField.text dismissalDelay:0.0f touchHandler:^{
+        [self.minimalNotification dismiss];
+    }];
+    self.minimalNotification.delegate = self;
+    UIFont* titleFont = [UIFont fontWithName:@"STHeitiK-Light" size:22];
+    [self.minimalNotification setTitleFont:titleFont];
+    UIFont* subTitleFont = [UIFont fontWithName:@"STHeitiK-Light" size:16];
+    [self.minimalNotification setSubTitleFont:subTitleFont];
+    [self.view addSubview:self.minimalNotification];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.minimalNotification show];
+    });
+    
+    return YES;
+}
+
+#pragma mark ----------------------
+#pragma mark JFMinimalNotificationDelegate
+#pragma mark ----------------------
 
 - (void)willShowNotification:(JFMinimalNotification*)notification {
     NSLog(@"willShowNotification");

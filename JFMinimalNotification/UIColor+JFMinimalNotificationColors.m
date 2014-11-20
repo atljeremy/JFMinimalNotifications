@@ -40,4 +40,9 @@
     return hsb(192, 2, 95);
 }
 
++ (instancetype)notificationOrangeColor
+{
+    return hsb(28, 85, 90);
+}
+
 @end

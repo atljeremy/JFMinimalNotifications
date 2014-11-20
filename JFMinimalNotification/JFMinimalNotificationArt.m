@@ -34,41 +34,30 @@ static UIImage *imageOfEdit = nil;
 
 + (void)drawCheckmarkWithColor:(UIColor*)color
 {
-    // Checkmark Shape Drawing
-    UIBezierPath *checkmarkShapePath = [[UIBezierPath alloc] init];
-    [checkmarkShapePath moveToPoint:CGPointMake(73.25, 14.05)];
-    [checkmarkShapePath addCurveToPoint:CGPointMake(64.51, 13.86) controlPoint1: CGPointMake(70.98, 11.44) controlPoint2: CGPointMake(66.78, 11.26)];
-    [checkmarkShapePath addLineToPoint:CGPointMake(27.46, 52)];
-    [checkmarkShapePath addLineToPoint:CGPointMake(15.75, 39.54)];
-    [checkmarkShapePath addCurveToPoint:CGPointMake(6.84, 39.54) controlPoint1: CGPointMake(13.48, 36.93) controlPoint2: CGPointMake(9.28, 36.93)];
-    [checkmarkShapePath addCurveToPoint:CGPointMake(6.84, 49.02) controlPoint1: CGPointMake(4.39, 42.14) controlPoint2: CGPointMake(4.39, 46.42)];
-    [checkmarkShapePath addLineToPoint:CGPointMake(22.91, 66.14)];
-    [checkmarkShapePath addCurveToPoint:CGPointMake(27.28, 68) controlPoint1: CGPointMake(24.14, 67.44) controlPoint2: CGPointMake(25.71, 68)];
-    [checkmarkShapePath addCurveToPoint:CGPointMake(31.65, 66.14) controlPoint1: CGPointMake(28.86, 68) controlPoint2: CGPointMake(30.43, 67.26)];
-    [checkmarkShapePath addLineToPoint:CGPointMake(73.08, 23.35)];
-    [checkmarkShapePath addCurveToPoint:CGPointMake(73.25, 14.05) controlPoint1: CGPointMake(75.52, 20.75) controlPoint2: CGPointMake(75.7, 16.65)];
-    [checkmarkShapePath closePath];
-    checkmarkShapePath.miterLimit = 4;
+    UIBezierPath* bezier3Path = UIBezierPath.bezierPath;
+    [bezier3Path moveToPoint: CGPointMake(8, 37)];
+    [bezier3Path addLineToPoint: CGPointMake(27, 56)];
+    [bezier3Path moveToPoint: CGPointMake(27, 56)];
+    [bezier3Path addLineToPoint: CGPointMake(75, 8)];
+    bezier3Path.lineCapStyle = kCGLineCapRound;
     
-    [color setFill];
-    [checkmarkShapePath fill];
+    [color setStroke];
+    bezier3Path.lineWidth = 14;
+    [bezier3Path stroke];
 }
 
 + (void)drawCrossWithColor:(UIColor*)color
 {
-    // Cross Shape Drawing
-    UIBezierPath *crossShapePath = [[UIBezierPath alloc] init];
-    [crossShapePath moveToPoint:CGPointMake(10, 70)];
-    [crossShapePath addLineToPoint:CGPointMake(70, 10)];
-    [crossShapePath moveToPoint:CGPointMake(10, 10)];
-    [crossShapePath addLineToPoint:CGPointMake(70, 70)];
-    
-    crossShapePath.lineCapStyle = kCGLineCapRound;
-    crossShapePath.lineJoinStyle = kCGLineJoinRound;
+    UIBezierPath* bezierPath = UIBezierPath.bezierPath;
+    [bezierPath moveToPoint: CGPointMake(10, 10)];
+    [bezierPath addLineToPoint: CGPointMake(53, 53)];
+    [bezierPath moveToPoint: CGPointMake(10, 53)];
+    [bezierPath addLineToPoint: CGPointMake(53, 10)];
+    bezierPath.lineCapStyle = kCGLineCapRound;
     
     [color setStroke];
-    crossShapePath.lineWidth = 14;
-    [crossShapePath stroke];
+    bezierPath.lineWidth = 11;
+    [bezierPath stroke];
 }
 
 + (void)drawNoticeWithColor:(UIColor*)color
@@ -109,45 +98,45 @@ static UIImage *imageOfEdit = nil;
     [noticeShapePath fill];
 }
 
-+ (void)drawWarningWithColor:(UIColor*)color
++ (void)drawWarningWithBGColor:(UIColor*)backgroundColor forgroundColor:(UIColor*)forgroundColor
 {
-    // Warning Group
-    // Warning Circle Drawing
-    UIBezierPath *warningCirclePath = [[UIBezierPath alloc] init];
-    [warningCirclePath moveToPoint:CGPointMake(40.94, 63.39)];
-    [warningCirclePath addCurveToPoint:CGPointMake(36.03, 65.55) controlPoint1: CGPointMake(39.06, 63.39) controlPoint2: CGPointMake(37.36, 64.18)];
-    [warningCirclePath addCurveToPoint:CGPointMake(34.14, 70.45) controlPoint1: CGPointMake(34.9, 66.92) controlPoint2: CGPointMake(34.14, 68.49)];
-    [warningCirclePath addCurveToPoint:CGPointMake(36.22, 75.54) controlPoint1: CGPointMake(34.14, 72.41) controlPoint2: CGPointMake(34.9, 74.17)];
-    [warningCirclePath addCurveToPoint:CGPointMake(40.94, 77.5) controlPoint1: CGPointMake(37.54, 76.91) controlPoint2: CGPointMake(39.06, 77.5)];
-    [warningCirclePath addCurveToPoint:CGPointMake(45.86, 75.35) controlPoint1: CGPointMake(42.83, 77.5) controlPoint2: CGPointMake(44.53, 76.72)];
-    [warningCirclePath addCurveToPoint:CGPointMake(47.93, 70.45) controlPoint1: CGPointMake(47.18, 74.17) controlPoint2: CGPointMake(47.93, 72.41)];
-    [warningCirclePath addCurveToPoint:CGPointMake(45.86, 65.35) controlPoint1: CGPointMake(47.93, 68.49) controlPoint2: CGPointMake(47.18, 66.72)];
-    [warningCirclePath addCurveToPoint:CGPointMake(40.94, 63.39) controlPoint1: CGPointMake(44.53, 64.18) controlPoint2: CGPointMake(42.83, 63.39)];
-    [warningCirclePath closePath];
-    warningCirclePath.miterLimit = 4;
+    //// Bezier Drawing
+    UIBezierPath* bezierPath = UIBezierPath.bezierPath;
+    [bezierPath moveToPoint: CGPointMake(54, 10)];
+    [bezierPath addLineToPoint: CGPointMake(11, 81)];
+    [bezierPath addLineToPoint: CGPointMake(54, 81)];
+    [bezierPath addLineToPoint: CGPointMake(97, 81)];
+    [bezierPath addLineToPoint: CGPointMake(54, 10)];
+    bezierPath.lineCapStyle = kCGLineCapRound;
     
-    [color setFill];
-    [warningCirclePath fill];
+    bezierPath.lineJoinStyle = kCGLineJoinRound;
+    
+    [backgroundColor setFill];
+    [bezierPath fill];
+    [backgroundColor setStroke];
+    bezierPath.lineWidth = 14;
+    [bezierPath stroke];
     
     
-    //// Warning Shape Drawing
-    UIBezierPath *warningShapePath = [[UIBezierPath alloc] init];
-    [warningShapePath moveToPoint:CGPointMake(46.23, 4.26)];
-    [warningShapePath addCurveToPoint:CGPointMake(40.94, 2.5) controlPoint1: CGPointMake(44.91, 3.09) controlPoint2: CGPointMake(43.02, 2.5)];
-    [warningShapePath addCurveToPoint:CGPointMake(34.71, 4.26) controlPoint1: CGPointMake(38.68, 2.5) controlPoint2: CGPointMake(36.03, 3.09)];
-    [warningShapePath addCurveToPoint:CGPointMake(31.5, 8.77) controlPoint1: CGPointMake(33.01, 5.44) controlPoint2: CGPointMake(31.5, 7.01)];
-    [warningShapePath addLineToPoint:CGPointMake(31.5, 19.36)];
-    [warningShapePath addLineToPoint:CGPointMake(34.71, 54.44)];
-    [warningShapePath addCurveToPoint:CGPointMake(40.38, 58.16) controlPoint1: CGPointMake(34.9, 56.2) controlPoint2: CGPointMake(36.41, 58.16)];
-    [warningShapePath addCurveToPoint:CGPointMake(45.67, 54.44) controlPoint1: CGPointMake(44.34, 58.16) controlPoint2: CGPointMake(45.67, 56.01)];
-    [warningShapePath addLineToPoint:CGPointMake(48.5, 19.36)];
-    [warningShapePath addLineToPoint:CGPointMake(48.5, 8.77)];
-    [warningShapePath addCurveToPoint:CGPointMake(46.23, 4.26) controlPoint1: CGPointMake(48.5, 7.01) controlPoint2: CGPointMake(47.74, 5.44)];
-    [warningShapePath closePath];
-    warningShapePath.miterLimit = 4;
+    //// Bezier 2 Drawing
+    UIBezierPath* bezier2Path = UIBezierPath.bezierPath;
+    [bezier2Path moveToPoint: CGPointMake(54, 48)];
+    [bezier2Path addLineToPoint: CGPointMake(54, 71)];
+    bezier2Path.lineCapStyle = kCGLineCapRound;
     
-    [color setFill];
-    [warningShapePath fill];
+    bezier2Path.lineJoinStyle = kCGLineJoinRound;
+    
+    [forgroundColor setFill];
+    [bezier2Path fill];
+    [forgroundColor setStroke];
+    bezier2Path.lineWidth = 14;
+    [bezier2Path stroke];
+    
+    
+    //// Oval Drawing
+    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(47, 19, 14, 14)];
+    [forgroundColor setFill];
+    [ovalPath fill];
 }
 
 + (void)drawInfoWithColor:(UIColor*)color
@@ -236,7 +225,7 @@ static UIImage *imageOfEdit = nil;
     }
     
     imageOfCheckmarkColor = color;
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(80, 80), NO, 0);
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(85, 63), NO, 0);
     [JFMinimalNotificationArt drawCheckmarkWithColor:color];
     imageOfCheckmark = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -253,7 +242,7 @@ static UIImage *imageOfEdit = nil;
     }
     
     imageOfCrossColor = color;
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(80, 80), NO, 0);
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(63, 63), NO, 0);
     [JFMinimalNotificationArt drawCrossWithColor:color];
     imageOfCross = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -277,16 +266,16 @@ static UIImage *imageOfEdit = nil;
     return imageOfNotice;
 }
 
-+ (UIImage*)imageOfWarningWithColor:(UIColor*)color
++ (UIImage*)imageOfWarningWithBGColor:(UIColor*)backgroundColor forgroundColor:(UIColor*)forgroundColor
 {
-    if (imageOfWarning && [imageOfWarningColor isEqual:color])
+    if (imageOfWarning && [imageOfWarningColor isEqual:backgroundColor])
     {
         return imageOfWarning;
     }
     
-    imageOfWarningColor = color;
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(80, 80), NO, 0);
-    [JFMinimalNotificationArt drawWarningWithColor:color];
+    imageOfWarningColor = backgroundColor;
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(108, 92), NO, 0);
+    [JFMinimalNotificationArt drawWarningWithBGColor:backgroundColor forgroundColor:forgroundColor];
     imageOfWarning = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     

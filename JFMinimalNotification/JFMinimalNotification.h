@@ -14,7 +14,8 @@ typedef NS_ENUM(NSInteger, JFMinimalNotificationStytle) {
     JFMinimalNotificationStyleDefault,
     JFMinimalNotificationStyleError,
     JFMinimalNotificationStyleSuccess,
-    JFMinimalNotificationStyleInfo
+    JFMinimalNotificationStyleInfo,
+    JFMinimalNotificationStyleWarning
 };
 
 typedef void (^JFMinimalNotificationTouchHandler)(void);
@@ -123,14 +124,7 @@ typedef void (^JFMinimalNotificationTouchHandler)(void);
  * @return Updates the JFMinimalNotificationStytle of the notification
  * @param style The desired JFMinimalNotificationStytle
  */
-- (void)setStyle:(JFMinimalNotificationStytle)style;
-
-/**
- * @return Sets/Updates a notifications title and subtitle text
- * @param title The desired title string
- * @param subTitle The desired sub-title string
- */
-- (void)setTitle:(NSString*)title withSubTitle:(NSString*)subTitle;
+- (void)setStyle:(JFMinimalNotificationStytle)style animated:(BOOL)animated;
 
 /**
  * @return Sets the title label font
@@ -148,13 +142,13 @@ typedef void (^JFMinimalNotificationTouchHandler)(void);
  * @return Sets the left view
  * @param view The desired UIView to be set as the left view
  */
-- (void)setLeftAccessoryView:(UIView*)view;
+- (void)setLeftAccessoryView:(UIView*)view animated:(BOOL)animated;
 
 /**
  * @return Sets the right view
  * @param view The desired UIView to be set as the right view
  */
-- (void)setRightAccessoryView:(UIView*)view;
+- (void)setRightAccessoryView:(UIView*)view animated:(BOOL)animated;
 
 @end
 

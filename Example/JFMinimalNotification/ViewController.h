@@ -19,5 +19,8 @@
 - (IBAction)removeLeftView:(id)sender;
 - (IBAction)removeRightView:(id)sender;
 - (IBAction)setInfoStyle:(id)sender;
+- (IBAction)setWarningStyle:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *titleLabelTextField;
+@property (weak, nonatomic) IBOutlet UITextField *subTitleLabelTextField;
 
 @end

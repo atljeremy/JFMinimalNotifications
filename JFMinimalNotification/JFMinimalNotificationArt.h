@@ -16,7 +16,7 @@
 
 + (UIImage*)imageOfNoticeWithColor:(UIColor*)color;
 
-+ (UIImage*)imageOfWarningWithColor:(UIColor*)color;
++ (UIImage*)imageOfWarningWithBGColor:(UIColor*)backgroundColor forgroundColor:(UIColor*)forgroundColor;
 
 + (UIImage*)imageOfInfoWithColor:(UIColor*)color;
 
@@ -28,7 +28,7 @@
 
 + (void)drawNoticeWithColor:(UIColor*)color;
 
-+ (void)drawWarningWithColor:(UIColor*)color;
++ (void)drawWarningWithBGColor:(UIColor*)backgroundColor forgroundColor:(UIColor*)forgroundColor;
 
 + (void)drawInfoWithColor:(UIColor*)color;
 
