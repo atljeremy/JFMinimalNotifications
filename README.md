@@ -74,9 +74,25 @@ How To Use It:
  * value greater than 0, this will be the length of time the notification will remain visisble before being 
  * automatically dismissed.
  */
+ 
+// With dismissalDelay
+self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleError title:@"This is my awesome title" subTitle:@"This is my awesome sub-title" dismissalDelay:3.0];
+ 
+// Without dismissalDelay and with touchHandler
 self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleError title:@"This is my awesome title" subTitle:@"This is my awesome sub-title" dismissalDelay:0.0 touchHandler:^{
     [self.minimalNotification dismiss];
 }];
+```
+
+```objective-c
+// Available Styles
+typedef NS_ENUM(NSInteger, JFMinimalNotificationStytle) {
+    JFMinimalNotificationStyleDefault,
+    JFMinimalNotificationStyleError,
+    JFMinimalNotificationStyleSuccess,
+    JFMinimalNotificationStyleInfo,
+    JFMinimalNotificationStyleWarning
+};
 ```
 
 Please see the example project include in this repo for an example of how to use this notification.
