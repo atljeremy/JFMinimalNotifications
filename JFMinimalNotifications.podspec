@@ -18,6 +18,7 @@ Pod::Spec.new do |s|
   s.name         = "JFMinimalNotifications"
   s.version      = "0.0.1"
   s.summary      = "An iOS UIView for presenting beautiful and minimalistic notifications."
+  s.requires_arc = true
 
   s.description  = <<-DESC
                    An iOS UIView for presenting beautiful and minimalistic notifications. 
