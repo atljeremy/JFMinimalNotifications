@@ -84,9 +84,9 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "JFMinimalNotifications/*.{h,m}"
+  s.source_files  = "JFMinimalNotification/*.{h,m}"
   # s.exclude_files = "Classes/Exclude"
-  s.public_header_files = "JFMinimalNotifications/*.h"
+  s.public_header_files = "JFMinimalNotification/*.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
