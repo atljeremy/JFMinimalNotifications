@@ -141,7 +141,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
 
 - (BOOL)isReadyToDisplay
 {
-    return self.superview;
+    return (BOOL)self.superview;
 }
 
 - (void)show
