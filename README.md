@@ -9,6 +9,7 @@ What It Looks Like:
 See a short video of this control here: [https://www.youtube.com/watch?v=jDYC-NYKl9A](https://www.youtube.com/watch?v=jDYC-NYKl9A)
 
 ### Screen Shots
+
 ![Examples](http://imageshack.com/a/img673/9547/7auGJk.png)
 <!-- ![Success With Left View](https://imageshack.us/a/img713/7325/screenshot20130508at125.png)
 ![Success](https://imageshack.us/a/img560/7325/screenshot20130508at125.png)
@@ -21,10 +22,6 @@ How To Use It:
 ### Basic Example
 
 ```objective-c
-#import "JFMinimalNotification.h"
-
-...
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -67,6 +64,7 @@ How To Use It:
 ```
 
 ### Constructors / Options
+
 ```objective-c
 /**
  * Note: passing a dismissalDelay of 0 means the notification will NOT be automatically dismissed, you will need to 
@@ -108,14 +106,14 @@ Delegate Methods:
 Installation:
 ------------
 
-### Add JFMinimalNotification to your projects
+### Cocoapods
+
+`pod 'JFMinimalNotifications', '~> 0.0.1'`
+
+### Directly include source into your projects
 
 - Simply copy the source files from the "JFMinimalNotification" folder into your project.
-
-### Add Dependencies
-
-- In your application's project app target settings, find the "Build Phases" section and open the "Link Binary With Libraries" block
-- Click the "+" button and select the "CoreGraphics.framework".
+- In your application's project app target settings, find the "Build Phases" section and open the "Link Binary With Libraries" block and click the "+" button and select the "CoreGraphics.framework".
 
 License
 -------
