@@ -7,6 +7,7 @@ What It Looks Like:
 ------------------
 
 ![Example](https://dl.dropboxusercontent.com/u/55388810/example.gif)
+
 See a short video of this control here: [https://www.youtube.com/watch?v=jDYC-NYKl9A](https://www.youtube.com/watch?v=jDYC-NYKl9A)
 
 ### Screen Shots
