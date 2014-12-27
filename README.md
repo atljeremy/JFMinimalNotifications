@@ -6,6 +6,7 @@ This is an iOS UIView for presenting a beautiful notification that is highly con
 What It Looks Like:
 ------------------
 
+![Example](https://www.dropbox.com/s/0ze8weqm5alwmmg/example.gif?dl=0)
 See a short video of this control here: [https://www.youtube.com/watch?v=jDYC-NYKl9A](https://www.youtube.com/watch?v=jDYC-NYKl9A)
 
 ### Screen Shots
