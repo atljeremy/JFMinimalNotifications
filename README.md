@@ -110,7 +110,7 @@ Installation:
 
 ### Cocoapods
 
-`pod 'JFMinimalNotifications', '~> 0.0.1'`
+`pod 'JFMinimalNotifications', '~> 0.0.2'`
 
 ### Directly include source into your projects
 
