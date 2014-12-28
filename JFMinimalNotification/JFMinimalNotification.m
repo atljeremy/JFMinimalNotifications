@@ -65,7 +65,9 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     _notificationVerticalConstraints    = nil;
     _notificationHorizontalConstraints  = nil;
     _titleLabelHorizontalConsraints     = nil;
+    _titleLabelVerticalConsraints       = nil;
     _subTitleLabelHorizontalConsraints  = nil;
+    _subTitleLabelVerticalConsraints    = nil;
     _dismissalTimer                     = nil;
 }
 
@@ -156,7 +158,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
         UIView* notification = self;
         NSDictionary* views = NSDictionaryOfVariableBindings(superview, notification);
         NSDictionary* metrics = @{@"height": @(kNotificationViewHeight)};
-        self.notificationVerticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[notification(==height)]" options:0 metrics:metrics views:views];
+        self.notificationVerticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[notification(==height)]|" options:0 metrics:metrics views:views];
         [self.superview addConstraints:self.notificationVerticalConstraints];
         
         [UIView animateWithDuration:0.6f delay:0.0f usingSpringWithDamping:0.7f initialSpringVelocity:0.3f options:UIViewAnimationOptionAllowAnimatedContent animations:^{
@@ -201,14 +203,18 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
 
 - (void)configureInitialNotificationConstraints
 {
-    [self.superview removeConstraints:self.notificationVerticalConstraints];
-    [self.superview removeConstraints:self.notificationHorizontalConstraints];
+    if (self.notificationVerticalConstraints.count > 0) {
+        [self.superview removeConstraints:self.notificationVerticalConstraints];
+    }
+    if (self.notificationHorizontalConstraints.count > 0) {
+        [self.superview removeConstraints:self.notificationHorizontalConstraints];
+    }
     UIView* superview = self.superview;
     UIView* notification = self;
     NSDictionary* views = NSDictionaryOfVariableBindings(superview, notification);
     NSDictionary* metrics = @{@"height": @(kNotificationViewHeight)};
     
-    self.notificationVerticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[notification(==height)][superview]" options:0 metrics:metrics views:views];
+    self.notificationVerticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[superview][notification(==height)]" options:0 metrics:metrics views:views];
     [self.superview addConstraints:self.notificationVerticalConstraints];
     
     self.notificationHorizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[notification]|" options:0 metrics:metrics views:views];
@@ -323,7 +329,6 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
         self.titleLabel = nil;
     }
     
-    
     if (subTitle && subTitle.length > 0) {
         if (!self.subTitleLabel) {
             self.subTitleLabel = [UILabel new];
@@ -336,8 +341,12 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
             UIView* subTitleLabel = self.subTitleLabel;
             NSDictionary* views;
             NSDictionary* metrics = @{@"height": @(kNotificationTitleLabelHeight), @"padding": @(kNotificationPadding)};
-            [self.contentView removeConstraints:self.titleLabelVerticalConsraints];
-            [self.contentView removeConstraints:self.subTitleLabelVerticalConsraints];
+            if (self.titleLabelVerticalConsraints.count > 0) {
+                [self.contentView removeConstraints:self.titleLabelVerticalConsraints];
+            }
+            if (self.subTitleLabelVerticalConsraints.count > 0) {
+                [self.contentView removeConstraints:self.subTitleLabelVerticalConsraints];
+            }
             if (titleLabel) {
                 views = NSDictionaryOfVariableBindings(titleLabel, subTitleLabel);
                 self.subTitleLabelVerticalConsraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-padding-[titleLabel(>=height)][subTitleLabel(>=height)]-padding-|" options:0 metrics:metrics views:views];
