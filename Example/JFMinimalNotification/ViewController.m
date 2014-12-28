@@ -49,6 +49,11 @@
     [self.minimalNotification setTitleFont:titleFont];
     UIFont* subTitleFont = [UIFont fontWithName:@"STHeitiK-Light" size:16];
     [self.minimalNotification setSubTitleFont:subTitleFont];
+    
+    /**
+     * Uncomment the following line to present notifications from the top of the screen.
+     */
+    // self.minimalNotification.presentFromTop = YES;
 }
 
 - (void)didReceiveMemoryWarning

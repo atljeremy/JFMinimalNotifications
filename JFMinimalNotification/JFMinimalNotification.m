@@ -1,10 +1,27 @@
-//
-//  JFMinimalNotification.m
-//  JFMinimalNotification
-//
-//  Created by Jeremy Fox on 5/4/13.
-//  Copyright (c) 2013 Jeremy Fox. All rights reserved.
-//
+/*
+ * JFMinimalNotification
+ *
+ * Created by Jeremy Fox on 5/4/13.
+ * Copyright (c) 2013 Jeremy Fox. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 
 #import "JFMinimalNotification.h"
 #import "JFMinimalNotificationArt.h"
@@ -133,7 +150,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
 - (void)didMoveToSuperview
 {
     if (self.isReadyToDisplay) {
-        [self configureInitialNotificationConstraints];
+        [self configureInitialNotificationConstraintsForTopPresentation:self.presentFromTop];
     }
 }
 
@@ -158,7 +175,15 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
         UIView* notification = self;
         NSDictionary* views = NSDictionaryOfVariableBindings(superview, notification);
         NSDictionary* metrics = @{@"height": @(kNotificationViewHeight)};
-        self.notificationVerticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[notification(==height)]|" options:0 metrics:metrics views:views];
+        
+        NSString* verticalConstraintString;
+        if (self.presentFromTop) {
+            verticalConstraintString = @"V:|[notification(==height)]";
+        } else {
+            verticalConstraintString = @"V:[notification(==height)]|";
+        }
+        
+        self.notificationVerticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:verticalConstraintString options:0 metrics:metrics views:views];
         [self.superview addConstraints:self.notificationVerticalConstraints];
         
         [UIView animateWithDuration:0.6f delay:0.0f usingSpringWithDamping:0.7f initialSpringVelocity:0.3f options:UIViewAnimationOptionAllowAnimatedContent animations:^{
@@ -190,7 +215,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
         self.dismissalTimer = nil;
     }
     
-    [self configureInitialNotificationConstraints];
+    [self configureInitialNotificationConstraintsForTopPresentation:self.presentFromTop];
     
     [UIView animateWithDuration:0.6f delay:0.0f usingSpringWithDamping:0.7f initialSpringVelocity:0.3f options:UIViewAnimationOptionAllowAnimatedContent animations:^{
         [self layoutIfNeeded];
@@ -201,7 +226,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     }];
 }
 
-- (void)configureInitialNotificationConstraints
+- (void)configureInitialNotificationConstraintsForTopPresentation:(BOOL)topPresentation
 {
     if (self.notificationVerticalConstraints.count > 0) {
         [self.superview removeConstraints:self.notificationVerticalConstraints];
@@ -214,7 +239,14 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     NSDictionary* views = NSDictionaryOfVariableBindings(superview, notification);
     NSDictionary* metrics = @{@"height": @(kNotificationViewHeight)};
     
-    self.notificationVerticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[superview][notification(==height)]" options:0 metrics:metrics views:views];
+    NSString* verticalConstraintString;
+    if (topPresentation) {
+        verticalConstraintString = @"V:[notification(==height)][superview]";
+    } else {
+        verticalConstraintString = @"V:[superview][notification(==height)]";
+    }
+    
+    self.notificationVerticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:verticalConstraintString options:0 metrics:metrics views:views];
     [self.superview addConstraints:self.notificationVerticalConstraints];
     
     self.notificationHorizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[notification]|" options:0 metrics:metrics views:views];
@@ -224,6 +256,12 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
 #pragma mark ----------------------
 #pragma mark Setters / Configuration
 #pragma mark ----------------------
+
+- (void)setPresentFromTop:(BOOL)presentFromTop
+{
+    _presentFromTop = presentFromTop;
+    [self configureInitialNotificationConstraintsForTopPresentation:_presentFromTop];
+}
 
 - (void)setStyle:(JFMinimalNotificationStytle)style animated:(BOOL)animated
 {
