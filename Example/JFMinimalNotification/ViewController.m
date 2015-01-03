@@ -22,14 +22,6 @@
     self.titleLabelTextField.text = @"Testing";
     self.subTitleLabelTextField.text = @"This is my awesome sub-title";
     
-    /**
-     * Create the notification
-     *
-     * You can also use the following to each the same result:
-     * self.minimalNotification = [[JFMinimalNotification alloc] initWithSuperView:self.view];
-     * [self.minimalNotification setTitle:@"My Test Title" withSubTitle:@"My Test Sub-Title"];
-     * [self.minimalNotification setStyle:JFMinimalNotificationStyleDefault];
-     */
     self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleError title:self.titleLabelTextField.text subTitle:self.subTitleLabelTextField.text dismissalDelay:0.0 touchHandler:^{
         [self.minimalNotification dismiss];
     }];
@@ -54,6 +46,12 @@
      * Uncomment the following line to present notifications from the top of the screen.
      */
     // self.minimalNotification.presentFromTop = YES;
+    
+    /**
+     * Uncomment the following lines to right align the text labels
+     */
+    self.minimalNotification.titleLabel.textAlignment = NSTextAlignmentRight;
+    self.minimalNotification.subTitleLabel.textAlignment = NSTextAlignmentRight;
 }
 
 - (void)didReceiveMemoryWarning
@@ -126,7 +124,10 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    [textField resignFirstResponder];
     JFMinimalNotificationStytle style = self.minimalNotification.currentStyle;
+    NSTextAlignment titleAlignment = self.minimalNotification.titleLabel.textAlignment;
+    NSTextAlignment subTitleAlignment = self.minimalNotification.subTitleLabel.textAlignment;
     [self.minimalNotification removeFromSuperview];
     self.minimalNotification = nil;
     self.minimalNotification = [JFMinimalNotification notificationWithStyle:style title:self.titleLabelTextField.text subTitle:self.subTitleLabelTextField.text dismissalDelay:0.0f touchHandler:^{
@@ -138,6 +139,8 @@
     UIFont* subTitleFont = [UIFont fontWithName:@"STHeitiK-Light" size:16];
     [self.minimalNotification setSubTitleFont:subTitleFont];
     [self.view addSubview:self.minimalNotification];
+    self.minimalNotification.titleLabel.textAlignment = titleAlignment;
+    self.minimalNotification.subTitleLabel.textAlignment = subTitleAlignment;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.minimalNotification show];
     });

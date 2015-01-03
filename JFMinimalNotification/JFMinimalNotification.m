@@ -339,7 +339,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     [self.accessoryView addConstraint:[NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.accessoryView attribute:NSLayoutAttributeCenterX multiplier:1.f constant:0.f]];
     [self.accessoryView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[imageView(<=30)]" options:0 metrics:metrics views:views]];
     [self.accessoryView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[imageView(<=30)]" options:0 metrics:metrics views:views]];
-    [self setLeftAccessoryView:self.accessoryView animated:animated];
+    [self setRightAccessoryView:self.accessoryView animated:animated];
 }
 
 - (void)setTitle:(NSString*)title withSubTitle:(NSString*)subTitle
