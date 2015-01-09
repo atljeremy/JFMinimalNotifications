@@ -3,6 +3,8 @@ JFMinimalNotification
 
 This is an iOS UIView for presenting a beautiful notification that is highly configurable and works for both iPhone and iPad. JFMinimalNotification is only available in ARC and targets iOS 7.0+.
 
+Looking for an Android version? Garrett Franks created one and it's awesome, check it out: [https://github.com/gfranks/GFMinimalNotifications](https://github.com/gfranks/GFMinimalNotifications)
+
 What It Looks Like:
 ------------------
 
