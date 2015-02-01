@@ -23,7 +23,7 @@
  * SOFTWARE.
  */
 
-#import <Foundation/Foundation.h>
+@import UIKit;
 
 @protocol JFMinimalNotificationDelegate;
 
