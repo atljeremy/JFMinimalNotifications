@@ -102,10 +102,10 @@ Please see the example project include in this repo for an example of how to use
 Delegate Methods:
 ----------------
 
-    - (void)willShowNotification:(JFMinimalNotification*)notification;
-    - (void)didShowNotification:(JFMinimalNotification*)notification;
-    - (void)willDisimissNotification:(JFMinimalNotification*)notification;
-    - (void)didDismissNotification:(JFMinimalNotification*)notification;
+    - (void)minimalNotificationWillShowNotification:(JFMinimalNotification*)notification;
+    - (void)minimalNotificationDidShowNotification:(JFMinimalNotification*)notification;
+    - (void)minimalNotificationWillDisimissNotification:(JFMinimalNotification*)notification;
+    - (void)minimalNotificationDidDismissNotification:(JFMinimalNotification*)notification;
     
 Installation:
 ------------
