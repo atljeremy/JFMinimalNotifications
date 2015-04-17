@@ -150,7 +150,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
 - (void)didMoveToSuperview
 {
     if (self.isReadyToDisplay) {
-        [self configureInitialNotificationConstraintsForTopPresentation:self.presentFromTop];
+        [self configureInitialNotificationConstraintsForTopPresentation:self.presentFromTop layoutIfNeeded:YES];
     }
 }
 
@@ -215,7 +215,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
         self.dismissalTimer = nil;
     }
     
-    [self configureInitialNotificationConstraintsForTopPresentation:self.presentFromTop];
+    [self configureInitialNotificationConstraintsForTopPresentation:self.presentFromTop layoutIfNeeded:NO];
     
     [UIView animateWithDuration:0.6f delay:0.0f usingSpringWithDamping:0.7f initialSpringVelocity:0.3f options:UIViewAnimationOptionAllowAnimatedContent animations:^{
         [self layoutIfNeeded];
@@ -226,7 +226,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     }];
 }
 
-- (void)configureInitialNotificationConstraintsForTopPresentation:(BOOL)topPresentation
+- (void)configureInitialNotificationConstraintsForTopPresentation:(BOOL)topPresentation layoutIfNeeded:(BOOL)layoutIfNeeded
 {
     if (self.notificationVerticalConstraints.count > 0) {
         [self.superview removeConstraints:self.notificationVerticalConstraints];
@@ -251,6 +251,10 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     
     self.notificationHorizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[notification]|" options:0 metrics:metrics views:views];
     [self.superview addConstraints:self.notificationHorizontalConstraints];
+    
+    if (layoutIfNeeded) {
+        [self layoutIfNeeded];
+    }
 }
 
 #pragma mark ----------------------
@@ -260,7 +264,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
 - (void)setPresentFromTop:(BOOL)presentFromTop
 {
     _presentFromTop = presentFromTop;
-    [self configureInitialNotificationConstraintsForTopPresentation:_presentFromTop];
+    [self configureInitialNotificationConstraintsForTopPresentation:_presentFromTop layoutIfNeeded:YES];
 }
 
 - (void)setStyle:(JFMinimalNotificationStytle)style animated:(BOOL)animated

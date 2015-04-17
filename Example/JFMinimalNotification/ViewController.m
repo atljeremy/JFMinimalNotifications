@@ -61,6 +61,40 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)showToastWithMessage:(NSString *)message {
+    if (self.minimalNotification) {
+        [self.minimalNotification dismiss];
+        [self.minimalNotification removeFromSuperview];
+        self.minimalNotification = nil;
+    }
+    
+    self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleError
+                                                          title:NSLocalizedString(@"Refresh Error", @"Refresh Error")
+                                                       subTitle:message
+                                                 dismissalDelay:10.0];
+    
+    /**
+     * Set the desired font for the title and sub-title labels
+     * Default is System Normal
+     */
+    UIFont* titleFont = [UIFont systemFontOfSize:22.0];
+    [self.minimalNotification setTitleFont:titleFont];
+    UIFont* subTitleFont = [UIFont systemFontOfSize:16.0];
+    [self.minimalNotification setSubTitleFont:subTitleFont];
+    
+    /**
+     * Add the notification to a view
+     */
+    [self.view addSubview:self.minimalNotification];
+    
+    // show
+    [self performSelector:@selector(showNotification) withObject:nil afterDelay:0.1];
+}
+
+- (void)showNotification {
+    [self.minimalNotification show];
+}
+
 - (IBAction)show:(id)sender {
     [self.minimalNotification show];
 }

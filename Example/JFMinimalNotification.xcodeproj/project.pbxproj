@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1907CAFC1AE1808500B0C2F4 /* JFMinimalNotification_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1907CAFB1AE1808500B0C2F4 /* JFMinimalNotification_Tests.m */; };
 		1A06FD941A1ABEEF00EC399D /* JFMinimalNotificationArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A06FD931A1ABEEF00EC399D /* JFMinimalNotificationArt.m */; };
 		1A06FD9A1A1AD6E400EC399D /* UIView+Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A06FD991A1AD6E400EC399D /* UIView+Round.m */; };
 		1A06FD9D1A1B887300EC399D /* UIColor+JFMinimalNotificationColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A06FD9C1A1B887300EC399D /* UIColor+JFMinimalNotificationColors.m */; };
@@ -26,7 +27,20 @@
 		3F0A97861735E4C500528BA7 /* JFMinimalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0A97851735E4C500528BA7 /* JFMinimalNotification.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		1907CAFD1AE1808500B0C2F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F0A974E1735E3E700528BA7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3F0A97551735E3E700528BA7;
+			remoteInfo = JFMinimalNotification;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		1907CAF71AE1808500B0C2F4 /* JFMinimalNotification Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JFMinimalNotification Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1907CAFA1AE1808500B0C2F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1907CAFB1AE1808500B0C2F4 /* JFMinimalNotification_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFMinimalNotification_Tests.m; sourceTree = "<group>"; };
 		1A06FD921A1ABEEF00EC399D /* JFMinimalNotificationArt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFMinimalNotificationArt.h; sourceTree = "<group>"; };
 		1A06FD931A1ABEEF00EC399D /* JFMinimalNotificationArt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFMinimalNotificationArt.m; sourceTree = "<group>"; };
 		1A06FD981A1AD6E400EC399D /* UIView+Round.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Round.h"; sourceTree = "<group>"; };
@@ -58,6 +72,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1907CAF41AE1808500B0C2F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3F0A97531735E3E700528BA7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -71,10 +92,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1907CAF81AE1808500B0C2F4 /* JFMinimalNotification Tests */ = {
+			isa = PBXGroup;
+			children = (
+				1907CAFB1AE1808500B0C2F4 /* JFMinimalNotification_Tests.m */,
+				1907CAF91AE1808500B0C2F4 /* Supporting Files */,
+			);
+			path = "JFMinimalNotification Tests";
+			sourceTree = "<group>";
+		};
+		1907CAF91AE1808500B0C2F4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1907CAFA1AE1808500B0C2F4 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		3F0A974D1735E3E700528BA7 = {
 			isa = PBXGroup;
 			children = (
 				3F0A975F1735E3E700528BA7 /* JFMinimalNotification */,
+				1907CAF81AE1808500B0C2F4 /* JFMinimalNotification Tests */,
 				3F0A97581735E3E700528BA7 /* Frameworks */,
 				3F0A97571735E3E700528BA7 /* Products */,
 			);
@@ -84,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				3F0A97561735E3E700528BA7 /* JFMinimalNotification.app */,
+				1907CAF71AE1808500B0C2F4 /* JFMinimalNotification Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,6 +189,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1907CAF61AE1808500B0C2F4 /* JFMinimalNotification Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1907CB011AE1808500B0C2F4 /* Build configuration list for PBXNativeTarget "JFMinimalNotification Tests" */;
+			buildPhases = (
+				1907CAF31AE1808500B0C2F4 /* Sources */,
+				1907CAF41AE1808500B0C2F4 /* Frameworks */,
+				1907CAF51AE1808500B0C2F4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1907CAFE1AE1808500B0C2F4 /* PBXTargetDependency */,
+			);
+			name = "JFMinimalNotification Tests";
+			productName = "JFMinimalNotification Tests";
+			productReference = 1907CAF71AE1808500B0C2F4 /* JFMinimalNotification Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		3F0A97551735E3E700528BA7 /* JFMinimalNotification */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3F0A977C1735E3E700528BA7 /* Build configuration list for PBXNativeTarget "JFMinimalNotification" */;
@@ -174,6 +232,12 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Jeremy Fox";
+				TargetAttributes = {
+					1907CAF61AE1808500B0C2F4 = {
+						CreatedOnToolsVersion = 6.3;
+						TestTargetID = 3F0A97551735E3E700528BA7;
+					};
+				};
 			};
 			buildConfigurationList = 3F0A97511735E3E700528BA7 /* Build configuration list for PBXProject "JFMinimalNotification" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -188,11 +252,19 @@
 			projectRoot = "";
 			targets = (
 				3F0A97551735E3E700528BA7 /* JFMinimalNotification */,
+				1907CAF61AE1808500B0C2F4 /* JFMinimalNotification Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1907CAF51AE1808500B0C2F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3F0A97541735E3E700528BA7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -209,6 +281,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1907CAF31AE1808500B0C2F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1907CAFC1AE1808500B0C2F4 /* JFMinimalNotification_Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3F0A97521735E3E700528BA7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -225,6 +305,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1907CAFE1AE1808500B0C2F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3F0A97551735E3E700528BA7 /* JFMinimalNotification */;
+			targetProxy = 1907CAFD1AE1808500B0C2F4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3F0A97621735E3E700528BA7 /* InfoPlist.strings */ = {
@@ -246,6 +334,72 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1907CAFF1AE1808500B0C2F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "JFMinimalNotification Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JFMinimalNotification.app/JFMinimalNotification";
+			};
+			name = Debug;
+		};
+		1907CB001AE1808500B0C2F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "JFMinimalNotification Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JFMinimalNotification.app/JFMinimalNotification";
+			};
+			name = Release;
+		};
 		3F0A977A1735E3E700528BA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -307,6 +461,8 @@
 		3F0A977D1735E3E700528BA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFMinimalNotification/JFMinimalNotification-Prefix.pch";
 				INFOPLIST_FILE = "JFMinimalNotification/JFMinimalNotification-Info.plist";
@@ -319,6 +475,8 @@
 		3F0A977E1735E3E700528BA7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JFMinimalNotification/JFMinimalNotification-Prefix.pch";
 				INFOPLIST_FILE = "JFMinimalNotification/JFMinimalNotification-Info.plist";
@@ -331,6 +489,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1907CB011AE1808500B0C2F4 /* Build configuration list for PBXNativeTarget "JFMinimalNotification Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1907CAFF1AE1808500B0C2F4 /* Debug */,
+				1907CB001AE1808500B0C2F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		3F0A97511735E3E700528BA7 /* Build configuration list for PBXProject "JFMinimalNotification" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

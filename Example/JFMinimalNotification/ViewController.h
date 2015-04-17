@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
+- (void)showToastWithMessage:(NSString *)message;
+- (void)showNotification;
 - (IBAction)show:(id)sender;
 - (IBAction)dismiss:(id)sender;
 - (IBAction)setErrorStyle:(id)sender;
