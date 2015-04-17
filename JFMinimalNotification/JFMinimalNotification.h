@@ -174,9 +174,9 @@ typedef void (^JFMinimalNotificationTouchHandler)(void);
 @protocol JFMinimalNotificationDelegate <NSObject>
 
 @optional
-- (void)willShowNotification:(JFMinimalNotification*)notification;
-- (void)didShowNotification:(JFMinimalNotification*)notification;
-- (void)willDisimissNotification:(JFMinimalNotification*)notification;
-- (void)didDismissNotification:(JFMinimalNotification*)notification;
+- (void)minimalNotificationWillShowNotification:(JFMinimalNotification*)notification;
+- (void)minimalNotificationDidShowNotification:(JFMinimalNotification*)notification;
+- (void)minimalNotificationWillDisimissNotification:(JFMinimalNotification*)notification;
+- (void)minimalNotificationDidDismissNotification:(JFMinimalNotification*)notification;
 
 @end

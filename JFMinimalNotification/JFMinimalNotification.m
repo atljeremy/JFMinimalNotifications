@@ -166,8 +166,8 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
 - (void)show
 {
     if (self.isReadyToDisplay) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(willShowNotification:)]) {
-            [self.delegate willShowNotification:self];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(minimalNotificationWillShowNotification:)]) {
+            [self.delegate minimalNotificationWillShowNotification:self];
         }
         
         [self.superview removeConstraints:self.notificationVerticalConstraints];
@@ -195,8 +195,8 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
                 self.dismissalTimer = [NSTimer scheduledTimerWithTimeInterval:self.dismissalDelay invocation:dismissalInvocation repeats:NO];
             }
             
-            if (self.delegate && [self.delegate respondsToSelector:@selector(didShowNotification:)]) {
-                [self.delegate didShowNotification:self];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(minimalNotificationDidShowNotification:)]) {
+                [self.delegate minimalNotificationDidShowNotification:self];
             }
         }];
     } else {
@@ -206,8 +206,8 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
 
 - (void)dismiss
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(willDisimissNotification:)]) {
-        [self.delegate willDisimissNotification:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(minimalNotificationWillDisimissNotification:)]) {
+        [self.delegate minimalNotificationWillDisimissNotification:self];
     }
     
     if (self.dismissalTimer) {
@@ -220,8 +220,8 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     [UIView animateWithDuration:0.6f delay:0.0f usingSpringWithDamping:0.7f initialSpringVelocity:0.3f options:UIViewAnimationOptionAllowAnimatedContent animations:^{
         [self layoutIfNeeded];
     } completion:^(BOOL finished) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(didDismissNotification:)]) {
-            [self.delegate didDismissNotification:self];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(minimalNotificationDidDismissNotification:)]) {
+            [self.delegate minimalNotificationDidDismissNotification:self];
         }
     }];
 }

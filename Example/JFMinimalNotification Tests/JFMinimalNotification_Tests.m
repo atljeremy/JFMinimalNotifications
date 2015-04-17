@@ -117,13 +117,13 @@
 //    }];
 //}
 
-- (void)didShowNotification:(JFMinimalNotification*)notification {
+- (void)minimalNotificationDidShowNotification:(JFMinimalNotification*)notification {
     if (self.expectation) {
         [self.expectation fulfill];
     }
 }
 
-- (void)didDismissNotification:(JFMinimalNotification *)notification {
+- (void)minimalNotificationDidDismissNotification:(JFMinimalNotification *)notification {
     if (self.expectation) {
         [self.expectation fulfill];
     }

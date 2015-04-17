@@ -183,19 +183,19 @@
 #pragma mark JFMinimalNotificationDelegate
 #pragma mark ----------------------
 
-- (void)willShowNotification:(JFMinimalNotification*)notification {
+- (void)minimalNotificationWillShowNotification:(JFMinimalNotification*)notification {
     NSLog(@"willShowNotification");
 }
 
-- (void)didShowNotification:(JFMinimalNotification*)notification {
+- (void)minimalNotificationDidShowNotification:(JFMinimalNotification*)notification {
     NSLog(@"didShowNotification");
 }
 
-- (void)willDisimissNotification:(JFMinimalNotification*)notification {
+- (void)minimalNotificationWillDisimissNotification:(JFMinimalNotification*)notification {
     NSLog(@"willDisimissNotification");
 }
 
-- (void)didDismissNotification:(JFMinimalNotification*)notification {
+- (void)minimalNotificationDidDismissNotification:(JFMinimalNotification*)notification {
     NSLog(@"didDismissNotification");
 }
 
