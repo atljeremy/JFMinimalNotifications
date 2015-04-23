@@ -130,6 +130,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
         
         _contentView = [UIView new];
         _contentView.translatesAutoresizingMaskIntoConstraints = NO;
+        _contentView.accessibilityLabel = @"Noticiation Content View";
         UIView* contentView = _contentView;
         NSDictionary* views = NSDictionaryOfVariableBindings(contentView);
         [self addSubview:_contentView];
