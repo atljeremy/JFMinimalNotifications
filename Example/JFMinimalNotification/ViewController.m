@@ -160,6 +160,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    [textField resignFirstResponder];
     JFMinimalNotificationStytle style = self.minimalNotification.currentStyle;
     [self.minimalNotification removeFromSuperview];
     self.minimalNotification = nil;
