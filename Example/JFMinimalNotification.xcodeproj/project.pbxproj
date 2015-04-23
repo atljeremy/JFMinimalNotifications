@@ -25,6 +25,9 @@
 		3F0A97731735E3E700528BA7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0A97711735E3E700528BA7 /* MainStoryboard.storyboard */; };
 		3F0A97791735E3E700528BA7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0A97781735E3E700528BA7 /* ViewController.m */; };
 		3F0A97861735E4C500528BA7 /* JFMinimalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0A97851735E4C500528BA7 /* JFMinimalNotification.m */; };
+		3FFDFDEA1AE5D4140023D5FD /* libKIF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFDFDDF1AE5D3F90023D5FD /* libKIF.a */; };
+		3FFDFDEC1AE5D4B80023D5FD /* JFMinimalNotificationUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFDFDEB1AE5D4B80023D5FD /* JFMinimalNotificationUITests.m */; };
+		3FFDFDED1AE5D7A60023D5FD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0A975D1735E3E700528BA7 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,48 @@
 			proxyType = 1;
 			remoteGlobalIDString = 3F0A97551735E3E700528BA7;
 			remoteInfo = JFMinimalNotification;
+		};
+		3FFDFDDE1AE5D3F90023D5FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FFDFDD51AE5D3F90023D5FD /* KIF.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EABD46AA1857A0C700A5F081;
+			remoteInfo = KIF;
+		};
+		3FFDFDE01AE5D3F90023D5FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FFDFDD51AE5D3F90023D5FD /* KIF.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB72047C1680DDAD00278DA2;
+			remoteInfo = "KIF-OCUnit";
+		};
+		3FFDFDE21AE5D3F90023D5FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FFDFDD51AE5D3F90023D5FD /* KIF.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB60ECC1177F8C83005A041A;
+			remoteInfo = "Test Host";
+		};
+		3FFDFDE41AE5D3F90023D5FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FFDFDD51AE5D3F90023D5FD /* KIF.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EABD46CD1857A0F300A5F081;
+			remoteInfo = "KIF Tests";
+		};
+		3FFDFDE61AE5D3F90023D5FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FFDFDD51AE5D3F90023D5FD /* KIF.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB60ECEB177F8DB3005A041A;
+			remoteInfo = "KIF Tests-OCUnit";
+		};
+		3FFDFDE81AE5D40F0023D5FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3FFDFDD51AE5D3F90023D5FD /* KIF.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EABD46791857A0C700A5F081;
+			remoteInfo = KIF;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -69,6 +114,10 @@
 		3F0A97841735E4C500528BA7 /* JFMinimalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFMinimalNotification.h; sourceTree = "<group>"; };
 		3F0A97851735E4C500528BA7 /* JFMinimalNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFMinimalNotification.m; sourceTree = "<group>"; };
 		3F0A97871736C4C700528BA7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		3FFDFDD51AE5D3F90023D5FD /* KIF.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = KIF.xcodeproj; sourceTree = "<group>"; };
+		3FFDFDEB1AE5D4B80023D5FD /* JFMinimalNotificationUITests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFMinimalNotificationUITests.m; sourceTree = "<group>"; };
+		3FFDFDEE1AE5D7D00023D5FD /* libTelephonyIOKitDynamic.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libTelephonyIOKitDynamic.dylib; path = usr/lib/libTelephonyIOKitDynamic.dylib; sourceTree = SDKROOT; };
+		3FFDFDF01AE5D8D40023D5FD /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +125,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FFDFDED1AE5D7A60023D5FD /* CoreGraphics.framework in Frameworks */,
+				3FFDFDEA1AE5D4140023D5FD /* libKIF.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +146,7 @@
 		1907CAF81AE1808500B0C2F4 /* JFMinimalNotification Tests */ = {
 			isa = PBXGroup;
 			children = (
+				3FFDFC451AE5D3A90023D5FD /* UI Automation */,
 				1907CAFB1AE1808500B0C2F4 /* JFMinimalNotification_Tests.m */,
 				1907CAF91AE1808500B0C2F4 /* Supporting Files */,
 			);
@@ -112,6 +164,7 @@
 		3F0A974D1735E3E700528BA7 = {
 			isa = PBXGroup;
 			children = (
+				3FFDFC461AE5D3B90023D5FD /* Vendor */,
 				3F0A975F1735E3E700528BA7 /* JFMinimalNotification */,
 				1907CAF81AE1808500B0C2F4 /* JFMinimalNotification Tests */,
 				3F0A97581735E3E700528BA7 /* Frameworks */,
@@ -131,6 +184,8 @@
 		3F0A97581735E3E700528BA7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3FFDFDF01AE5D8D40023D5FD /* IOKit.framework */,
+				3FFDFDEE1AE5D7D00023D5FD /* libTelephonyIOKitDynamic.dylib */,
 				3F0A97871736C4C700528BA7 /* QuartzCore.framework */,
 				3F0A97591735E3E700528BA7 /* UIKit.framework */,
 				3F0A975B1735E3E700528BA7 /* Foundation.framework */,
@@ -186,6 +241,42 @@
 			path = ../../JFMinimalNotification;
 			sourceTree = "<group>";
 		};
+		3FFDFC451AE5D3A90023D5FD /* UI Automation */ = {
+			isa = PBXGroup;
+			children = (
+				3FFDFDEB1AE5D4B80023D5FD /* JFMinimalNotificationUITests.m */,
+			);
+			path = "UI Automation";
+			sourceTree = "<group>";
+		};
+		3FFDFC461AE5D3B90023D5FD /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				3FFDFC471AE5D3B90023D5FD /* KIF */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		3FFDFC471AE5D3B90023D5FD /* KIF */ = {
+			isa = PBXGroup;
+			children = (
+				3FFDFDD51AE5D3F90023D5FD /* KIF.xcodeproj */,
+			);
+			path = KIF;
+			sourceTree = "<group>";
+		};
+		3FFDFDD61AE5D3F90023D5FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3FFDFDDF1AE5D3F90023D5FD /* libKIF.a */,
+				3FFDFDE11AE5D3F90023D5FD /* libKIF-OCUnit.a */,
+				3FFDFDE31AE5D3F90023D5FD /* Test Host.app */,
+				3FFDFDE51AE5D3F90023D5FD /* KIF Tests - XCTest.xctest */,
+				3FFDFDE71AE5D3F90023D5FD /* KIF Tests-OCUnit.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -200,6 +291,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				3FFDFDE91AE5D40F0023D5FD /* PBXTargetDependency */,
 				1907CAFE1AE1808500B0C2F4 /* PBXTargetDependency */,
 			);
 			name = "JFMinimalNotification Tests";
@@ -245,10 +337,17 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 3F0A974D1735E3E700528BA7;
 			productRefGroup = 3F0A97571735E3E700528BA7 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3FFDFDD61AE5D3F90023D5FD /* Products */;
+					ProjectRef = 3FFDFDD51AE5D3F90023D5FD /* KIF.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3F0A97551735E3E700528BA7 /* JFMinimalNotification */,
@@ -256,6 +355,44 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3FFDFDDF1AE5D3F90023D5FD /* libKIF.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libKIF.a;
+			remoteRef = 3FFDFDDE1AE5D3F90023D5FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3FFDFDE11AE5D3F90023D5FD /* libKIF-OCUnit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libKIF-OCUnit.a";
+			remoteRef = 3FFDFDE01AE5D3F90023D5FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3FFDFDE31AE5D3F90023D5FD /* Test Host.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Test Host.app";
+			remoteRef = 3FFDFDE21AE5D3F90023D5FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3FFDFDE51AE5D3F90023D5FD /* KIF Tests - XCTest.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "KIF Tests - XCTest.xctest";
+			remoteRef = 3FFDFDE41AE5D3F90023D5FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3FFDFDE71AE5D3F90023D5FD /* KIF Tests-OCUnit.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "KIF Tests-OCUnit.octest";
+			remoteRef = 3FFDFDE61AE5D3F90023D5FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1907CAF51AE1808500B0C2F4 /* Resources */ = {
@@ -285,6 +422,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FFDFDEC1AE5D4B80023D5FD /* JFMinimalNotificationUITests.m in Sources */,
 				1907CAFC1AE1808500B0C2F4 /* JFMinimalNotification_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,6 +449,11 @@
 			isa = PBXTargetDependency;
 			target = 3F0A97551735E3E700528BA7 /* JFMinimalNotification */;
 			targetProxy = 1907CAFD1AE1808500B0C2F4 /* PBXContainerItemProxy */;
+		};
+		3FFDFDE91AE5D40F0023D5FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = KIF;
+			targetProxy = 3FFDFDE81AE5D40F0023D5FD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -348,6 +491,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -363,6 +507,13 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JFMinimalNotification.app/JFMinimalNotification";
 			};
@@ -384,6 +535,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -395,6 +547,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JFMinimalNotification.app/JFMinimalNotification";
 			};
@@ -496,6 +654,7 @@
 				1907CB001AE1808500B0C2F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3F0A97511735E3E700528BA7 /* Build configuration list for PBXProject "JFMinimalNotification" */ = {
 			isa = XCConfigurationList;

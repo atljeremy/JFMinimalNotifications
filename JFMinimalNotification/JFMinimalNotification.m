@@ -351,6 +351,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     if (title && title.length > 0) {
         if (!self.titleLabel) {
             self.titleLabel = [UILabel new];
+            self.titleLabel.accessibilityLabel = @"Notification Title";
             self.titleLabel.adjustsFontSizeToFitWidth = YES;
             self.titleLabel.backgroundColor = [UIColor clearColor];
             self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -374,6 +375,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     if (subTitle && subTitle.length > 0) {
         if (!self.subTitleLabel) {
             self.subTitleLabel = [UILabel new];
+            self.subTitleLabel.accessibilityLabel = @"Notification Subtitle";
             self.subTitleLabel.text = subTitle;
             self.subTitleLabel.adjustsFontSizeToFitWidth = YES;
             self.subTitleLabel.backgroundColor = [UIColor clearColor];
@@ -439,6 +441,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
             if (![view isEqual:self.leftAccessoryView]) {
                 [self.leftAccessoryView removeFromSuperview];
                 _leftAccessoryView = view;
+                _leftAccessoryView.accessibilityLabel = @"Left Accessory";
                 _leftAccessoryView.translatesAutoresizingMaskIntoConstraints = NO;
                 self.leftAccessoryView.contentMode = UIViewContentModeScaleAspectFit;
                 self.leftAccessoryView.alpha = 0.0f;
@@ -551,6 +554,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
             if (![view isEqual:self.rightAccessoryView]) {
                 [self.rightAccessoryView removeFromSuperview];
                 _rightAccessoryView = view;
+                _rightAccessoryView.accessibilityLabel = @"Right Accessory";
                 _rightAccessoryView.translatesAutoresizingMaskIntoConstraints = NO;
                 [self.contentView addSubview:self.rightAccessoryView];
                 UIView* rightView = self.rightAccessoryView;
