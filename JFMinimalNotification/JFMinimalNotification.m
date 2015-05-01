@@ -236,6 +236,12 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
         [self.superview removeConstraints:self.notificationHorizontalConstraints];
     }
     UIView* superview = self.superview;
+    
+    if (!superview) {
+        // This is to address issue: https://github.com/atljeremy/JFMinimalNotifications/issues/10
+        return;
+    }
+    
     UIView* notification = self;
     NSDictionary* views = NSDictionaryOfVariableBindings(superview, notification);
     NSDictionary* metrics = @{@"height": @(kNotificationViewHeight)};

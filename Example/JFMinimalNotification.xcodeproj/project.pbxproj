@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1907CAFC1AE1808500B0C2F4 /* JFMinimalNotification_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1907CAFB1AE1808500B0C2F4 /* JFMinimalNotification_Tests.m */; };
 		1993D9721AE961CE00090768 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1993D96B1AE9619E00090768 /* IOKit.framework */; };
+		19C95A5C1AF3B1B800590781 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C95A5B1AF3B1B800590781 /* DetailViewController.m */; };
 		1A06FD941A1ABEEF00EC399D /* JFMinimalNotificationArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A06FD931A1ABEEF00EC399D /* JFMinimalNotificationArt.m */; };
 		1A06FD9A1A1AD6E400EC399D /* UIView+Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A06FD991A1AD6E400EC399D /* UIView+Round.m */; };
 		1A06FD9D1A1B887300EC399D /* UIColor+JFMinimalNotificationColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A06FD9C1A1B887300EC399D /* UIColor+JFMinimalNotificationColors.m */; };
@@ -88,6 +89,8 @@
 		1907CAFA1AE1808500B0C2F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1907CAFB1AE1808500B0C2F4 /* JFMinimalNotification_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFMinimalNotification_Tests.m; sourceTree = "<group>"; };
 		1993D96B1AE9619E00090768 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
+		19C95A5A1AF3B1B800590781 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		19C95A5B1AF3B1B800590781 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		1A06FD921A1ABEEF00EC399D /* JFMinimalNotificationArt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFMinimalNotificationArt.h; sourceTree = "<group>"; };
 		1A06FD931A1ABEEF00EC399D /* JFMinimalNotificationArt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFMinimalNotificationArt.m; sourceTree = "<group>"; };
 		1A06FD981A1AD6E400EC399D /* UIView+Round.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Round.h"; sourceTree = "<group>"; };
@@ -204,9 +207,11 @@
 				3F0A97831735E4C500528BA7 /* JFMinimalNotification */,
 				3F0A97681735E3E700528BA7 /* AppDelegate.h */,
 				3F0A97691735E3E700528BA7 /* AppDelegate.m */,
-				3F0A97711735E3E700528BA7 /* MainStoryboard.storyboard */,
 				3F0A97771735E3E700528BA7 /* ViewController.h */,
 				3F0A97781735E3E700528BA7 /* ViewController.m */,
+				19C95A5A1AF3B1B800590781 /* DetailViewController.h */,
+				19C95A5B1AF3B1B800590781 /* DetailViewController.m */,
+				3F0A97711735E3E700528BA7 /* MainStoryboard.storyboard */,
 				3F0A97601735E3E700528BA7 /* Supporting Files */,
 			);
 			path = JFMinimalNotification;
@@ -437,6 +442,7 @@
 			files = (
 				3F0A97661735E3E700528BA7 /* main.m in Sources */,
 				3F0A976A1735E3E700528BA7 /* AppDelegate.m in Sources */,
+				19C95A5C1AF3B1B800590781 /* DetailViewController.m in Sources */,
 				3F0A97791735E3E700528BA7 /* ViewController.m in Sources */,
 				1A06FD9A1A1AD6E400EC399D /* UIView+Round.m in Sources */,
 				1A06FD941A1ABEEF00EC399D /* JFMinimalNotificationArt.m in Sources */,

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xP7-OY-ST8">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--JFMinimalNotification-->
         <scene sceneID="5">
             <objects>
                 <viewController id="2" customClass="ViewController" sceneMemberID="viewController">
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Pd-Fl-5Io">
-                                <rect key="frame" x="136" y="20" width="328" height="413"/>
+                                <rect key="frame" x="136" y="64" width="328" height="413"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jzV-ta-tPG">
                                         <rect key="frame" x="24" y="49" width="129" height="30"/>
@@ -186,6 +186,21 @@
                             <constraint firstAttribute="centerX" secondItem="1Pd-Fl-5Io" secondAttribute="centerX" id="zss-5r-vpa"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="JFMinimalNotification" id="Q7o-ig-KgG">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="ReK-lG-xRY">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="khD-Of-1aD">
+                                <rect key="frame" x="-23" y="-15" width="133" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration" label="details"/>
+                                <state key="normal" title="Details">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="5Lp-Xh-5eu" kind="show" id="Pwv-oW-yrc"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="subTitleLabelTextField" destination="A69-Z3-6Za" id="5Je-Je-9hY"/>
                         <outlet property="titleLabelTextField" destination="0HC-hE-bOC" id="odF-uh-Cv1"/>
@@ -194,6 +209,61 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="144.375" y="73.943661971830977"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="icH-OA-IX1">
+            <objects>
+                <navigationController id="xP7-OY-ST8" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kGf-V9-GZ1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2" kind="relationship" relationship="rootViewController" id="o1J-Rr-YYc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vf0-uV-Wvn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-528" y="73"/>
+        </scene>
+        <!--Details-->
+        <scene sceneID="jPl-gr-kkl">
+            <objects>
+                <viewController id="5Lp-Xh-5eu" customClass="DetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HsC-cX-g82"/>
+                        <viewControllerLayoutGuide type="bottom" id="vN3-lz-KXO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Cwd-9w-Cjx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xUC-It-mSD">
+                                <rect key="frame" x="159" y="114" width="283" height="30"/>
+                                <accessibility key="accessibilityConfiguration" label="dismiss and show"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="283" id="nZf-aY-sVy"/>
+                                    <constraint firstAttribute="height" constant="30" id="uPj-oD-iye"/>
+                                </constraints>
+                                <state key="normal" title="Dismiss and show Notification after delay">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissAndShowNotificationAfterDelayAction:" destination="5Lp-Xh-5eu" eventType="touchUpInside" id="faN-GM-hCU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="xUC-It-mSD" secondAttribute="centerX" constant="-0.5" id="SFF-PC-Jb7"/>
+                            <constraint firstItem="xUC-It-mSD" firstAttribute="top" secondItem="HsC-cX-g82" secondAttribute="bottom" constant="50" id="fIo-PA-R3S"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Details" id="5fT-cv-548"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zOT-Jt-8Hn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="881" y="73"/>
         </scene>
     </scenes>
 </document>

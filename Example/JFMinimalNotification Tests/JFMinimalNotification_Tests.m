@@ -18,6 +18,7 @@
 @interface JFMinimalNotification_Tests : XCTestCase <JFMinimalNotificationDelegate>
 @property (nonatomic, strong) ViewController* viewController;
 @property (nonatomic, strong) XCTestExpectation* expectation;
+@property (assign) BOOL allowShowFullfilment;
 @end
 
 @implementation JFMinimalNotification_Tests
@@ -28,6 +29,7 @@
         self.viewController = [ViewController new];
         self.viewController.view.frame = CGRectMake(0, 0, 320, 480);
     }
+    self.allowShowFullfilment = YES;
 }
 
 - (void)tearDown {
@@ -99,26 +101,28 @@
     }];
 }
 
-//- (void)testAsyncCallsToShowAndDismissWorkProperly {
-//    self.expectation = [self expectationWithDescription:@"Animation Complete Expectation"];
-//    [self.viewController showToastWithMessage:@"Testing..."];
-//
-//    dispatch_queue_t queue = dispatch_queue_create("com.jeremyfox.JFMinimalNotification.Tests", NULL);
-//    dispatch_async(queue, ^{
-//        [self.viewController showToastWithMessage:@"Testing..."];
-//    });
-//    
-//    self.viewController.minimalNotification.delegate = self;
-//    [self.viewController dismiss:nil];
-//    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
-//        CGFloat notificationMinY = CGRectGetMinY(self.viewController.minimalNotification.frame);
-//        CGFloat viewMaxY = CGRectGetMaxY(self.viewController.view.frame);
-//        XCTAssert(notificationMinY >= viewMaxY, @"Notification should be placed at the bottom of it's superview - outside the visible area of the view");
-//    }];
-//}
+- (void)testAsyncCallsToShowAndDismissWorkProperly {
+    self.allowShowFullfilment = NO;
+    self.expectation = [self expectationWithDescription:@"Animation Complete Expectation"];
+    self.viewController.minimalNotification.delegate = self;
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.viewController.minimalNotification show];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.viewController.minimalNotification dismiss];
+    });
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
+        CGFloat notificationMinY = CGRectGetMinY(self.viewController.minimalNotification.frame);
+        CGFloat viewMaxY = CGRectGetMaxY(self.viewController.view.frame);
+        XCTAssert(notificationMinY >= viewMaxY, @"Notification should be placed at the bottom of it's superview - outside the visible area of the view");
+    }];
+}
 
 - (void)minimalNotificationDidShowNotification:(JFMinimalNotification*)notification {
-    if (self.expectation) {
+    if (self.allowShowFullfilment && self.expectation) {
         [self.expectation fulfill];
     }
 }

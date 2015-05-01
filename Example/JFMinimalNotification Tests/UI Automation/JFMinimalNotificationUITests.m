@@ -156,4 +156,14 @@
     [tester tapViewWithAccessibilityLabel:@"dismiss"];
 }
 
+- (void)testDismissalDelayNotificationDoesntCauseCrashIfDismissalHappensAfterViewHasBeenDismissed {
+    // Test for issue: https://github.com/atljeremy/JFMinimalNotifications/issues/10
+    [tester tapViewWithAccessibilityLabel:@"details"];
+    [tester waitForViewWithAccessibilityLabel:@"dismiss and show"];
+    [tester tapViewWithAccessibilityLabel:@"dismiss and show"];
+    [tester waitForAnimationsToFinishWithTimeout:1.0];
+    [tester waitForTimeInterval:2.5]; // Give the dismissalDelay time to fire NSInvocation
+    [tester waitForViewWithAccessibilityLabel:@"details"]; // Make sure we're back on the main view and the app didn't crash
+}
+
 @end
