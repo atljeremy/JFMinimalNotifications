@@ -88,7 +88,7 @@ self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinima
 
 ```objective-c
 // Available Styles
-typedef NS_ENUM(NSInteger, JFMinimalNotificationStytle) {
+typedef NS_ENUM(NSInteger, JFMinimalNotificationStyle) {
     JFMinimalNotificationStyleDefault,
     JFMinimalNotificationStyleError,
     JFMinimalNotificationStyleSuccess,

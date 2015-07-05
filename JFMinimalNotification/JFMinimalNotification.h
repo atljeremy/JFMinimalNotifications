@@ -27,7 +27,7 @@
 
 @protocol JFMinimalNotificationDelegate;
 
-typedef NS_ENUM(NSInteger, JFMinimalNotificationStytle) {
+typedef NS_ENUM(NSInteger, JFMinimalNotificationStyle) {
     JFMinimalNotificationStyleDefault,
     JFMinimalNotificationStyleError,
     JFMinimalNotificationStyleSuccess,
@@ -65,9 +65,9 @@ typedef void (^JFMinimalNotificationTouchHandler)(void);
 @property (nonatomic, strong, readonly) UIView* rightAccessoryView;
 
 /**
- * @return The current JFMinimalNotificationStytle of the notification
+ * @return The current JFMinimalNotificationStyle of the notification
  */
-@property (nonatomic, readonly) JFMinimalNotificationStytle currentStyle;
+@property (nonatomic, readonly) JFMinimalNotificationStyle currentStyle;
 
 /**
  * @return Used to present the notification from the top of the screen
@@ -86,35 +86,35 @@ typedef void (^JFMinimalNotificationTouchHandler)(void);
 
 /**
  * @return a helper class method to instantiate a notification and set the desired style, title and subtitle.
- * @param style The desired JFMinimalNotificationStytle for this notification
+ * @param style The desired JFMinimalNotificationStyle for this notification
  * @param title The desired title string
  * @param subTitle The desired sub-title string
  */
-+ (instancetype)notificationWithStyle:(JFMinimalNotificationStytle)style
++ (instancetype)notificationWithStyle:(JFMinimalNotificationStyle)style
                                 title:(NSString*)title
                              subTitle:(NSString*)subTitle;
 
 /**
  * @return a helper class method to instantiate a notification and set the desired style, title, subtitle and dismissalDelay.
- * @param style The desired JFMinimalNotificationStytle for this notification
+ * @param style The desired JFMinimalNotificationStyle for this notification
  * @param title The desired title string
  * @param subTitle The desired sub-title string
  * @param dismissalDelay The amount of time the notification should be displayed before being dismissed.
  */
-+ (instancetype)notificationWithStyle:(JFMinimalNotificationStytle)style
++ (instancetype)notificationWithStyle:(JFMinimalNotificationStyle)style
                                 title:(NSString*)title
                              subTitle:(NSString*)subTitle
                        dismissalDelay:(NSTimeInterval)dismissalDelay;
 
 /**
  * @return a helper class method to instantiate a notification and set the desired style, title, subtitle, dismissalDelay and touchHandler.
- * @param style The desired JFMinimalNotificationStytle for this notification
+ * @param style The desired JFMinimalNotificationStyle for this notification
  * @param title The desired title string
  * @param subTitle The desired sub-title string
  * @param dismissalDelay The amount of time the notification should be displayed before being dismissed.
  * @param touchHandler The touch handler callback block that will be invoked when the notification is tapped.
  */
-+ (instancetype)notificationWithStyle:(JFMinimalNotificationStytle)style
++ (instancetype)notificationWithStyle:(JFMinimalNotificationStyle)style
                                 title:(NSString*)title
                              subTitle:(NSString*)subTitle
                        dismissalDelay:(NSTimeInterval)dismissalDelay
@@ -140,10 +140,10 @@ typedef void (^JFMinimalNotificationTouchHandler)(void);
 #pragma mark ----------------------
 
 /**
- * @return Updates the JFMinimalNotificationStytle of the notification
- * @param style The desired JFMinimalNotificationStytle
+ * @return Updates the JFMinimalNotificationStyle of the notification
+ * @param style The desired JFMinimalNotificationStyle
  */
-- (void)setStyle:(JFMinimalNotificationStytle)style animated:(BOOL)animated;
+- (void)setStyle:(JFMinimalNotificationStyle)style animated:(BOOL)animated;
 
 /**
  * @return Sets the title label font
