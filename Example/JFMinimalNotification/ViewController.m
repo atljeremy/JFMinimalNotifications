@@ -161,7 +161,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    JFMinimalNotificationStytle style = self.minimalNotification.currentStyle;
+    JFMinimalNotificationStyle style = self.minimalNotification.currentStyle;
     [self.minimalNotification removeFromSuperview];
     self.minimalNotification = nil;
     self.minimalNotification = [JFMinimalNotification notificationWithStyle:style title:self.titleLabelTextField.text subTitle:self.subTitleLabelTextField.text dismissalDelay:0.0f touchHandler:^{

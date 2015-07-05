@@ -37,7 +37,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
 @interface JFMinimalNotification()
 
 // Configuration
-@property (nonatomic, readwrite) JFMinimalNotificationStytle currentStyle;
+@property (nonatomic, readwrite) JFMinimalNotificationStyle currentStyle;
 
 // Views
 @property (nonatomic, strong) UIView* contentView;
@@ -88,17 +88,17 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     _dismissalTimer                     = nil;
 }
 
-+ (instancetype)notificationWithStyle:(JFMinimalNotificationStytle)style title:(NSString*)title subTitle:(NSString*)subTitle
++ (instancetype)notificationWithStyle:(JFMinimalNotificationStyle)style title:(NSString*)title subTitle:(NSString*)subTitle
 {
     return [self notificationWithStyle:style title:title subTitle:subTitle dismissalDelay:0];
 }
 
-+ (instancetype)notificationWithStyle:(JFMinimalNotificationStytle)style title:(NSString *)title subTitle:(NSString *)subTitle dismissalDelay:(NSTimeInterval)dismissalDelay
++ (instancetype)notificationWithStyle:(JFMinimalNotificationStyle)style title:(NSString *)title subTitle:(NSString *)subTitle dismissalDelay:(NSTimeInterval)dismissalDelay
 {
     return [self notificationWithStyle:style title:title subTitle:subTitle dismissalDelay:dismissalDelay touchHandler:nil];
 }
 
-+ (instancetype)notificationWithStyle:(JFMinimalNotificationStytle)style title:(NSString *)title subTitle:(NSString *)subTitle dismissalDelay:(NSTimeInterval)dismissalDelay touchHandler:(JFMinimalNotificationTouchHandler)touchHandler
++ (instancetype)notificationWithStyle:(JFMinimalNotificationStyle)style title:(NSString *)title subTitle:(NSString *)subTitle dismissalDelay:(NSTimeInterval)dismissalDelay touchHandler:(JFMinimalNotificationTouchHandler)touchHandler
 {
     JFMinimalNotification* notification = [[JFMinimalNotification alloc] initWithStyle:style title:title subTitle:subTitle];
     
@@ -122,7 +122,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     return nil;
 }
 
-- (instancetype)initWithStyle:(JFMinimalNotificationStytle)style title:(NSString*)title subTitle:(NSString*)subTitle
+- (instancetype)initWithStyle:(JFMinimalNotificationStyle)style title:(NSString*)title subTitle:(NSString*)subTitle
 {
     if (self = [super init]) {
         
@@ -274,7 +274,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     [self configureInitialNotificationConstraintsForTopPresentation:_presentFromTop layoutIfNeeded:YES];
 }
 
-- (void)setStyle:(JFMinimalNotificationStytle)style animated:(BOOL)animated
+- (void)setStyle:(JFMinimalNotificationStyle)style animated:(BOOL)animated
 {
     UIImage* image;
     self.accessoryView = nil;
