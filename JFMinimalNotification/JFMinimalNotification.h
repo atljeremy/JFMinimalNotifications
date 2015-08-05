@@ -75,9 +75,15 @@ typedef void (^JFMinimalNotificationTouchHandler)(void);
 @property (nonatomic, assign) BOOL presentFromTop;
 
 /**
+ * @return The current padding from the bottom/top of the screen (depending on if presentFrom Top is set or not)
+ */
+@property (nonatomic, assign) CGFloat edgePadding;
+  
+/**
  * @return The JFMinimalNotificationDelegate
  */
 @property (nonatomic, weak) id<JFMinimalNotificationDelegate> delegate;
+
 
 
 #pragma mark ----------------------
@@ -168,6 +174,12 @@ typedef void (^JFMinimalNotificationTouchHandler)(void);
  * @param view The desired UIView to be set as the right view
  */
 - (void)setRightAccessoryView:(UIView*)view animated:(BOOL)animated;
+
+/**
+ * @return Sets the edge padding
+ * @param edgePadding The desired edgePadding
+ */
+-(void)setEdgePadding:(CGFloat)edgePadding;
 
 @end
 
