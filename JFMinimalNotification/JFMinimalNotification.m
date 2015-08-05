@@ -86,6 +86,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     _subTitleLabelHorizontalConsraints  = nil;
     _subTitleLabelVerticalConsraints    = nil;
     _dismissalTimer                     = nil;
+    _edgePadding                        = 0;
 }
 
 + (instancetype)notificationWithStyle:(JFMinimalNotificationStyle)style title:(NSString*)title subTitle:(NSString*)subTitle
@@ -139,6 +140,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
         
         [self setTitle:title withSubTitle:subTitle];
         [self setStyle:style animated:NO];
+        [self setEdgePadding:0];
         
     }
     return self;
@@ -175,13 +177,13 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
         UIView* superview = self.superview;
         UIView* notification = self;
         NSDictionary* views = NSDictionaryOfVariableBindings(superview, notification);
-        NSDictionary* metrics = @{@"height": @(kNotificationViewHeight)};
+        NSDictionary* metrics = @{@"height": @(kNotificationViewHeight), @"edgepadding": @(_edgePadding)};
         
         NSString* verticalConstraintString;
         if (self.presentFromTop) {
-            verticalConstraintString = @"V:|[notification(==height)]";
+            verticalConstraintString = @"V:|-edgepadding-[notification(==height)]";
         } else {
-            verticalConstraintString = @"V:[notification(==height)]|";
+            verticalConstraintString = @"V:[notification(==height)]-edgepadding-|";
         }
         
         self.notificationVerticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:verticalConstraintString options:0 metrics:metrics views:views];
@@ -661,6 +663,13 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
             }];
         }
     }
+}
+
+-(void)setEdgePadding:(CGFloat)ePadding
+{
+  if(ePadding >= 0) {
+    _edgePadding = ePadding;
+  }
 }
 
 #pragma mark ----------------------
