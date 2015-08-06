@@ -47,6 +47,10 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
 @property (nonatomic, strong, readwrite) UIView* righAccessorytView;
 @property (nonatomic, strong) UIView* accessoryView;
 
+// Content view constraints
+@property (nonatomic, strong) NSArray* contentViewVerticalContstraints;
+@property (nonatomic, strong) NSArray* contentViewHorizontalContstraints;
+
 // Constraints for animations
 @property (nonatomic, strong) NSArray* notificationVerticalConstraints;
 @property (nonatomic, strong) NSArray* notificationHorizontalConstraints;
@@ -130,12 +134,14 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
         
         _contentView = [UIView new];
         _contentView.translatesAutoresizingMaskIntoConstraints = NO;
-        _contentView.accessibilityLabel = @"Noticiation Content View";
+        _contentView.accessibilityLabel = @"Notification Content View";
         UIView* contentView = _contentView;
         NSDictionary* views = NSDictionaryOfVariableBindings(contentView);
         [self addSubview:_contentView];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[contentView]|" options:0 metrics:nil views:views]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[contentView]|" options:0 metrics:nil views:views]];
+        _contentViewVerticalContstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[contentView]|" options:0 metrics:nil views:views];
+        _contentViewHorizontalContstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[contentView]|" options:0 metrics:nil views:views];
+        [self addConstraints:_contentViewVerticalContstraints];
+        [self addConstraints:_contentViewHorizontalContstraints];
         
         [self setTitle:title withSubTitle:subTitle];
         [self setStyle:style animated:NO];
@@ -172,10 +178,9 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
         }
         
         [self.superview removeConstraints:self.notificationVerticalConstraints];
-        UIView* superview = self.superview;
         UIView* notification = self;
-        NSDictionary* views = NSDictionaryOfVariableBindings(superview, notification);
-        NSDictionary* metrics = @{@"height": @(kNotificationViewHeight)};
+        NSDictionary* views = NSDictionaryOfVariableBindings(notification);
+        NSDictionary* metrics = @{@"height": @(kNotificationViewHeight + self.edgePadding.top + self.edgePadding.bottom)};
         
         NSString* verticalConstraintString;
         if (self.presentFromTop) {
@@ -232,19 +237,41 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     if (self.notificationVerticalConstraints.count > 0) {
         [self.superview removeConstraints:self.notificationVerticalConstraints];
     }
+    
     if (self.notificationHorizontalConstraints.count > 0) {
         [self.superview removeConstraints:self.notificationHorizontalConstraints];
     }
-    UIView* superview = self.superview;
     
+    UIView* superview = self.superview;
     if (!superview) {
         // This is to address issue: https://github.com/atljeremy/JFMinimalNotifications/issues/10
         return;
     }
     
+    if (self.edgePadding.top > 0 || self.edgePadding.bottom > 0) {
+        [self removeConstraints:self.contentViewVerticalContstraints];
+        UIView* contentView = self.contentView;
+        NSDictionary* views = NSDictionaryOfVariableBindings(contentView);
+        NSDictionary* metrics = @{@"height": @(kNotificationViewHeight),
+                                  @"toppadding": @(self.edgePadding.top),
+                                  @"bottompadding": @(self.edgePadding.bottom),};
+        self.contentViewVerticalContstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-toppadding-[contentView(==height)]-bottompadding-|" options:0 metrics:metrics views:views];
+        [self addConstraints:self.contentViewVerticalContstraints];
+    }
+    
+    if (self.edgePadding.left > 0  || self.edgePadding.right > 0) {
+        [self removeConstraints:self.contentViewHorizontalContstraints];
+        UIView* contentView = self.contentView;
+        NSDictionary* views = NSDictionaryOfVariableBindings(contentView);
+        NSDictionary* metrics = @{@"leftpadding": @(kNotificationPadding + self.edgePadding.left),
+                                  @"rightpadding": @(kNotificationPadding + self.edgePadding.right)};
+        self.contentViewHorizontalContstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-leftpadding-[contentView]-rightpadding-|" options:0 metrics:metrics views:views];
+        [self addConstraints:self.contentViewHorizontalContstraints];
+    }
+    
     UIView* notification = self;
     NSDictionary* views = NSDictionaryOfVariableBindings(superview, notification);
-    NSDictionary* metrics = @{@"height": @(kNotificationViewHeight)};
+    NSDictionary* metrics = @{@"height": @(kNotificationViewHeight + self.edgePadding.top + self.edgePadding.bottom)};
     
     NSString* verticalConstraintString;
     if (topPresentation) {
@@ -286,7 +313,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
         case JFMinimalNotificationStyleError: {
             UIColor* primaryColor = [UIColor notificationRedColor];
             UIColor* secondaryColor = [UIColor notificationWhiteColor];
-            self.contentView.backgroundColor = primaryColor;
+            self.backgroundColor = primaryColor;
             self.titleLabel.textColor = secondaryColor;
             self.subTitleLabel.textColor = secondaryColor;
             image = [JFMinimalNotificationArt imageOfCrossWithColor:primaryColor];
@@ -297,7 +324,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
         case JFMinimalNotificationStyleSuccess: {
             UIColor* primaryColor = [UIColor notificationGreenColor];
             UIColor* secondaryColor = [UIColor notificationWhiteColor];
-            self.contentView.backgroundColor = primaryColor;
+            self.backgroundColor = primaryColor;
             self.titleLabel.textColor = secondaryColor;
             self.subTitleLabel.textColor = secondaryColor;
             image = [JFMinimalNotificationArt imageOfCheckmarkWithColor:primaryColor];
@@ -308,7 +335,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
         case JFMinimalNotificationStyleInfo: {
             UIColor* primaryColor = [UIColor notificationOrangeColor];
             UIColor* secondaryColor = [UIColor notificationWhiteColor];
-            self.contentView.backgroundColor = primaryColor;
+            self.backgroundColor = primaryColor;
             self.titleLabel.textColor = secondaryColor;
             self.subTitleLabel.textColor = secondaryColor;
             image = [JFMinimalNotificationArt imageOfInfoWithColor:primaryColor];
@@ -319,7 +346,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
         case JFMinimalNotificationStyleWarning: {
             UIColor* primaryColor = [UIColor notificationYellowColor];
             UIColor* secondaryColor = [UIColor notificationBlackColor];
-            self.contentView.backgroundColor = primaryColor;
+            self.backgroundColor = primaryColor;
             self.titleLabel.textColor = secondaryColor;
             self.subTitleLabel.textColor = secondaryColor;
             image = [JFMinimalNotificationArt imageOfWarningWithBGColor:primaryColor forgroundColor:secondaryColor];
@@ -331,7 +358,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
         default: {
             UIColor* primaryColor = [UIColor notificationBlueColor];
             UIColor* secondaryColor = [UIColor notificationWhiteColor];
-            self.contentView.backgroundColor = primaryColor;
+            self.backgroundColor = primaryColor;
             self.titleLabel.textColor = secondaryColor;
             self.subTitleLabel.textColor = secondaryColor;
             image = [JFMinimalNotificationArt imageOfInfoWithColor:primaryColor];
@@ -345,11 +372,10 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     imageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.accessoryView addSubview:imageView];
     NSDictionary* views = NSDictionaryOfVariableBindings(imageView);
-    NSDictionary* metrics = @{@"padding": @(kNotificationAccessoryPadding)};
     [self.accessoryView addConstraint:[NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.accessoryView attribute:NSLayoutAttributeCenterY multiplier:1.f constant:0.f]];
     [self.accessoryView addConstraint:[NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.accessoryView attribute:NSLayoutAttributeCenterX multiplier:1.f constant:0.f]];
-    [self.accessoryView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[imageView(<=30)]" options:0 metrics:metrics views:views]];
-    [self.accessoryView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[imageView(<=30)]" options:0 metrics:metrics views:views]];
+    [self.accessoryView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[imageView(<=30)]" options:0 metrics:nil views:views]];
+    [self.accessoryView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[imageView(<=30)]" options:0 metrics:nil views:views]];
     [self setLeftAccessoryView:self.accessoryView animated:animated];
 }
 

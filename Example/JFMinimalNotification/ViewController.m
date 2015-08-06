@@ -34,6 +34,8 @@
         [self.minimalNotification dismiss];
     }];
     
+    self.minimalNotification.edgePadding = UIEdgeInsetsMake(0, 0, 10, 0);
+    
     [self.view addSubview:self.minimalNotification];
     
     /**

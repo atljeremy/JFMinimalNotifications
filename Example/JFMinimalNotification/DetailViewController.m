@@ -23,7 +23,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.notification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleSuccess title:@"Testing" subTitle:@"Testing 1 2 3" dismissalDelay:2.0];
-    [self.view addSubview:self.notification];
+    self.notification.edgePadding = UIEdgeInsetsMake(10, 0, 0, 0);
+    [self.navigationController.view addSubview:self.notification];
     self.notification.presentFromTop = YES;
 }
 

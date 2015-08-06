@@ -79,6 +79,10 @@ typedef void (^JFMinimalNotificationTouchHandler)(void);
  */
 @property (nonatomic, weak) id<JFMinimalNotificationDelegate> delegate;
 
+/**
+ * @return The edge padding to be used for the notifications layout
+ */
+@property (nonatomic, assign) UIEdgeInsets edgePadding;
 
 #pragma mark ----------------------
 #pragma mark Custom Initialization
