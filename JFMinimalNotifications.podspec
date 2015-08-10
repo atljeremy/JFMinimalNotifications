@@ -88,7 +88,7 @@ Pod::Spec.new do |s|
   s.source_files  = "JFMinimalNotification/*.{h,m}"
   # s.exclude_files = "Classes/Exclude"
   s.public_header_files = "JFMinimalNotification/*.h"
-
+  s.module_map = "JFMinimalNotification/JSMinimalNotifications.modulemap"
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
