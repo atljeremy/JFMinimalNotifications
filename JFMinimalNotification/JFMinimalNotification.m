@@ -44,8 +44,10 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
 @property (nonatomic, strong, readwrite) UILabel* titleLabel;
 @property (nonatomic, strong, readwrite) UILabel* subTitleLabel;
 @property (nonatomic, strong, readwrite) UIView* leftAccessoryView;
-@property (nonatomic, strong, readwrite) UIView* righAccessorytView;
+@property (nonatomic, strong, readwrite) UIView* rightAccessorytView;
 @property (nonatomic, strong) UIView* accessoryView;
+@property (nonatomic, strong) UIVisualEffectView* blurView;
+@property (nonatomic, strong) UIVisualEffectView* vibrancyView;
 
 // Content view constraints
 @property (nonatomic, strong) NSArray* contentViewVerticalContstraints;
@@ -90,6 +92,8 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     _subTitleLabelHorizontalConsraints  = nil;
     _subTitleLabelVerticalConsraints    = nil;
     _dismissalTimer                     = nil;
+    _blurView                           = nil;
+    _vibrancyView                       = nil;
 }
 
 + (instancetype)notificationWithStyle:(JFMinimalNotificationStyle)style title:(NSString*)title subTitle:(NSString*)subTitle
@@ -303,21 +307,46 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
 
 - (void)setStyle:(JFMinimalNotificationStyle)style animated:(BOOL)animated
 {
-    UIImage* image;
-    self.accessoryView = nil;
-    self.accessoryView = [UIView new];
-    self.accessoryView.translatesAutoresizingMaskIntoConstraints = NO;
-    
     self.currentStyle = style;
+    
+    [self removeBlurViews];
+    
     switch (style) {
+        case JFMinimalNotificationStyleBlurDark: {
+            UIColor* primaryColor = [UIColor clearColor];
+            UIColor* secondaryColor = [UIColor whiteColor];
+            self.backgroundColor = primaryColor;
+            self.titleLabel.textColor = secondaryColor;
+            self.subTitleLabel.textColor = secondaryColor;
+            [self configuredBlurViewForBlurEffectStyle:UIBlurEffectStyleDark];
+            break;
+        }
+            
+        case JFMinimalNotificationStyleBlurLight: {
+            UIColor* primaryColor = [UIColor clearColor];
+            UIColor* secondaryColor = [UIColor blackColor];
+            self.backgroundColor = primaryColor;
+            self.titleLabel.textColor = secondaryColor;
+            self.subTitleLabel.textColor = secondaryColor;
+            [self configuredBlurViewForBlurEffectStyle:UIBlurEffectStyleLight];
+            break;
+        }
+            
+        case JFMinimalNotificationStyleCustom: {
+            UIColor* primaryColor = [UIColor whiteColor];
+            UIColor* secondaryColor = [UIColor blackColor];
+            self.backgroundColor = primaryColor;
+            self.titleLabel.textColor = secondaryColor;
+            self.subTitleLabel.textColor = secondaryColor;
+            break;
+        }
+            
         case JFMinimalNotificationStyleError: {
             UIColor* primaryColor = [UIColor notificationRedColor];
             UIColor* secondaryColor = [UIColor notificationWhiteColor];
             self.backgroundColor = primaryColor;
             self.titleLabel.textColor = secondaryColor;
             self.subTitleLabel.textColor = secondaryColor;
-            image = [JFMinimalNotificationArt imageOfCrossWithColor:primaryColor];
-            self.accessoryView.backgroundColor = secondaryColor;
             break;
         }
             
@@ -327,8 +356,6 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
             self.backgroundColor = primaryColor;
             self.titleLabel.textColor = secondaryColor;
             self.subTitleLabel.textColor = secondaryColor;
-            image = [JFMinimalNotificationArt imageOfCheckmarkWithColor:primaryColor];
-            self.accessoryView.backgroundColor = secondaryColor;
             break;
         }
             
@@ -338,8 +365,6 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
             self.backgroundColor = primaryColor;
             self.titleLabel.textColor = secondaryColor;
             self.subTitleLabel.textColor = secondaryColor;
-            image = [JFMinimalNotificationArt imageOfInfoWithColor:primaryColor];
-            self.accessoryView.backgroundColor = secondaryColor;
             break;
         }
             
@@ -349,8 +374,6 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
             self.backgroundColor = primaryColor;
             self.titleLabel.textColor = secondaryColor;
             self.subTitleLabel.textColor = secondaryColor;
-            image = [JFMinimalNotificationArt imageOfWarningWithBGColor:primaryColor forgroundColor:secondaryColor];
-            self.accessoryView.backgroundColor = secondaryColor;
             break;
         }
             
@@ -361,22 +384,43 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
             self.backgroundColor = primaryColor;
             self.titleLabel.textColor = secondaryColor;
             self.subTitleLabel.textColor = secondaryColor;
-            image = [JFMinimalNotificationArt imageOfInfoWithColor:primaryColor];
-            self.accessoryView.backgroundColor = secondaryColor;
             break;
         }
     }
+    
+    [self setAccessoryViewForStyle:style animated:animated];
+}
 
-    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    imageView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.accessoryView addSubview:imageView];
-    NSDictionary* views = NSDictionaryOfVariableBindings(imageView);
-    [self.accessoryView addConstraint:[NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.accessoryView attribute:NSLayoutAttributeCenterY multiplier:1.f constant:0.f]];
-    [self.accessoryView addConstraint:[NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.accessoryView attribute:NSLayoutAttributeCenterX multiplier:1.f constant:0.f]];
-    [self.accessoryView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[imageView(<=30)]" options:0 metrics:nil views:views]];
-    [self.accessoryView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[imageView(<=30)]" options:0 metrics:nil views:views]];
-    [self setLeftAccessoryView:self.accessoryView animated:animated];
+- (void)configuredBlurViewForBlurEffectStyle:(UIBlurEffectStyle)blurStyle
+{
+    UIBlurEffect* blurEffect = [UIBlurEffect effectWithStyle:blurStyle];
+    self.blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    self.blurView.translatesAutoresizingMaskIntoConstraints = NO;
+    UIVibrancyEffect* visualEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
+    self.vibrancyView = [[UIVisualEffectView alloc] initWithEffect:visualEffect];
+    self.vibrancyView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [self insertSubview:self.blurView belowSubview:self.contentView];
+    NSDictionary* views = @{@"blurView": self.blurView};
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[blurView]|" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[blurView]|" options:0 metrics:nil views:views]];
+    
+    [self insertSubview:self.vibrancyView belowSubview:self.contentView];
+    views = @{@"vibrancyView": self.vibrancyView};
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[vibrancyView]|" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[vibrancyView]|" options:0 metrics:nil views:views]];
+}
+
+- (void)removeBlurViews
+{
+    if ([self.subviews containsObject:self.blurView]) {
+        [self.blurView removeFromSuperview];
+        self.blurView = nil;
+    }
+    if ([self.subviews containsObject:self.vibrancyView]) {
+        [self.vibrancyView removeFromSuperview];
+        self.vibrancyView = nil;
+    }
 }
 
 - (void)setTitle:(NSString*)title withSubTitle:(NSString*)subTitle
@@ -463,6 +507,76 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
 {
     [self.subTitleLabel setTextColor:color];
 }
+
+- (void)setAccessoryViewForStyle:(JFMinimalNotificationStyle)style animated:(BOOL)animated
+{
+    UIImage* image;
+    self.accessoryView = nil;
+    self.accessoryView = [UIView new];
+    self.accessoryView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    switch (style) {
+        case JFMinimalNotificationStyleBlurDark:
+        case JFMinimalNotificationStyleBlurLight:
+        case JFMinimalNotificationStyleCustom:
+            [self setLeftAccessoryView:nil animated:animated];
+            [self setRightAccessoryView:nil animated:animated];
+            self.accessoryView = nil;
+            return;
+            
+        case JFMinimalNotificationStyleError: {
+            UIColor* secondaryColor = [UIColor notificationWhiteColor];
+            image = [JFMinimalNotificationArt imageOfCrossWithColor:[UIColor notificationRedColor]];
+            self.accessoryView.backgroundColor = secondaryColor;
+            break;
+        }
+            
+        case JFMinimalNotificationStyleSuccess: {
+            UIColor* primaryColor = [UIColor notificationGreenColor];
+            UIColor* secondaryColor = [UIColor notificationWhiteColor];
+            image = [JFMinimalNotificationArt imageOfCheckmarkWithColor:primaryColor];
+            self.accessoryView.backgroundColor = secondaryColor;
+            break;
+        }
+            
+        case JFMinimalNotificationStyleInfo: {
+            UIColor* primaryColor = [UIColor notificationOrangeColor];
+            UIColor* secondaryColor = [UIColor notificationWhiteColor];
+            image = [JFMinimalNotificationArt imageOfInfoWithColor:primaryColor];
+            self.accessoryView.backgroundColor = secondaryColor;
+            break;
+        }
+            
+        case JFMinimalNotificationStyleWarning: {
+            UIColor* primaryColor = [UIColor notificationYellowColor];
+            UIColor* secondaryColor = [UIColor notificationBlackColor];
+            image = [JFMinimalNotificationArt imageOfWarningWithBGColor:primaryColor forgroundColor:secondaryColor];
+            self.accessoryView.backgroundColor = secondaryColor;
+            break;
+        }
+            
+        case JFMinimalNotificationStyleDefault:
+        default: {
+            UIColor* primaryColor = [UIColor notificationBlueColor];
+            UIColor* secondaryColor = [UIColor notificationWhiteColor];
+            image = [JFMinimalNotificationArt imageOfInfoWithColor:primaryColor];
+            self.accessoryView.backgroundColor = secondaryColor;
+            break;
+        }
+    }
+    
+    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.accessoryView addSubview:imageView];
+    NSDictionary* views = NSDictionaryOfVariableBindings(imageView);
+    [self.accessoryView addConstraint:[NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.accessoryView attribute:NSLayoutAttributeCenterY multiplier:1.f constant:0.f]];
+    [self.accessoryView addConstraint:[NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.accessoryView attribute:NSLayoutAttributeCenterX multiplier:1.f constant:0.f]];
+    [self.accessoryView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[imageView(<=30)]" options:0 metrics:nil views:views]];
+    [self.accessoryView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[imageView(<=30)]" options:0 metrics:nil views:views]];
+    [self setLeftAccessoryView:self.accessoryView animated:animated];
+}
+
 
 - (void)setLeftAccessoryView:(UIView*)view animated:(BOOL)animated
 {

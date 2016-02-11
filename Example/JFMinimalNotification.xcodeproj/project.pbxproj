@@ -9,21 +9,19 @@
 /* Begin PBXBuildFile section */
 		1907CAFC1AE1808500B0C2F4 /* JFMinimalNotification_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1907CAFB1AE1808500B0C2F4 /* JFMinimalNotification_Tests.m */; };
 		1993D9721AE961CE00090768 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1993D96B1AE9619E00090768 /* IOKit.framework */; };
+		1996A5521C6D219A00A0CF97 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1996A5511C6D219A00A0CF97 /* Media.xcassets */; };
+		1996A5591C6D21DE00A0CF97 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1996A5581C6D21DE00A0CF97 /* Launch Screen.storyboard */; };
 		19C95A5C1AF3B1B800590781 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C95A5B1AF3B1B800590781 /* DetailViewController.m */; };
 		1A06FD941A1ABEEF00EC399D /* JFMinimalNotificationArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A06FD931A1ABEEF00EC399D /* JFMinimalNotificationArt.m */; };
 		1A06FD9A1A1AD6E400EC399D /* UIView+Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A06FD991A1AD6E400EC399D /* UIView+Round.m */; };
 		1A06FD9D1A1B887300EC399D /* UIColor+JFMinimalNotificationColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A06FD9C1A1B887300EC399D /* UIColor+JFMinimalNotificationColors.m */; };
 		1A06FDD81A1BB0DC00EC399D /* NSInvocation+Constructors.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A06FDD71A1BB0DC00EC399D /* NSInvocation+Constructors.m */; };
-		1A06FDE01A1BF1F300EC399D /* thumbs-up.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1A06FDDF1A1BF1F300EC399D /* thumbs-up.jpg */; };
 		1A06FDE11A1BF7E200EC399D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0A975D1735E3E700528BA7 /* CoreGraphics.framework */; };
 		3F0A975A1735E3E700528BA7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0A97591735E3E700528BA7 /* UIKit.framework */; };
 		3F0A975C1735E3E700528BA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0A975B1735E3E700528BA7 /* Foundation.framework */; };
 		3F0A97641735E3E700528BA7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3F0A97621735E3E700528BA7 /* InfoPlist.strings */; };
 		3F0A97661735E3E700528BA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0A97651735E3E700528BA7 /* main.m */; };
 		3F0A976A1735E3E700528BA7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0A97691735E3E700528BA7 /* AppDelegate.m */; };
-		3F0A976C1735E3E700528BA7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0A976B1735E3E700528BA7 /* Default.png */; };
-		3F0A976E1735E3E700528BA7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0A976D1735E3E700528BA7 /* Default@2x.png */; };
-		3F0A97701735E3E700528BA7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0A976F1735E3E700528BA7 /* Default-568h@2x.png */; };
 		3F0A97731735E3E700528BA7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0A97711735E3E700528BA7 /* MainStoryboard.storyboard */; };
 		3F0A97791735E3E700528BA7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0A97781735E3E700528BA7 /* ViewController.m */; };
 		3F0A97861735E4C500528BA7 /* JFMinimalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0A97851735E4C500528BA7 /* JFMinimalNotification.m */; };
@@ -89,6 +87,8 @@
 		1907CAFA1AE1808500B0C2F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1907CAFB1AE1808500B0C2F4 /* JFMinimalNotification_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFMinimalNotification_Tests.m; sourceTree = "<group>"; };
 		1993D96B1AE9619E00090768 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
+		1996A5511C6D219A00A0CF97 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		1996A5581C6D21DE00A0CF97 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		19C95A5A1AF3B1B800590781 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		19C95A5B1AF3B1B800590781 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		1A06FD921A1ABEEF00EC399D /* JFMinimalNotificationArt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFMinimalNotificationArt.h; sourceTree = "<group>"; };
@@ -99,7 +99,6 @@
 		1A06FD9C1A1B887300EC399D /* UIColor+JFMinimalNotificationColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+JFMinimalNotificationColors.m"; sourceTree = "<group>"; };
 		1A06FDD61A1BB0DC00EC399D /* NSInvocation+Constructors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+Constructors.h"; sourceTree = "<group>"; };
 		1A06FDD71A1BB0DC00EC399D /* NSInvocation+Constructors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+Constructors.m"; sourceTree = "<group>"; };
-		1A06FDDF1A1BF1F300EC399D /* thumbs-up.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "thumbs-up.jpg"; sourceTree = "<group>"; };
 		3F0A97561735E3E700528BA7 /* JFMinimalNotification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFMinimalNotification.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F0A97591735E3E700528BA7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3F0A975B1735E3E700528BA7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -110,9 +109,6 @@
 		3F0A97671735E3E700528BA7 /* JFMinimalNotification-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFMinimalNotification-Prefix.pch"; sourceTree = "<group>"; };
 		3F0A97681735E3E700528BA7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3F0A97691735E3E700528BA7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3F0A976B1735E3E700528BA7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		3F0A976D1735E3E700528BA7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		3F0A976F1735E3E700528BA7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3F0A97721735E3E700528BA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		3F0A97771735E3E700528BA7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		3F0A97781735E3E700528BA7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -212,6 +208,7 @@
 				19C95A5A1AF3B1B800590781 /* DetailViewController.h */,
 				19C95A5B1AF3B1B800590781 /* DetailViewController.m */,
 				3F0A97711735E3E700528BA7 /* MainStoryboard.storyboard */,
+				1996A5581C6D21DE00A0CF97 /* Launch Screen.storyboard */,
 				3F0A97601735E3E700528BA7 /* Supporting Files */,
 			);
 			path = JFMinimalNotification;
@@ -220,14 +217,11 @@
 		3F0A97601735E3E700528BA7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1A06FDDF1A1BF1F300EC399D /* thumbs-up.jpg */,
 				3F0A97611735E3E700528BA7 /* JFMinimalNotification-Info.plist */,
 				3F0A97621735E3E700528BA7 /* InfoPlist.strings */,
 				3F0A97651735E3E700528BA7 /* main.m */,
 				3F0A97671735E3E700528BA7 /* JFMinimalNotification-Prefix.pch */,
-				3F0A976B1735E3E700528BA7 /* Default.png */,
-				3F0A976D1735E3E700528BA7 /* Default@2x.png */,
-				3F0A976F1735E3E700528BA7 /* Default-568h@2x.png */,
+				1996A5511C6D219A00A0CF97 /* Media.xcassets */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -416,11 +410,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F0A97641735E3E700528BA7 /* InfoPlist.strings in Resources */,
-				3F0A976C1735E3E700528BA7 /* Default.png in Resources */,
-				3F0A976E1735E3E700528BA7 /* Default@2x.png in Resources */,
-				3F0A97701735E3E700528BA7 /* Default-568h@2x.png in Resources */,
+				1996A5521C6D219A00A0CF97 /* Media.xcassets in Resources */,
 				3F0A97731735E3E700528BA7 /* MainStoryboard.storyboard in Resources */,
-				1A06FDE01A1BF1F300EC399D /* thumbs-up.jpg in Resources */,
+				1996A5591C6D21DE00A0CF97 /* Launch Screen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,7 +587,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -620,7 +612,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -631,6 +623,8 @@
 		3F0A977D1735E3E700528BA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -649,6 +643,8 @@
 		3F0A977E1735E3E700528BA7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (

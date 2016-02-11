@@ -24,13 +24,8 @@
     
     /**
      * Create the notification
-     *
-     * You can also use the following to each the same result:
-     * self.minimalNotification = [[JFMinimalNotification alloc] initWithSuperView:self.view];
-     * [self.minimalNotification setTitle:@"My Test Title" withSubTitle:@"My Test Sub-Title"];
-     * [self.minimalNotification setStyle:JFMinimalNotificationStyleDefault];
      */
-    self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleError title:self.titleLabelTextField.text subTitle:self.subTitleLabelTextField.text dismissalDelay:0.0 touchHandler:^{
+    self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleBlurLight title:self.titleLabelTextField.text subTitle:self.subTitleLabelTextField.text dismissalDelay:0.0 touchHandler:^{
         [self.minimalNotification dismiss];
     }];
     
@@ -103,6 +98,18 @@
 
 - (IBAction)dismiss:(id)sender {
     [self.minimalNotification dismiss];
+}
+
+- (IBAction)setLightStyle:(id)sender {
+    [self.minimalNotification setStyle:JFMinimalNotificationStyleBlurLight animated:YES];
+}
+
+- (IBAction)setDarkStyle:(id)sender {
+    [self.minimalNotification setStyle:JFMinimalNotificationStyleBlurDark animated:YES];
+}
+
+- (IBAction)setCustomStyle:(id)sender {
+    [self.minimalNotification setStyle:JFMinimalNotificationStyleCustom animated:YES];
 }
 
 - (IBAction)setErrorStyle:(id)sender {

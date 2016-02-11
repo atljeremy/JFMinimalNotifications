@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xP7-OY-ST8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xP7-OY-ST8">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--JFMinimalNotification-->
@@ -17,6 +18,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.45000000000000001" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="zUK-7P-Jtx">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Pd-Fl-5Io">
                                 <rect key="frame" x="136" y="64" width="328" height="413"/>
                                 <subviews>
@@ -41,7 +45,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="muH-f8-JFX">
-                                        <rect key="frame" x="24" y="127" width="42" height="30"/>
+                                        <rect key="frame" x="22" y="114" width="42" height="30"/>
                                         <accessibility key="accessibilityConfiguration" label="error"/>
                                         <state key="normal" title="Error">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -51,7 +55,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyZ-U2-ZMI">
-                                        <rect key="frame" x="74" y="127" width="65" height="30"/>
+                                        <rect key="frame" x="72" y="114" width="65" height="30"/>
                                         <accessibility key="accessibilityConfiguration" label="success"/>
                                         <state key="normal" title="Success">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -60,8 +64,28 @@
                                             <action selector="setSuccessStyle:" destination="2" eventType="touchUpInside" id="XGq-rz-abO"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B57-TE-Ykn">
+                                        <rect key="frame" x="22" y="143" width="42" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" label="error"/>
+                                        <state key="normal" title="Light">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="setLightStyle:" destination="2" eventType="touchUpInside" id="btu-bX-GtZ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QnO-D6-T5i">
+                                        <rect key="frame" x="74" y="143" width="58" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" label="success"/>
+                                        <state key="normal" title="Dark">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="setDarkStyle:" destination="2" eventType="touchUpInside" id="nnO-7k-1Pb"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mbm-lA-PBH">
-                                        <rect key="frame" x="185" y="127" width="55" height="30"/>
+                                        <rect key="frame" x="183" y="114" width="55" height="30"/>
                                         <accessibility key="accessibilityConfiguration" label="default"/>
                                         <state key="normal" title="Default">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -91,21 +115,18 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Style:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJe-nX-96a">
-                                        <rect key="frame" x="20" y="98" width="288" height="21"/>
+                                        <rect key="frame" x="20" y="87" width="288" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Presentation:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKM-ai-ad5">
                                         <rect key="frame" x="20" y="20" width="288" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Right View:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G2n-Ky-sAt">
                                         <rect key="frame" x="20" y="258" width="288" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8S5-kS-UIR">
@@ -129,7 +150,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEU-b9-j9U">
-                                        <rect key="frame" x="140" y="127" width="37" height="30"/>
+                                        <rect key="frame" x="138" y="114" width="37" height="30"/>
                                         <accessibility key="accessibilityConfiguration" label="info"/>
                                         <state key="normal" title="Info">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -139,7 +160,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xa5-hB-lSM">
-                                        <rect key="frame" x="248" y="127" width="60" height="30"/>
+                                        <rect key="frame" x="246" y="114" width="60" height="30"/>
                                         <accessibility key="accessibilityConfiguration" label="warning"/>
                                         <state key="normal" title="Warning">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -169,11 +190,19 @@
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Left View:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ma3-TL-dhQ">
                                         <rect key="frame" x="20" y="181" width="284" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dvj-TN-w08">
+                                        <rect key="frame" x="133" y="143" width="62" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" label="success"/>
+                                        <state key="normal" title="Custom">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="setCustomStyle:" destination="2" eventType="touchUpInside" id="gh6-vj-6s4"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="328" id="Gwg-pb-N8m"/>
                                     <constraint firstAttribute="height" constant="413" id="Va5-7a-WhZ"/>
@@ -182,14 +211,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="zUK-7P-Jtx" firstAttribute="top" secondItem="3NV-Eb-Knn" secondAttribute="bottom" constant="-64" id="PBY-AM-7PR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zUK-7P-Jtx" secondAttribute="trailing" constant="-20" id="RdN-c2-oie"/>
                             <constraint firstItem="1Pd-Fl-5Io" firstAttribute="top" secondItem="3NV-Eb-Knn" secondAttribute="bottom" id="VJi-C9-Ut9"/>
+                            <constraint firstItem="F7R-pF-1q3" firstAttribute="top" secondItem="zUK-7P-Jtx" secondAttribute="bottom" id="hZj-El-lYq"/>
+                            <constraint firstItem="zUK-7P-Jtx" firstAttribute="leading" secondItem="3" secondAttribute="leadingMargin" constant="-20" id="ncm-aF-H7H"/>
                             <constraint firstAttribute="centerX" secondItem="1Pd-Fl-5Io" secondAttribute="centerX" id="zss-5r-vpa"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="JFMinimalNotification" id="Q7o-ig-KgG">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="ReK-lG-xRY">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="khD-Of-1aD">
-                                <rect key="frame" x="-23" y="-15" width="133" height="30"/>
+                                <rect key="frame" x="447" y="7" width="133" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label="details"/>
                                 <state key="normal" title="Details">
@@ -208,7 +241,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="144.375" y="73.943661971830977"/>
+            <point key="canvasLocation" x="144" y="68"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="icH-OA-IX1">
@@ -266,4 +299,7 @@
             <point key="canvasLocation" x="881" y="73"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bg" width="830" height="830"/>
+    </resources>
 </document>

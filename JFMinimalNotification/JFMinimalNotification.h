@@ -32,7 +32,22 @@ typedef NS_ENUM(NSInteger, JFMinimalNotificationStyle) {
     JFMinimalNotificationStyleError,
     JFMinimalNotificationStyleSuccess,
     JFMinimalNotificationStyleInfo,
-    JFMinimalNotificationStyleWarning
+    JFMinimalNotificationStyleWarning,
+    
+    /**
+     * @return Used to get a title and subtitle, no accessory views, and white bg with black label text. Use the .bakgroundColor property on the notification to set the desired background color and .textColor property on the titleLabel and subTitleLabel UILabel's to change text color.
+     */
+    JFMinimalNotificationStyleCustom,
+    
+    /**
+     * @return A dark blur with vibrancy effect in the bakground with black label text.
+     */
+    JFMinimalNotificationStyleBlurDark,
+    
+    /**
+     * @return A light blur with vibrancy effect in the bakground with black label text.
+     */
+    JFMinimalNotificationStyleBlurLight
 };
 
 typedef void (^JFMinimalNotificationTouchHandler)(void);
