@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger, JFMinimalNotificationStyle) {
     JFMinimalNotificationStyleCustom,
     
     /**
-     * @return A dark blur with vibrancy effect in the bakground with black label text.
+     * @return A dark blur with vibrancy effect in the bakground with white label text.
      */
     JFMinimalNotificationStyleBlurDark,
     

@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
                    DESC
 
   s.homepage     = "https://github.com/atljeremy/JFMinimalNotifications"
-  s.screenshots  = "http://imageshack.com/a/img673/9547/7auGJk.png"
+  s.screenshots  = "https://dl.dropboxusercontent.com/u/55388810/JFMinimalNotificationExample.jpeg"
 
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

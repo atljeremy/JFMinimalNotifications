@@ -25,13 +25,18 @@
     /**
      * Create the notification
      */
-    self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleBlurLight title:self.titleLabelTextField.text subTitle:self.subTitleLabelTextField.text dismissalDelay:0.0 touchHandler:^{
+    self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleCustom title:self.titleLabelTextField.text subTitle:self.subTitleLabelTextField.text dismissalDelay:0.0 touchHandler:^{
         [self.minimalNotification dismiss];
     }];
     
     self.minimalNotification.edgePadding = UIEdgeInsetsMake(0, 0, 10, 0);
     
     [self.view addSubview:self.minimalNotification];
+    
+    self.minimalNotification.backgroundColor = [UIColor purpleColor];
+    
+    self.minimalNotification.titleLabel.textColor = [UIColor whiteColor];
+    self.minimalNotification.subTitleLabel.textColor = [UIColor whiteColor];
     
     /**
      * Set the delegate
