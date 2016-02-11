@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "JFMinimalNotifications"
-  s.version      = "0.0.5"
+  s.version      = "0.0.6"
   s.summary      = "An iOS UIView for presenting a minimalistic notification that doesn't block the UI and is highly configurable"
   s.requires_arc = true
 
@@ -74,7 +74,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/atljeremy/JFMinimalNotifications.git", :tag => "0.0.5" }
+  s.source       = { :git => "https://github.com/atljeremy/JFMinimalNotifications.git", :tag => "0.0.6" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
