@@ -14,7 +14,7 @@ See a short video of this control here: [https://www.youtube.com/watch?v=jDYC-NY
 
 ### Screen Shots
 
-![Examples](http://imageshack.com/a/img673/9547/7auGJk.png)
+![Examples](https://dl.dropboxusercontent.com/u/55388810/JFMinimalNotificationExample.jpeg)
 <!-- ![Success With Left View](https://imageshack.us/a/img713/7325/screenshot20130508at125.png)
 ![Success](https://imageshack.us/a/img560/7325/screenshot20130508at125.png)
 ![Error](https://imageshack.us/a/img43/7325/screenshot20130508at125.png)
@@ -33,9 +33,7 @@ How To Use It:
     /**
      * Create the notification
      */
-    self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleDefault
-                                                                      title:@"This is my awesome title"
-                                                                   subTitle:@"This is my awesome sub-title"];
+    self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleDefault title:@"This is my awesome title" subTitle:@"This is my awesome sub-title"];
     
     /**
      * Set the desired font for the title and sub-title labels
@@ -98,7 +96,22 @@ typedef NS_ENUM(NSInteger, JFMinimalNotificationStyle) {
     JFMinimalNotificationStyleError,
     JFMinimalNotificationStyleSuccess,
     JFMinimalNotificationStyleInfo,
-    JFMinimalNotificationStyleWarning
+    JFMinimalNotificationStyleWarning,
+    
+    /**
+     * @return Used to get a title and subtitle, no accessory views, and white bg with black label text. Use the .bakgroundColor property on the notification to set the desired background color and .textColor property on the titleLabel and subTitleLabel UILabel's to change text color.
+     */
+    JFMinimalNotificationStyleCustom,
+    
+    /**
+     * @return A dark blur with vibrancy effect in the bakground with white label text.
+     */
+    JFMinimalNotificationStyleBlurDark,
+    
+    /**
+     * @return A light blur with vibrancy effect in the bakground with black label text.
+     */
+    JFMinimalNotificationStyleBlurLight
 };
 ```
 
@@ -117,7 +130,7 @@ Installation:
 
 ### Cocoapods
 
-`pod 'JFMinimalNotifications', '~> 0.0.6'`
+`pod 'JFMinimalNotifications', '~> 0.0.7'`
 
 ### Directly include source into your projects
 
