@@ -128,7 +128,7 @@ Delegate Methods:
 Installation:
 ------------
 
-### Cocoapods
+### CocoaPods
 
 `pod 'JFMinimalNotifications', '~> 0.0.7'`
 
