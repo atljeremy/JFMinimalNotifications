@@ -3,6 +3,8 @@ JFMinimalNotification
 
 This is an iOS UIView for presenting a beautiful notification that is highly configurable and works for both iPhone and iPad. JFMinimalNotification is only available in ARC and targets iOS 7.0+.
 
+[![CocoaPods](https://img.shields.io/cocoapods/v/JFMinimalNotifications.svg?maxAge=2592000)]() [![CocoaPods](https://img.shields.io/cocoapods/dt/JFMinimalNotifications.svg?maxAge=2592000)]() [![CocoaPods](https://img.shields.io/cocoapods/l/JFMinimalNotifications.svg?maxAge=2592000)]() [![CocoaPods](https://img.shields.io/cocoapods/p/JFMinimalNotifications.svg?maxAge=2592000)]()
+
 Looking for an Android version? Garrett Franks created one and it's awesome, check it out: [https://github.com/gfranks/GFMinimalNotifications](https://github.com/gfranks/GFMinimalNotifications)
 
 What It Looks Like:
