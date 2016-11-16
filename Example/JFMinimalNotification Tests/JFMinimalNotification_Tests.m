@@ -39,6 +39,7 @@
 
 - (void)testNotificationIsAssignedAValidSuperview {
     [self.viewController.view addSubview:self.viewController.minimalNotification];
+    [self.viewController.view layoutIfNeeded];
     CGFloat notificationMinY = CGRectGetMinY(self.viewController.minimalNotification.frame);
     CGFloat viewMaxY = CGRectGetMaxY(self.viewController.view.frame);
     XCTAssert(self.viewController.minimalNotification.superview, @"Notification must have a superview before being displayed");

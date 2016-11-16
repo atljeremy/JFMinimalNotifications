@@ -36,29 +36,8 @@
 
 - (void)waitForAbsenceOfViewWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier
 {
-    [self runBlock:^KIFTestStepResult(NSError **error) {
-        // If the app is ignoring interaction events, then wait before doing our analysis
-        KIFTestWaitCondition(![[UIApplication sharedApplication] isIgnoringInteractionEvents], error, @"Application is ignoring interaction events.");
-        
-        // If the element can't be found, then we're done
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"accessibilityIdentifier = %@", accessibilityIdentifier];
-        UIAccessibilityElement *element = nil;
-        
-        if (![UIAccessibilityElement accessibilityElement:&element view:NULL withElementMatchingPredicate:predicate tappable:NO error:NULL]) {
-            return KIFTestStepResultSuccess;
-        }
-        
-        UIView *view = [UIAccessibilityElement viewContainingAccessibilityElement:element];
-        
-        // If we found an element, but it's not associated with a view, then something's wrong. Wait it out and try again.
-        KIFTestWaitCondition(view, error, @"Cannot find view containing accessibility element with the identifier \"%@\"", accessibilityIdentifier);
-        
-        // Hidden views count as absent
-        KIFTestWaitCondition([view isHidden] || [view superview] == nil, error, @"Accessibility element with identifier \"%@\" is visible and not hidden.", accessibilityIdentifier);
-        
-        return KIFTestStepResultSuccess;
-    }];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"accessibilityIdentifier = %@", accessibilityIdentifier];
+    [self waitForAbsenceOfViewWithElementMatchingPredicate:predicate];
 }
 
 - (UIView *)waitForViewWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier tappable:(BOOL)mustBeTappable
@@ -84,7 +63,6 @@
 - (void)enterText:(NSString *)text intoViewWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier
 {
 	return [self enterText:text intoViewWithAccessibilityIdentifier:accessibilityIdentifier expectedResult:nil];
-	
 }
 
 - (void)enterText:(NSString *)text intoViewWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier expectedResult:(NSString *)expectedResult
@@ -93,10 +71,7 @@
 	UIAccessibilityElement *element = nil;
 	
 	[self waitForAccessibilityElement:&element view:&view withIdentifier:accessibilityIdentifier tappable:YES];
-	[self tapAccessibilityElement:element inView:view];
-	[self waitForTimeInterval:0.25];
-	[self enterTextIntoCurrentFirstResponder:text fallbackView:view];
-	[self expectView:view toContainText:expectedResult ?: text];
+    [self enterText:text intoElement:element inView:view expectedResult:expectedResult];
 }
 
 - (void)clearTextFromViewWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier
@@ -118,6 +93,17 @@
 {
 	[self clearTextFromViewWithAccessibilityIdentifier:accessibilityIdentifier];
 	[self enterText:text intoViewWithAccessibilityIdentifier:accessibilityIdentifier expectedResult:expectedResult];
+}
+
+- (void)setText:(NSString *)text intoViewWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier
+{
+    UIView *view = nil;
+    UIAccessibilityElement *element = nil;
+
+    [self waitForAccessibilityElement:&element view:&view withIdentifier:accessibilityIdentifier tappable:YES];
+    if ([view respondsToSelector:@selector(setText:)]) {
+        [view performSelector:@selector(setText:) withObject:text];
+    }
 }
 
 - (void)setOn:(BOOL)switchIsOn forSwitchWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier
@@ -202,5 +188,43 @@
     return [UIAccessibilityElement accessibilityElement:nil view:nil withElementMatchingPredicate:predicate tappable:NO error:nil];
 }
 
+- (void)swipeViewWithAccessibilityIdentifier:(NSString *)identifier inDirection:(KIFSwipeDirection)direction
+{
+    UIView *viewToSwipe = nil;
+    UIAccessibilityElement *element = nil;
 
+    [self waitForAccessibilityElement: &element view:&viewToSwipe withIdentifier:identifier tappable:NO];
+
+    [self swipeAccessibilityElement:element inView:viewToSwipe inDirection:direction];
+}
+
+- (void)pullToRefreshViewWithAccessibilityIdentifier:(NSString *)identifier
+{
+	UIView *viewToSwipe = nil;
+	UIAccessibilityElement *element = nil;
+
+	[self waitForAccessibilityElement: &element view:&viewToSwipe withIdentifier:identifier tappable:NO];
+
+	[self pullToRefreshAccessibilityElement:element inView:viewToSwipe pullDownDuration:0];
+}
+
+- (void)pullToRefreshViewWithAccessibilityIdentifier:(NSString *)identifier pullDownDuration:(KIFPullToRefreshTiming) pullDownDuration
+{
+	UIView *viewToSwipe = nil;
+	UIAccessibilityElement *element = nil;
+
+	[self waitForAccessibilityElement: &element view:&viewToSwipe withIdentifier:identifier tappable:NO];
+
+	[self pullToRefreshAccessibilityElement:element inView:viewToSwipe pullDownDuration:pullDownDuration];
+}
+
+-(void) tapStepperWithAccessibilityIdentifier: (NSString *)accessibilityIdentifier increment: (KIFStepperDirection) stepperDirection
+{
+	@autoreleasepool {
+		UIView *view = nil;
+		UIAccessibilityElement *element = nil;
+		[self waitForAccessibilityElement:&element view:&view withIdentifier:accessibilityIdentifier tappable:YES];
+		[self tapStepperWithAccessibilityElement:element increment:stepperDirection inView:view];
+	}
+}
 @end

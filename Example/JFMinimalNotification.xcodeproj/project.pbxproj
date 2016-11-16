@@ -12,6 +12,7 @@
 		1996A5521C6D219A00A0CF97 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1996A5511C6D219A00A0CF97 /* Media.xcassets */; };
 		1996A5591C6D21DE00A0CF97 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1996A5581C6D21DE00A0CF97 /* Launch Screen.storyboard */; };
 		19C95A5C1AF3B1B800590781 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C95A5B1AF3B1B800590781 /* DetailViewController.m */; };
+		19D769081DDC9D8500726323 /* KIF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D769011DDC9D6000726323 /* KIF.framework */; };
 		1A06FD941A1ABEEF00EC399D /* JFMinimalNotificationArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A06FD931A1ABEEF00EC399D /* JFMinimalNotificationArt.m */; };
 		1A06FD9A1A1AD6E400EC399D /* UIView+Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A06FD991A1AD6E400EC399D /* UIView+Round.m */; };
 		1A06FD9D1A1B887300EC399D /* UIColor+JFMinimalNotificationColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A06FD9C1A1B887300EC399D /* UIColor+JFMinimalNotificationColors.m */; };
@@ -25,7 +26,6 @@
 		3F0A97731735E3E700528BA7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F0A97711735E3E700528BA7 /* MainStoryboard.storyboard */; };
 		3F0A97791735E3E700528BA7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0A97781735E3E700528BA7 /* ViewController.m */; };
 		3F0A97861735E4C500528BA7 /* JFMinimalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0A97851735E4C500528BA7 /* JFMinimalNotification.m */; };
-		3FFDFDEA1AE5D4140023D5FD /* libKIF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFDFDDF1AE5D3F90023D5FD /* libKIF.a */; };
 		3FFDFDEC1AE5D4B80023D5FD /* JFMinimalNotificationUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFDFDEB1AE5D4B80023D5FD /* JFMinimalNotificationUITests.m */; };
 		3FFDFDED1AE5D7A60023D5FD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0A975D1735E3E700528BA7 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
@@ -38,44 +38,51 @@
 			remoteGlobalIDString = 3F0A97551735E3E700528BA7;
 			remoteInfo = JFMinimalNotification;
 		};
-		3FFDFDDE1AE5D3F90023D5FD /* PBXContainerItemProxy */ = {
+		19D768FA1DDC9D6000726323 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3FFDFDD51AE5D3F90023D5FD /* KIF.xcodeproj */;
+			containerPortal = 19D768F01DDC9D6000726323 /* KIF.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EABD46AA1857A0C700A5F081;
 			remoteInfo = KIF;
 		};
-		3FFDFDE01AE5D3F90023D5FD /* PBXContainerItemProxy */ = {
+		19D768FC1DDC9D6000726323 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3FFDFDD51AE5D3F90023D5FD /* KIF.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EB72047C1680DDAD00278DA2;
-			remoteInfo = "KIF-OCUnit";
-		};
-		3FFDFDE21AE5D3F90023D5FD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3FFDFDD51AE5D3F90023D5FD /* KIF.xcodeproj */;
+			containerPortal = 19D768F01DDC9D6000726323 /* KIF.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EB60ECC1177F8C83005A041A;
 			remoteInfo = "Test Host";
 		};
-		3FFDFDE41AE5D3F90023D5FD /* PBXContainerItemProxy */ = {
+		19D768FE1DDC9D6000726323 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3FFDFDD51AE5D3F90023D5FD /* KIF.xcodeproj */;
+			containerPortal = 19D768F01DDC9D6000726323 /* KIF.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EABD46CD1857A0F300A5F081;
 			remoteInfo = "KIF Tests";
 		};
-		3FFDFDE61AE5D3F90023D5FD /* PBXContainerItemProxy */ = {
+		19D769001DDC9D6000726323 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3FFDFDD51AE5D3F90023D5FD /* KIF.xcodeproj */;
+			containerPortal = 19D768F01DDC9D6000726323 /* KIF.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = EB60ECEB177F8DB3005A041A;
-			remoteInfo = "KIF Tests-OCUnit";
+			remoteGlobalIDString = 9CC9673B1AD4B1B600576D13;
+			remoteInfo = KIFFramework;
 		};
-		3FFDFDE81AE5D40F0023D5FD /* PBXContainerItemProxy */ = {
+		19D769021DDC9D6000726323 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3FFDFDD51AE5D3F90023D5FD /* KIF.xcodeproj */;
+			containerPortal = 19D768F01DDC9D6000726323 /* KIF.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FAB89FFC1CAC546900C6DFC1;
+			remoteInfo = KIFFrameworkConsumer;
+		};
+		19D769041DDC9D6000726323 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 19D768F01DDC9D6000726323 /* KIF.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FAB8A0141CAC546A00C6DFC1;
+			remoteInfo = KIFFrameworkConsumerTests;
+		};
+		19D769061DDC9D7D00726323 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 19D768F01DDC9D6000726323 /* KIF.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = EABD46791857A0C700A5F081;
 			remoteInfo = KIF;
@@ -91,6 +98,7 @@
 		1996A5581C6D21DE00A0CF97 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		19C95A5A1AF3B1B800590781 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		19C95A5B1AF3B1B800590781 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		19D768F01DDC9D6000726323 /* KIF.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = KIF.xcodeproj; sourceTree = "<group>"; };
 		1A06FD921A1ABEEF00EC399D /* JFMinimalNotificationArt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFMinimalNotificationArt.h; sourceTree = "<group>"; };
 		1A06FD931A1ABEEF00EC399D /* JFMinimalNotificationArt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFMinimalNotificationArt.m; sourceTree = "<group>"; };
 		1A06FD981A1AD6E400EC399D /* UIView+Round.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Round.h"; sourceTree = "<group>"; };
@@ -115,7 +123,6 @@
 		3F0A97841735E4C500528BA7 /* JFMinimalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFMinimalNotification.h; sourceTree = "<group>"; };
 		3F0A97851735E4C500528BA7 /* JFMinimalNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFMinimalNotification.m; sourceTree = "<group>"; };
 		3F0A97871736C4C700528BA7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		3FFDFDD51AE5D3F90023D5FD /* KIF.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = KIF.xcodeproj; sourceTree = "<group>"; };
 		3FFDFDEB1AE5D4B80023D5FD /* JFMinimalNotificationUITests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFMinimalNotificationUITests.m; sourceTree = "<group>"; };
 		3FFDFDEE1AE5D7D00023D5FD /* libTelephonyIOKitDynamic.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libTelephonyIOKitDynamic.dylib; path = usr/lib/libTelephonyIOKitDynamic.dylib; sourceTree = SDKROOT; };
 		3FFDFDF01AE5D8D40023D5FD /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -126,8 +133,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19D769081DDC9D8500726323 /* KIF.framework in Frameworks */,
 				3FFDFDED1AE5D7A60023D5FD /* CoreGraphics.framework in Frameworks */,
-				3FFDFDEA1AE5D4140023D5FD /* libKIF.a in Frameworks */,
 				1993D9721AE961CE00090768 /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,6 +168,19 @@
 				1907CAFA1AE1808500B0C2F4 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		19D768F11DDC9D6000726323 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				19D768FB1DDC9D6000726323 /* libKIF.a */,
+				19D768FD1DDC9D6000726323 /* Test Host.app */,
+				19D768FF1DDC9D6000726323 /* KIF Tests - XCTest.xctest */,
+				19D769011DDC9D6000726323 /* KIF.framework */,
+				19D769031DDC9D6000726323 /* KIFFrameworkConsumer.app */,
+				19D769051DDC9D6000726323 /* KIFFrameworkConsumerTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		3F0A974D1735E3E700528BA7 = {
@@ -263,21 +283,9 @@
 		3FFDFC471AE5D3B90023D5FD /* KIF */ = {
 			isa = PBXGroup;
 			children = (
-				3FFDFDD51AE5D3F90023D5FD /* KIF.xcodeproj */,
+				19D768F01DDC9D6000726323 /* KIF.xcodeproj */,
 			);
 			path = KIF;
-			sourceTree = "<group>";
-		};
-		3FFDFDD61AE5D3F90023D5FD /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3FFDFDDF1AE5D3F90023D5FD /* libKIF.a */,
-				3FFDFDE11AE5D3F90023D5FD /* libKIF-OCUnit.a */,
-				3FFDFDE31AE5D3F90023D5FD /* Test Host.app */,
-				3FFDFDE51AE5D3F90023D5FD /* KIF Tests - XCTest.xctest */,
-				3FFDFDE71AE5D3F90023D5FD /* KIF Tests-OCUnit.octest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,7 +302,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				3FFDFDE91AE5D40F0023D5FD /* PBXTargetDependency */,
+				19D769071DDC9D7D00726323 /* PBXTargetDependency */,
 				1907CAFE1AE1808500B0C2F4 /* PBXTargetDependency */,
 			);
 			name = "JFMinimalNotification Tests";
@@ -347,8 +355,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 3FFDFDD61AE5D3F90023D5FD /* Products */;
-					ProjectRef = 3FFDFDD51AE5D3F90023D5FD /* KIF.xcodeproj */;
+					ProductGroup = 19D768F11DDC9D6000726323 /* Products */;
+					ProjectRef = 19D768F01DDC9D6000726323 /* KIF.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -360,39 +368,46 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3FFDFDDF1AE5D3F90023D5FD /* libKIF.a */ = {
+		19D768FB1DDC9D6000726323 /* libKIF.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libKIF.a;
-			remoteRef = 3FFDFDDE1AE5D3F90023D5FD /* PBXContainerItemProxy */;
+			remoteRef = 19D768FA1DDC9D6000726323 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3FFDFDE11AE5D3F90023D5FD /* libKIF-OCUnit.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libKIF-OCUnit.a";
-			remoteRef = 3FFDFDE01AE5D3F90023D5FD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3FFDFDE31AE5D3F90023D5FD /* Test Host.app */ = {
+		19D768FD1DDC9D6000726323 /* Test Host.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = "Test Host.app";
-			remoteRef = 3FFDFDE21AE5D3F90023D5FD /* PBXContainerItemProxy */;
+			remoteRef = 19D768FC1DDC9D6000726323 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3FFDFDE51AE5D3F90023D5FD /* KIF Tests - XCTest.xctest */ = {
+		19D768FF1DDC9D6000726323 /* KIF Tests - XCTest.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "KIF Tests - XCTest.xctest";
-			remoteRef = 3FFDFDE41AE5D3F90023D5FD /* PBXContainerItemProxy */;
+			remoteRef = 19D768FE1DDC9D6000726323 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3FFDFDE71AE5D3F90023D5FD /* KIF Tests-OCUnit.octest */ = {
+		19D769011DDC9D6000726323 /* KIF.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = KIF.framework;
+			remoteRef = 19D769001DDC9D6000726323 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		19D769031DDC9D6000726323 /* KIFFrameworkConsumer.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = KIFFrameworkConsumer.app;
+			remoteRef = 19D769021DDC9D6000726323 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		19D769051DDC9D6000726323 /* KIFFrameworkConsumerTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "KIF Tests-OCUnit.octest";
-			remoteRef = 3FFDFDE61AE5D3F90023D5FD /* PBXContainerItemProxy */;
+			path = KIFFrameworkConsumerTests.xctest;
+			remoteRef = 19D769041DDC9D6000726323 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -452,10 +467,10 @@
 			target = 3F0A97551735E3E700528BA7 /* JFMinimalNotification */;
 			targetProxy = 1907CAFD1AE1808500B0C2F4 /* PBXContainerItemProxy */;
 		};
-		3FFDFDE91AE5D40F0023D5FD /* PBXTargetDependency */ = {
+		19D769071DDC9D7D00726323 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = KIF;
-			targetProxy = 3FFDFDE81AE5D40F0023D5FD /* PBXContainerItemProxy */;
+			targetProxy = 19D769061DDC9D7D00726323 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

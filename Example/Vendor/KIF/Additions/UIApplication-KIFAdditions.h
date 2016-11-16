@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 #define UIApplicationCurrentRunMode ([[UIApplication sharedApplication] currentRunLoopMode])
 
 /*!
@@ -25,6 +26,11 @@ UIKIT_EXTERN NSString *const UIApplicationDidMockCanOpenURLNotification;
  @abstract The key for the opened URL in the @c UIApplicationDidMockOpenURLNotification notification.
  */
 UIKIT_EXTERN NSString *const UIApplicationOpenedURLKey;
+
+/*!
+ @abstract A wrapper for CFRunLoopRunInMode that scales the seconds parameter relative to the animation speed.
+ */
+CF_EXPORT SInt32 KIFRunLoopRunInModeRelativeToAnimationSpeed(CFStringRef mode, CFTimeInterval seconds, Boolean returnAfterSourceHandled);
 
 @interface UIApplication (KIFAdditions)
 
@@ -70,6 +76,11 @@ UIKIT_EXTERN NSString *const UIApplicationOpenedURLKey;
 - (NSArray *)windowsWithKeyWindow;
 
 /*!
+ The current Core Animation speed of the keyWindow's CALayer.
+ */
+@property (nonatomic, assign) float animationSpeed;
+
+/*!
  @abstract Writes a screenshot to disk.
  @discussion This method only works if the @c KIF_SCREENSHOTS environment variable is set.
  @param lineNumber The line number in the code at which the screenshot was taken.
@@ -105,8 +116,6 @@ UIKIT_EXTERN NSString *const UIApplicationOpenedURLKey;
 @end
 
 @interface UIApplication (Private)
-- (BOOL)rotateIfNeeded:(UIDeviceOrientation)orientation;
-- (void)rotateIfNeeded:(UIDeviceOrientation)orientation completion:(void (^)(void))completion;
 - (UIWindow *)statusBarWindow;
 @property(getter=isStatusBarHidden) BOOL statusBarHidden;
 @end

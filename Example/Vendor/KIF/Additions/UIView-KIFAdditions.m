@@ -53,14 +53,17 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
         return YES;
     }
     
-    if ([expected rangeOfString:@"\n"].location == NSNotFound) {
+    if ([expected rangeOfString:@"\n"].location == NSNotFound &&
+        [actual rangeOfString:@"\n"].location == NSNotFound) {
         return NO;
     }
     
     for (NSUInteger i = 0; i < expected.length; i ++) {
         unichar expectedChar = [expected characterAtIndex:i];
         unichar actualChar = [actual characterAtIndex:i];
-        if (expectedChar != actualChar && !(expectedChar == '\n' && actualChar == ' ')) {
+        if (expectedChar != actualChar &&
+           !(expectedChar == '\n' && actualChar == ' ') &&
+           !(expectedChar == ' '  && actualChar == '\n')) {
             return NO;
         }
     }
@@ -98,25 +101,31 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
 {
     return [self accessibilityElementMatchingBlock:^(UIAccessibilityElement *element) {
         
-        // TODO: This is a temporary fix for an SDK defect.
-        NSString *accessibilityValue = nil;
-        @try {
-            accessibilityValue = element.accessibilityValue;
-        }
-        @catch (NSException *exception) {
-            NSLog(@"KIF: Unable to access accessibilityValue for element %@ because of exception: %@", element, exception.reason);
-        }
+        return [UIView accessibilityElement:element hasLabel:label accessibilityValue:value traits:traits];
         
-        if ([accessibilityValue isKindOfClass:[NSAttributedString class]]) {
-            accessibilityValue = [(NSAttributedString *)accessibilityValue string];
-        }
-        
-        BOOL labelsMatch = StringsMatchExceptLineBreaks(label, element.accessibilityLabel);
-        BOOL traitsMatch = ((element.accessibilityTraits) & traits) == traits;
-        BOOL valuesMatch = !value || [value isEqual:accessibilityValue];
-
-        return (BOOL)(labelsMatch && traitsMatch && valuesMatch);
     }];
+}
+
++ (BOOL)accessibilityElement:(UIAccessibilityElement *)element hasLabel:(NSString *)label accessibilityValue:(NSString *)value traits:(UIAccessibilityTraits)traits
+{
+    // TODO: This is a temporary fix for an SDK defect.
+    NSString *accessibilityValue = nil;
+    @try {
+        accessibilityValue = element.accessibilityValue;
+    }
+    @catch (NSException *exception) {
+        NSLog(@"KIF: Unable to access accessibilityValue for element %@ because of exception: %@", element, exception.reason);
+    }
+    
+    if ([accessibilityValue isKindOfClass:[NSAttributedString class]]) {
+        accessibilityValue = [(NSAttributedString *)accessibilityValue string];
+    }
+    
+    BOOL labelsMatch = StringsMatchExceptLineBreaks(label, element.accessibilityLabel);
+    BOOL traitsMatch = ((element.accessibilityTraits) & traits) == traits;
+    BOOL valuesMatch = !value || [value isEqual:accessibilityValue];
+    
+    return (BOOL)(labelsMatch && traitsMatch && valuesMatch);
 }
 
 - (UIAccessibilityElement *)accessibilityElementMatchingBlock:(BOOL(^)(UIAccessibilityElement *))matchBlock;
@@ -186,7 +195,13 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
                 continue;
             }
         }
-        
+
+        // Avoid crash within accessibilityElementCount while traversing map subviews
+        // See https://github.com/kif-framework/KIF/issues/802
+        if ([element isKindOfClass:NSClassFromString(@"MKBasicMapView")]) {
+            continue;
+        }
+
         // If the view is an accessibility container, and we didn't find a matching subview,
         // then check the actual accessibility elements
         NSInteger accessibilityElementCount = element.accessibilityElementCount;
@@ -208,14 +223,26 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
         }
     }
     
-    if (!matchingButOccludedElement) {
+    if (!matchingButOccludedElement && self.window) {
         if ([self isKindOfClass:[UITableView class]]) {
             UITableView *tableView = (UITableView *)self;
             
-            NSArray *indexPathsForVisibleRows = [tableView indexPathsForVisibleRows];
+            // Because of a bug in [UITableView indexPathsForVisibleRows] http://openradar.appspot.com/radar?id=5191284490764288
+            // We use [UITableView visibleCells] to determine the index path of the visible cells
+            NSMutableArray *indexPathsForVisibleRows = [[NSMutableArray alloc] init];
+            [[tableView visibleCells] enumerateObjectsUsingBlock:^(UITableViewCell *cell, NSUInteger idx, BOOL *stop) {
+                NSIndexPath *indexPath = [tableView indexPathForCell:cell];
+                if (indexPath) {
+                    [indexPathsForVisibleRows addObject:indexPath];
+                }
+            }];
             
             for (NSUInteger section = 0, numberOfSections = [tableView numberOfSections]; section < numberOfSections; section++) {
                 for (NSUInteger row = 0, numberOfRows = [tableView numberOfRowsInSection:section]; row < numberOfRows; row++) {
+                    if (!self.window) {
+                        break;
+                    }
+
                     // Skip visible rows because they are already handled
                     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
                     if ([indexPathsForVisibleRows containsObject:indexPath]) {
@@ -239,6 +266,7 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
                     
                     // Scroll to the cell and wait for the animation to complete
                     [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
+                    // Note: using KIFRunLoopRunInModeRelativeToAnimationSpeed here may cause tests to stall
                     CFRunLoopRunInMode(UIApplicationCurrentRunMode, 0.5, false);
                     
                     // Now try finding the element again
@@ -252,6 +280,10 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
             
             for (NSUInteger section = 0, numberOfSections = [collectionView numberOfSections]; section < numberOfSections; section++) {
                 for (NSUInteger item = 0, numberOfItems = [collectionView numberOfItemsInSection:section]; item < numberOfItems; item++) {
+                    if (!self.window) {
+                        break;
+                    }
+
                     // Skip visible items because they are already handled
                     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:item inSection:section];
                     if ([indexPathsForVisibleItems containsObject:indexPath]) {
@@ -275,7 +307,9 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
                     }
                     
                     // Scroll to the cell and wait for the animation to complete
-                    [collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+                    CGRect frame = [collectionView.collectionViewLayout layoutAttributesForItemAtIndexPath:indexPath].frame;
+                    [collectionView scrollRectToVisible:frame animated:YES];
+                    // Note: using KIFRunLoopRunInModeRelativeToAnimationSpeed here may cause tests to stall
                     CFRunLoopRunInMode(UIApplicationCurrentRunMode, 0.5, false);
                     
                     // Now try finding the element again
@@ -554,9 +588,13 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
 
             // The last point needs to also send a phase ended touch.
             if (pointIndex == pointsInPath - 1) {
-                [touch setPhaseAndUpdateTimestamp:UITouchPhaseEnded];
-                UIEvent *eventUp = [self eventWithTouch:touch];
-                [[UIApplication sharedApplication] sendEvent:eventUp];
+                for (UITouch * touch in touches) {
+                    [touch setPhaseAndUpdateTimestamp:UITouchPhaseEnded];
+                    UIEvent *eventUp = [self eventWithTouch:touch];
+                    [[UIApplication sharedApplication] sendEvent:eventUp];
+                    
+                }
+
             }
         }
     }
@@ -814,6 +852,20 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
         }
     }
     
+    // Somtimes views are inside a UIControl and don't have user interaction enabled.
+    // Walk up the hierarchary evaluating the parent UIControl subclass and use that instead.
+    if (!isUserInteractionEnabled && [self.superview isKindOfClass:[UIControl class]]) {
+        // If this view is inside a UIControl, and it is enabled, then consider the view enabled
+        UIControl *control = (UIControl *)[self superview];
+        while (control && [control isKindOfClass:[UIControl class]]) {
+            if (control.isUserInteractionEnabled) {
+                isUserInteractionEnabled = YES;
+                break;
+            }
+            control = (UIControl *)[control superview];
+        }
+    }
+    
     return isUserInteractionEnabled;
 }
 
@@ -882,177 +934,5 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
     }
 }
 
-- (void)printViewHierarchy {
-    [self printViewHierarchyWithIndentation:0];
-}
-
-+(void)printViewHierarchy {
-    NSArray* windows = [UIApplication sharedApplication].windows;
-    if(windows.count == 1) {
-        [windows[0] printViewHierarchy];
-    } else {
-        //more than one window, also print some information about each window
-        for (UIWindow* window in windows) {
-            printf("Window level %f", window.windowLevel);
-            if(window.isKeyWindow) printf(" (key window)");
-            printf("\n");
-            [window printViewHierarchy];
-            printf("\n");
-        }
-    }
-}
-
-- (void)printAccessibilityTraits:(UIAccessibilityTraits)traits {
-    
-    printf("traits: ");
-    bool didPrintOne = false;
-    if(traits == UIAccessibilityTraitNone) {
-        printf("none");
-        didPrintOne = true;
-    }
-    if(traits & UIAccessibilityTraitButton) {
-        if(didPrintOne) printf(", ");
-        printf("button");
-        didPrintOne = true;
-    }
-    if(traits & UIAccessibilityTraitLink) {
-        if(didPrintOne) printf(", ");
-        printf("link");
-        didPrintOne = true;
-    }
-    if(traits & UIAccessibilityTraitHeader) {
-        if(didPrintOne) printf(", ");
-        printf("header");
-        didPrintOne = true;
-    }
-    if(traits & UIAccessibilityTraitSearchField) {
-        if(didPrintOne) printf(", ");
-        printf("search field");
-        didPrintOne = true;
-    }
-    if(traits & UIAccessibilityTraitImage) {
-        if(didPrintOne) printf(", ");
-        printf("image");
-        didPrintOne = true;
-    }
-    if(traits & UIAccessibilityTraitSelected) {
-        if(didPrintOne) printf(", ");
-        printf("selected");
-        didPrintOne = true;
-    }
-    if(traits & UIAccessibilityTraitPlaysSound) {
-        if(didPrintOne) printf(", ");
-        printf("plays sound");
-        didPrintOne = true;
-    }
-    if(traits & UIAccessibilityTraitKeyboardKey) {
-        if(didPrintOne) printf(", ");
-        printf("keyboard key");
-        didPrintOne = true;
-    }
-    if(traits & UIAccessibilityTraitStaticText) {
-        if(didPrintOne) printf(", ");
-        printf("static text");
-        didPrintOne = true;
-    }
-    if(traits & UIAccessibilityTraitSummaryElement) {
-        if(didPrintOne) printf(", ");
-        printf("summary element");
-        didPrintOne = true;
-    }
-    if(traits & UIAccessibilityTraitNotEnabled) {
-        if(didPrintOne) printf(", ");
-        printf("not enabled");
-        didPrintOne = true;
-    }
-    if(traits & UIAccessibilityTraitUpdatesFrequently) {
-        if(didPrintOne) printf(", ");
-        printf("updates frequently");
-        didPrintOne = true;
-    }
-    if(traits & UIAccessibilityTraitStartsMediaSession) {
-        if(didPrintOne) printf(", ");
-        printf("starts media session");
-        didPrintOne = true;
-    }
-    if(traits & UIAccessibilityTraitAdjustable) {
-        if(didPrintOne) printf(", ");
-        printf("adjustable");
-        didPrintOne = true;
-    }
-    if(traits & UIAccessibilityTraitAllowsDirectInteraction) {
-        if(didPrintOne) printf(", ");
-        printf("allows direct interaction");
-        didPrintOne = true;
-    }
-    if(traits & UIAccessibilityTraitCausesPageTurn) {
-        if(didPrintOne) printf(", ");
-        printf("causes page turn");
-        didPrintOne = true;
-    }
-    if(!didPrintOne) {
-        printf("unknown flags (0x%llx)", traits);
-    }
-}
-
-
-- (void)printViewHierarchyWithIndentation:(int)indent {
-    NSString* name = NSStringFromClass([self class]);
-    NSString* label = self.accessibilityLabel;
-    NSString* identifier = self.accessibilityIdentifier;
-    for(int i = 0; i < indent; ++i) {
-        printf("|\t");
-    }
-    printf("%s", name.UTF8String);
-    if(label != nil) {
-        printf(", label: %s", label.UTF8String);
-    } else if(identifier != nil) {
-        printf(", identifier: %s", identifier.UTF8String);
-    }
-    if(self.hidden) {
-        printf(" (invisible)");
-    }
-    
-    if([self isKindOfClass:[UIImageView class]]) {
-        if(((UIImageView*)self).highlighted) {
-            printf(" (highlighted)");
-        } else {
-            printf(" (not highlighted)");
-        }
-    }
-    
-    if([self isKindOfClass:[UIControl class]]) {
-        UIControl* ctrl = (UIControl*)self;
-        ctrl.enabled ? printf(" (enabled)") : printf(" (not enabled)");
-        ctrl.selected ? printf(" (selected)") : printf(" (not selected)");
-        ctrl.highlighted ? printf(" (highlighted)") : printf(" (not highlighted)");
-    }
-    printf("\n");
-    
-    //
-    NSInteger numOfAccElements = self.accessibilityElementCount;
-    if(numOfAccElements != NSNotFound) {
-        for (NSInteger i = 0; i < numOfAccElements; ++i) {
-            for(int i = 0; i < indent+1; ++i) {
-                printf("|\t");
-            }
-            UIAccessibilityElement *e = [(UIAccessibilityElement*)self accessibilityElementAtIndex:i];
-            printf("%s, label: %s", NSStringFromClass([e class]).UTF8String, e.accessibilityLabel.UTF8String);
-            if(e.accessibilityValue && e.accessibilityValue.length > 0) {
-                printf(", value: %s", e.accessibilityValue.UTF8String);
-            }
-            if(e.accessibilityHint && e.accessibilityHint.length > 0) {
-                printf(", hint: %s", e.accessibilityHint.UTF8String);
-            }
-            printf(", ");
-            [self printAccessibilityTraits:e.accessibilityTraits];
-            printf("\n");
-        }
-    }
-    
-    for (UIView *subview in self.subviews) {
-        [subview printViewHierarchyWithIndentation:indent+1];
-    }
-}
 
 @end

@@ -75,10 +75,28 @@
     [tester enterText:@", world\n" intoViewWithAccessibilityLabel:@"Greeting" traits:UIAccessibilityTraitNone expectedResult:@"Hello, world"];
 }
 
+- (void)testEnteringEmojiCharactersIntoViewWithAccessibilityLabel
+{
+	NSString *text = @" 😓He😤ll👿o";
+	[tester clearTextFromAndThenEnterText:text intoViewWithAccessibilityLabel:@"Greeting"];
+	UITextField * tf = (UITextField*)[tester waitForViewWithAccessibilityLabel:@"Greeting"];
+	XCTAssertTrue([tf.text isEqualToString:text]);
+}
+
 - (void)testClearingALongTextField
 {
     [tester clearTextFromAndThenEnterText:@"A man, a plan, a canal, Panama.  Able was I, ere I saw Elba." intoViewWithAccessibilityLabel:@"Greeting"];
     [tester clearTextFromViewWithAccessibilityLabel:@"Greeting"];
+}
+
+- (void)testSettingTextIntoViewWithAccessibilityLabel
+{
+    UIView *greetingView = [tester waitForViewWithAccessibilityLabel:@"Greeting"];
+    [tester longPressViewWithAccessibilityLabel:@"Greeting" duration:2];
+    [tester setText:@"Yo" intoViewWithAccessibilityLabel:@"Greeting"];
+    [tester expectView:greetingView toContainText:@"Yo"];
+    [tester setText:@"Hello" intoViewWithAccessibilityLabel:@"Greeting"];
+    [tester expectView:greetingView toContainText:@"Hello"];
 }
 
 - (void)testThatClearingTextHitsTheDelegate
@@ -92,6 +110,8 @@
 {
     [tester enterText:@"hi\bello" intoViewWithAccessibilityLabel:@"Other Text" traits:UIAccessibilityTraitNone expectedResult:@"hello"];
     [tester waitForViewWithAccessibilityLabel:@"Greeting" value:@"Deleted something." traits:UIAccessibilityTraitNone];
+    UIView *textView = [tester waitForViewWithAccessibilityLabel:@"Other Text"];
+    XCTAssertEqualObjects([tester textFromView:textView], @"hello");
 }
 
 @end

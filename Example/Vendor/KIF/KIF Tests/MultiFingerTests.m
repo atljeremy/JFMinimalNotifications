@@ -42,8 +42,10 @@
     self.latestRotation = 0;
 }
 
-- (void)testTwoFingerTap {
+- (void)testTwoFingerTap
+{
     UIScrollView *scrollView = (UIScrollView *)[tester waitForViewWithAccessibilityLabel:@"Scroll View"];
+	[tester waitForAnimationsToFinish];
     UITapGestureRecognizer *twoFingerTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                              action:@selector(twoFingerTapped)];
     twoFingerTapRecognizer.numberOfTouchesRequired = 2;
@@ -55,7 +57,8 @@
     [scrollView removeGestureRecognizer:twoFingerTapRecognizer];
 }
 
-- (void)twoFingerTapped {
+- (void)twoFingerTapped
+{
     self.twoFingerTapSuccess = YES;
 }
 
@@ -64,7 +67,8 @@
     CGFloat offset = 50.0;
 
     UIScrollView *scrollView = (UIScrollView *)[tester waitForViewWithAccessibilityLabel:@"Scroll View"];
-    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerPanned)];
+	[tester waitForAnimationsToFinish];
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerPanned:)];
     panGestureRecognizer.minimumNumberOfTouches = 2;
     [scrollView addGestureRecognizer:panGestureRecognizer];
 
@@ -76,14 +80,19 @@
     [scrollView removeGestureRecognizer:panGestureRecognizer];
 }
 
-- (void)twoFingerPanned {
-    self.twoFingerPanSuccess = YES;
+- (void)twoFingerPanned:(UIGestureRecognizer*) gr{
+    
+    if (gr.state == UIGestureRecognizerStateEnded) {
+        self.twoFingerPanSuccess = YES;
+    }
+    
 }
 
 - (void)testZoom {
     CGFloat distance = 50.0;
 
     UIScrollView *scrollView = (UIScrollView *)[tester waitForViewWithAccessibilityLabel:@"Scroll View"];
+	[tester waitForAnimationsToFinish];
     UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self
                                                                                           action:@selector(zoomed:)];
 
@@ -110,6 +119,7 @@
 
 - (void)testRotate {
     UIScrollView *scrollView = (UIScrollView *)[tester waitForViewWithAccessibilityLabel:@"Scroll View"];
+	[tester waitForAnimationsToFinish];
     UIRotationGestureRecognizer *rotateRecognizer =
         [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotated:)];
 

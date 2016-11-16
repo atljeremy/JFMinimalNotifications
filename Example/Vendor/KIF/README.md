@@ -1,33 +1,31 @@
-[![Build Status](https://travis-ci.org/kif-framework/KIF.svg?branch=master)](https://travis-ci.org/kif-framework/KIF)
+[![Build Status](https://travis-ci.org/kif-framework/KIF.svg?branch=master)](https://travis-ci.org/kif-framework/KIF) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![CocoaPod Version](https://img.shields.io/cocoapods/v/KIF.svg?style=flat)](https://cocoapods.org)
 
 KIF iOS Integration Testing Framework
 =====================================
 
 KIF, which stands for Keep It Functional, is an iOS integration test framework. It allows for easy automation of iOS apps by leveraging the accessibility attributes that the OS makes available for those with visual disabilities.
 
-KIF builds and performs the tests using a standard `XCTest` testing target.  Testing is conducted synchronously in the main thread (running the run loop to force the passage of time) allowing for more complex logic and composition.  This also allows KIF to take advantage of the Xcode 5 Test Navigator, command line build tools, and Bot test reports.  [Find out more about Xcode 5 features.](https://developer.apple.com/technologies/tools/whats-new.html)
+KIF builds and performs the tests using a standard `XCTest` testing target.  Testing is conducted synchronously in the main thread (running the run loop to force the passage of time) allowing for more complex logic and composition.  This also allows KIF to take advantage of the Xcode Test Navigator, command line build tools, and Bot test reports.
 
 **KIF uses undocumented Apple APIs.** This is true of most iOS testing frameworks, and is safe for testing purposes, but it's important that KIF does not make it into production code, as it will get your app submission denied by Apple. Follow the instructions below to ensure that KIF is configured correctly for your project.
-
-**Note:** KIF 2.0 is not API compatible with KIF 1.0 and uses a different test execution mechanism.  KIF 1.0 can be found in the [Releases](https://github.com/kif-framework/KIF/releases/) section or on [CocoaPods](http://cocoapods.org).
 
 Features
 --------
 
 #### Minimizes Indirection
-All of the tests for KIF are written in Objective C. This allows for maximum integration with your code while minimizing the number of layers you have to build.
+All of the tests for KIF are written in Objective-C. This allows for maximum integration with your code while minimizing the number of layers you have to build.
 
 #### Easy Configuration
 KIF integrates directly into your Xcode project, so there's no need to run an additional web server or install any additional packages.
 
 #### Wide OS coverage
-KIF's test suite has been run against iOS 5.1 and above (including iOS 8), though lower versions will likely work.
+KIF's test suite has been run against iOS 8.1 and above, though lower versions will likely work.
 
 #### Test Like a User
 KIF attempts to imitate actual user input. Automation is done using tap events wherever possible.
 
-#### Automatic Integration with Xcode 5 Testing Tools
-Xcode 5 introduces [new testing an continuous integration tools](https://developer.apple.com/technologies/tools/whats-new.html) built on the same testing platform as KIF.  You can easily run a single KIF test with the Test Navigator or kick off nightly acceptance tests with Bots.
+#### Automatic Integration with Xcode Testing Tools
+You can easily run a single KIF test with the Test Navigator or kick off nightly acceptance tests with Bots.
 
 See KIF in Action
 -----------------
@@ -41,29 +39,23 @@ Installation (with CocoaPods)
 
 The first thing you will want to do is set up a test target you will be using for KIF.  You may already have one named *MyApplication*_Tests if you selected to automatically create unit tests.  If you did, you can keep using it if you aren't using it for unit tests.  Otherwise, follow these directions to create a new one.
 
-Select your project in Xcode and click on "Add Target" in the bottom left corner of the editor.  Select iOS -> Other -> Cocoa Touch Unit Testing Bundle.  Give it a product name like "Acceptance Tests", "UI Tests", or something that indicates the intent of your testing process.  You can select "Use Automatic Reference Counting" even if the remainder of your app doesn't, just to make your life easier.
+Select your project in Xcode and click on "Add Target" in the bottom left corner of the editor.  Select iOS -> Test -> iOS Unit Testing Bundle.  Give it a product name like "Acceptance Tests", "UI Tests", or something that indicates the intent of your testing process.
 
 The testing target will add a header and implementation file, likely "Acceptance_Tests.m/h" to match your target name. Delete those.
 
 Once your test target set up, add the following to your Podfile file. Use your target's name as appropriate.
 
 ```Ruby
-target 'Acceptance Tests', :exclusive => true do
+target 'Your Apps' do
+  ...
+end
+
+target 'Acceptance Tests' do
   pod 'KIF', '~> 3.0', :configurations => ['Debug']
 end
 ```
 
-The `:exclusive => true` option will prevent Cocoapods from including dependencies from your main target in your test target causing double-linking issues when you test link against the app.
-
 After running `pod install` complete the tasks in [**Final Test Target Configurations**](#final-test-target-configurations) below for the final details on getting your tests to run.
-
-Note: if you are using KIF with OCUnit, you need to use the OCUnit version of KIF as follows:
-
-```Ruby
-target 'Acceptance Tests', :exclusive => true do
-  pod 'KIF/OCUnit', '~> 3.0'
-end
-```
 
 Installation (from GitHub)
 --------------------------
@@ -95,12 +87,14 @@ Let your project know about KIF by adding the KIF project into a workspace along
 ### Create a Testing Target
 You'll need to create a test target for your app.  You may already have one named *MyApplication*Tests if you selected to automatically create unit tests when you created the project.  If you did, you can keep using it if you aren't using it for unit tests.  Otherwise, follow these directions to create a new one.
 
-Select your project in Xcode and click on "Add Target" in the bottom left corner of the editor.  Select iOS -> Other -> Cocoa Touch  Testing Bundle.  Give it a product name like "Acceptance Tests", "UI Tests", or something that indicates the intent of your testing process.
+Select your project in Xcode and click on "Add Target" in the bottom left corner of the editor.  Select iOS -> Test -> iOS Unit Testing Bundle.  Give it a product name like "Acceptance Tests", "UI Tests", or something that indicates the intent of your testing process.
 
 The testing target will add a header and implementation file, likely "Acceptance_Tests.m/h" to match your target name. Delete those.
 
 ### Configure the Testing Target
-Now that you have a target for your tests, add the tests to that target. With the project settings still selected in the Project Navigator, and the new integration tests target selected in the project settings, select the "Build Phases" tab. Under the "Link Binary With Libraries" section, hit the "+" button. In the sheet that appears, select "libKIF.a" and click "Add".  Repeat the process for CoreGraphics.framework and IOKit.framework.
+Now that you have a target for your tests, add the tests to that target. With the project settings still selected in the Project Navigator, and the new integration tests target selected in the project settings, select the "Build Phases" tab. Under the "Link Binary With Libraries" section, hit the "+" button. In the sheet that appears, select "libKIF.a" and click "Add".  Repeat the process for CoreGraphics.framework and QuartzCore.framework. 
+
+KIF requires the IOKit.framework, but it is not located with the other system frameworks. To link to it, add "-framework IOKit" to the "Other Linker Flags" build setting.
 
 ![Add libKIF library screen shot](https://github.com/kif-framework/KIF/raw/master/Documentation/Images/Add Library.png)
 
@@ -119,14 +113,14 @@ You need your tests to run hosted in your application. **Xcode does this for you
 
 First add your application by selecting "Build Phases", expanding the "Target Dependencies" section, clicking on the "+" button, and in the new sheet that appears selecting your application target and clicking "Add".
 
-Next, configure your bundle loader.  In "Build Settings", expand "Linking" and edit "Bundle Loader" to be `$(BUILT_PRODUCTS_DIR)/MyApplication.app/MyApplication` where *MyApplication* is the name of your app.  Expand the "Unit Testing" section and edit "Test Host" to be `$(BUNDLE_LOADER)`. Also make sure that "Wrapper Extension" is set to "xctest".
+Next, configure your bundle loader.  In "Build Settings", expand "Linking" and edit "Bundle Loader" to be `$(BUILT_PRODUCTS_DIR)/MyApplication.app/MyApplication` where *MyApplication* is the name of your app.  Expand the "Testing" section and edit "Test Host" to be `$(BUNDLE_LOADER)`. Also make sure that "Wrapper Extension" is set to "xctest".
 
 The last step is to configure your unit tests to run when you trigger a test (⌘U).  Click on your scheme name and select "Edit Scheme…".  Click on "Test" in the sidebar followed by the "+" in the bottom left corner.  Select your testing target and click "OK".
 
 ## Example test cases
 With your project configured to use KIF, it's time to start writing tests. There are two main classes used in KIF testing: the test case (`KIFTestCase`, subclass of `XCTestCase`) and the UI test actor (`KIFUITestActor`).  The XCTest test runner loads the test case classes and executes their test.  Inside these tests, the tester performs the UI operations which generally imitate a user interaction. Three of the most common tester actions are "tap this view," "enter text into this view," and "wait for this view." These steps are included as factory methods on `KIFUITestActor` in the base KIF implementation.
 
-KIF relies on the built-in accessibility of iOS to perform its test steps. As such, it's important that your app is fully accessible. This is also a great way to ensure that your app is usable by the sight impaired. Making your application accessible is usually as easy as giving your views reasonable labels. More details are available in [Apple's Documentation](http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html#//apple_ref/doc/uid/TP40008785-CH102-SW5).
+KIF relies on the built-in accessibility of iOS to perform its test steps. As such, it's important that your app is fully accessible. This is also a great way to ensure that your app is usable by everyone. Giving your views reasonable labels is usually a good place to start when making your application accessible. More details are available in [Apple's Documentation](http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html#//apple_ref/doc/uid/TP40008785-CH102-SW5).
 
 The first step is to create a test class to test some functionality.  In our case, we will create a login test (`LoginTests`). Create a new class that inherits from KIFTestCase.  You may have to update the import to point to `<KIF/KIF.h>`. The test method name provides a unique identifier. Your `KIFTestCase` subclass should look something like this:
 
@@ -251,22 +245,24 @@ If you want to write your test cases in Swift, you'll need to keep two things in
 2. The `tester` and `system` keywords are C preprocessor macros which aren't available in Swift. You can easily write a small extension to `XCTestCase` or any other class to access them:
 
 ```swift
+import KIF
+ 
 extension XCTestCase {
-    func tester(_ file : String = __FILE__, _ line : Int = __LINE__) -> KIFUITestActor {
+    func tester(file : String = #file, _ line : Int = #line) -> KIFUITestActor {
         return KIFUITestActor(inFile: file, atLine: line, delegate: self)
     }
 
-    func system(_ file : String = __FILE__, _ line : Int = __LINE__) -> KIFSystemTestActor {
+    func system(file : String = #file, _ line : Int = #line) -> KIFSystemTestActor {
         return KIFSystemTestActor(inFile: file, atLine: line, delegate: self)
     }
 }
 
 extension KIFTestActor {
-    func tester(_ file : String = __FILE__, _ line : Int = __LINE__) -> KIFUITestActor {
+    func tester(file : String = #file, _ line : Int = #line) -> KIFUITestActor {
         return KIFUITestActor(inFile: file, atLine: line, delegate: self)
     }
 
-    func system(_ file : String = __FILE__, _ line : Int = __LINE__) -> KIFSystemTestActor {
+    func system(file : String = #file, _ line : Int = #line) -> KIFSystemTestActor {
         return KIFSystemTestActor(inFile: file, atLine: line, delegate: self)
     }
 }

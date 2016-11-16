@@ -22,6 +22,7 @@ typedef CGPoint KIFDisplacement;
 - (UIAccessibilityElement *)accessibilityElementWithLabel:(NSString *)label;
 - (UIAccessibilityElement *)accessibilityElementWithLabel:(NSString *)label traits:(UIAccessibilityTraits)traits;
 - (UIAccessibilityElement *)accessibilityElementWithLabel:(NSString *)label accessibilityValue:(NSString *)value traits:(UIAccessibilityTraits)traits;
++ (BOOL)accessibilityElement:(UIAccessibilityElement *)element hasLabel:(NSString *)label accessibilityValue:(NSString *)value traits:(UIAccessibilityTraits)traits;
 
 /*!
  @method accessibilityElementMatchingBlock:
@@ -114,15 +115,5 @@ typedef CGPoint KIFDisplacement;
  @abstract Returns either the current window or another window if a transform is applied.  Returns `nil` if all windows in the application have transforms.
  */
 @property (nonatomic, readonly) UIWindow *windowOrIdentityWindow;
-
-/*!
- @abstract Prints the view hiererchy, starting from the top window(s), along with accessibility information, which is more related to KIF than the usual information given by the 'description' method.
- */
-+(void)printViewHierarchy;
-
-/*!
- @abstract Prints the view hiererchy, starting from this view, along with accessibility information, which is more related to KIF than the usual information given by the 'description' method.
- */
--(void)printViewHierarchy;
 
 @end

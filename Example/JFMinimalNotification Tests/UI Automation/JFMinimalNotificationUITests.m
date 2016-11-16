@@ -38,8 +38,8 @@
     UIView* subtitleView = [tester waitForViewWithAccessibilityLabel:@"Notification Subtitle"];
     [tester expectView:subtitleView toContainText:@"Error Subtitle!"];
     
-    UIView* contentView = [tester waitForViewWithAccessibilityLabel:@"Notification Content View"];
-    XCTAssert([contentView.backgroundColor isEqual:[UIColor notificationRedColor]], @"Error notification didn't have red color background");
+    UIView* notification = [tester waitForViewWithAccessibilityLabel:@"Notification Content View"].superview;
+    XCTAssert([notification.backgroundColor isEqual:[UIColor notificationRedColor]], @"Error notification didn't have red color background");
     
     [tester tapViewWithAccessibilityLabel:@"dismiss"];
 }
@@ -66,8 +66,8 @@
     UIView* subtitleView = [tester waitForViewWithAccessibilityLabel:@"Notification Subtitle"];
     [tester expectView:subtitleView toContainText:@"Success Subtitle!"];
     
-    UIView* contentView = [tester waitForViewWithAccessibilityLabel:@"Notification Content View"];
-    XCTAssert([contentView.backgroundColor isEqual:[UIColor notificationGreenColor]], @"Error notification didn't have red color background");
+    UIView* notification = [tester waitForViewWithAccessibilityLabel:@"Notification Content View"].superview;
+    XCTAssert([notification.backgroundColor isEqual:[UIColor notificationGreenColor]], @"Error notification didn't have red color background");
     
     [tester tapViewWithAccessibilityLabel:@"dismiss"];
 }
@@ -94,8 +94,8 @@
     UIView* subtitleView = [tester waitForViewWithAccessibilityLabel:@"Notification Subtitle"];
     [tester expectView:subtitleView toContainText:@"Info Subtitle!"];
     
-    UIView* contentView = [tester waitForViewWithAccessibilityLabel:@"Notification Content View"];
-    XCTAssert([contentView.backgroundColor isEqual:[UIColor notificationOrangeColor]], @"Error notification didn't have red color background");
+    UIView* notification = [tester waitForViewWithAccessibilityLabel:@"Notification Content View"].superview;
+    XCTAssert([notification.backgroundColor isEqual:[UIColor notificationOrangeColor]], @"Error notification didn't have red color background");
     
     [tester tapViewWithAccessibilityLabel:@"dismiss"];
 }
@@ -122,8 +122,8 @@
     UIView* subtitleView = [tester waitForViewWithAccessibilityLabel:@"Notification Subtitle"];
     [tester expectView:subtitleView toContainText:@"Default Subtitle!"];
     
-    UIView* contentView = [tester waitForViewWithAccessibilityLabel:@"Notification Content View"];
-    XCTAssert([contentView.backgroundColor isEqual:[UIColor notificationBlueColor]], @"Error notification didn't have red color background");
+    UIView* notification = [tester waitForViewWithAccessibilityLabel:@"Notification Content View"].superview;
+    XCTAssert([notification.backgroundColor isEqual:[UIColor notificationBlueColor]], @"Error notification didn't have red color background");
     
     [tester tapViewWithAccessibilityLabel:@"dismiss"];
 }
@@ -150,8 +150,8 @@
     UIView* subtitleView = [tester waitForViewWithAccessibilityLabel:@"Notification Subtitle"];
     [tester expectView:subtitleView toContainText:@"Warning Subtitle!"];
     
-    UIView* contentView = [tester waitForViewWithAccessibilityLabel:@"Notification Content View"];
-    XCTAssert([contentView.backgroundColor isEqual:[UIColor notificationYellowColor]], @"Error notification didn't have red color background");
+    UIView* notification = [tester waitForViewWithAccessibilityLabel:@"Notification Content View"].superview;
+    XCTAssert([notification.backgroundColor isEqual:[UIColor notificationYellowColor]], @"Error notification didn't have red color background");
     
     [tester tapViewWithAccessibilityLabel:@"dismiss"];
 }

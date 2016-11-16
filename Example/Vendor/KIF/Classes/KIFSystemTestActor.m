@@ -11,6 +11,8 @@
 #import <UIKit/UIKit.h>
 #import "UIApplication-KIFAdditions.h"
 #import "NSError-KIFAdditions.h"
+#import "UIAutomationHelper.h"
+
 
 @implementation KIFSystemTestActor
 
@@ -56,17 +58,7 @@
 
 - (void)simulateDeviceRotationToOrientation:(UIDeviceOrientation)orientation
 {
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(rotateIfNeeded:completion:)]) {
-        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        [[UIApplication sharedApplication] rotateIfNeeded:orientation completion:^{
-            dispatch_semaphore_signal(semaphore);
-        }];
-        while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) {
-            CFRunLoopRunInMode([[UIApplication sharedApplication] currentRunLoopMode] ?: kCFRunLoopDefaultMode, 0.1, false);
-        }
-    } else {
-        [[UIApplication sharedApplication] rotateIfNeeded:orientation];
-    }
+    [[UIDevice currentDevice] setValue:[NSNumber numberWithInt:orientation] forKey:@"orientation"];
 }
 
 
@@ -120,6 +112,10 @@
     if (![[UIApplication sharedApplication] writeScreenshotForLine:(NSUInteger)self.line inFile:self.file description:description error:&error]) {
         [self failWithError:error stopTest:NO];
     }
+}
+
+- (void)deactivateAppForDuration:(NSTimeInterval)duration {
+    [UIAutomationHelper deactivateAppForDuration:@(duration)];
 }
 
 @end
