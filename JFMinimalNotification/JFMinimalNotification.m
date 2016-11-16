@@ -197,7 +197,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
         [self.superview addConstraints:self.notificationVerticalConstraints];
         
         [UIView animateWithDuration:0.6f delay:0.0f usingSpringWithDamping:0.7f initialSpringVelocity:0.3f options:UIViewAnimationOptionAllowAnimatedContent animations:^{
-            [self layoutIfNeeded];
+            [self.superview layoutIfNeeded];
         } completion:^(BOOL finished) {
             
             if (self.dismissalDelay > 0) {
@@ -228,7 +228,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     [self configureInitialNotificationConstraintsForTopPresentation:self.presentFromTop layoutIfNeeded:NO];
     
     [UIView animateWithDuration:0.6f delay:0.0f usingSpringWithDamping:0.7f initialSpringVelocity:0.3f options:UIViewAnimationOptionAllowAnimatedContent animations:^{
-        [self layoutIfNeeded];
+        [self.superview layoutIfNeeded];
     } completion:^(BOOL finished) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(minimalNotificationDidDismissNotification:)]) {
             [self.delegate minimalNotificationDidDismissNotification:self];
