@@ -23,6 +23,19 @@ See a short video of this control here: [https://www.youtube.com/watch?v=jDYC-NY
 ![Error](https://imageshack.us/a/img43/7325/screenshot20130508at125.png)
 ![Default](https://imageshack.us/a/img856/7325/screenshot20130508at125.png)  -->
 
+Installation:
+------------
+
+### CocoaPods
+
+`pod 'JFMinimalNotifications', '~> 0.0.8'`
+
+### Directly include source into your projects
+
+- Simply copy the source files from the "JFMinimalNotification" folder into your project.
+- In your application's project app target settings, find the "Build Phases" section and open the "Link Binary With Libraries" block and click the "+" button and select the "CoreGraphics.framework".
+
+
 How To Use It:
 -------------
 
@@ -127,19 +140,7 @@ Delegate Methods:
     - (void)minimalNotificationDidShowNotification:(JFMinimalNotification*)notification;
     - (void)minimalNotificationWillDisimissNotification:(JFMinimalNotification*)notification;
     - (void)minimalNotificationDidDismissNotification:(JFMinimalNotification*)notification;
-    
-Installation:
-------------
-
-### CocoaPods
-
-`pod 'JFMinimalNotifications', '~> 0.0.7'`
-
-### Directly include source into your projects
-
-- Simply copy the source files from the "JFMinimalNotification" folder into your project.
-- In your application's project app target settings, find the "Build Phases" section and open the "Link Binary With Libraries" block and click the "+" button and select the "CoreGraphics.framework".
-
+   
 License
 -------
 Copyright (c) 2012 Jeremy Fox ([jeremyfox.me](http://www.jeremyfox.me)). All rights reserved.
