@@ -291,7 +291,7 @@ static CGFloat const kNotificationAccessoryPadding = 10.0f;
     [self.superview addConstraints:self.notificationHorizontalConstraints];
     
     if (layoutIfNeeded) {
-        [self layoutIfNeeded];
+        [self.superview layoutIfNeeded];
     }
 }
 
