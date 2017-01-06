@@ -1,0 +1,9 @@
+framework module JSMinimalNotifications {
+    header "JSMinimalNotification.h"
+    header "JSMinimalNotificationArt.h"
+    header "NSInvocation+Constructors.h"
+    header "UIColor+JFMinimalNotificationColors"
+    header "UIView+Round"
+
+    export *
+}
