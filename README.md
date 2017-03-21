@@ -14,17 +14,13 @@ Looking for an Android version? Garrett Franks created one and it's awesome, che
 What It Looks Like:
 ------------------
 
-![Example](https://dl.dropboxusercontent.com/u/55388810/example.gif) ![Example](https://dl.dropboxusercontent.com/u/55388810/exampletop.gif)
+![Example](https://github.com/atljeremy/JFMinimalNotifications/blob/master/Resources/example.gif?raw=true) ![Example](https://github.com/atljeremy/JFMinimalNotifications/blob/master/Resources/exampletop.gif?raw=true)
 
 See a short video of this control here: [https://www.youtube.com/watch?v=jDYC-NYKl9A](https://www.youtube.com/watch?v=jDYC-NYKl9A)
 
 ### Screen Shots
 
-![Examples](https://dl.dropboxusercontent.com/u/55388810/JFMinimalNotificationExample.jpeg)
-<!-- ![Success With Left View](https://imageshack.us/a/img713/7325/screenshot20130508at125.png)
-![Success](https://imageshack.us/a/img560/7325/screenshot20130508at125.png)
-![Error](https://imageshack.us/a/img43/7325/screenshot20130508at125.png)
-![Default](https://imageshack.us/a/img856/7325/screenshot20130508at125.png)  -->
+![Examples](https://github.com/atljeremy/JFMinimalNotifications/blob/master/Resources/notification-examples.png?raw=true)
 
 Installation:
 ------------
