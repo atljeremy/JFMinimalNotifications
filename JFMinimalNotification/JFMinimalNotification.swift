@@ -194,8 +194,9 @@ public class JFMinimalNotification: UIView {
         
         superview?.removeConstraints(notificationVerticalConstraints)
         
+        let safeAreaPadding = presentFromTop ? safeAreaInsets.top : safeAreaInsets.bottom
         let views = ["notification": self]
-        let metrics = ["height": JFMinimalNotification.notificationViewHeight + edgePadding.top + edgePadding.bottom]
+        let metrics = ["height": JFMinimalNotification.notificationViewHeight + edgePadding.top + edgePadding.bottom + safeAreaPadding]
         
         let verticalConstraintString = presentFromTop ? "V:|[notification(==height)]" : "V:[notification(==height)]|"
         notificationVerticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: verticalConstraintString, options: [], metrics: metrics, views: views)
@@ -647,7 +648,8 @@ public class JFMinimalNotification: UIView {
             removeConstraints(contentViewVerticalConstraints)
             let views = ["contentView": contentView]
             let metrics = ["height": JFMinimalNotification.notificationViewHeight, "toppadding": edgePadding.top, "bottompadding": edgePadding.bottom]
-            contentViewVerticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-toppadding-[contentView(==height)]-bottompadding-|", options: [], metrics: metrics, views: views)
+            let visualForamt = presentFromTop ? "V:[contentView(==height)]-bottompadding-|" : "V:|-toppadding-[contentView(==height)]"
+            contentViewVerticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: visualForamt, options: [], metrics: metrics, views: views)
             addConstraints(contentViewVerticalConstraints)
         }
         
@@ -662,7 +664,7 @@ public class JFMinimalNotification: UIView {
         let views = ["superview": superview, "notification": self]
         let metrics = ["height": JFMinimalNotification.notificationViewHeight + edgePadding.top + edgePadding.bottom]
         
-        let verticalConstraintString = topPresentation ? "V:[notification(==height)][superview]" : "V:[superview][notification(==height)]"
+        let verticalConstraintString = topPresentation ? "V:[notification][superview]" : "V:[superview][notification]"
         notificationVerticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: verticalConstraintString, options: [], metrics: metrics, views: views)
         superview.addConstraints(notificationVerticalConstraints)
         
