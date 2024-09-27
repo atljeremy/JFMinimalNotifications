@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "JFMinimalNotifications"
-  s.version      = "0.0.9"
+  s.version      = "1.0.0"
   s.summary      = "An iOS UIView for presenting a minimalistic notification that doesn't block the UI and is highly configurable"
   s.requires_arc = true
 
@@ -61,7 +61,7 @@ Pod::Spec.new do |s|
   #
 
   # s.platform     = :ios
-  s.platform     = :ios, "7.0"
+  s.platform     = :ios, "13.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
@@ -74,7 +74,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/atljeremy/JFMinimalNotifications.git", :tag => "0.0.9" }
+  s.source       = { :git => "https://github.com/atljeremy/JFMinimalNotifications.git", :tag => "1.0.0" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -85,9 +85,9 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "JFMinimalNotification/*.{h,m}"
+  s.source_files  = "JFMinimalNotification/*.{swift}"
   # s.exclude_files = "Classes/Exclude"
-  s.public_header_files = "JFMinimalNotification/*.h"
+  # s.public_header_files = "JFMinimalNotification/*.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

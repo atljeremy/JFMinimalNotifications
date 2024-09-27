@@ -1,0 +1,3 @@
+[submodule "Example/Vendor/KIF"]
+	path = Example/Vendor/KIF
+	url = git@github.com:kif-framework/KIF
