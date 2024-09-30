@@ -37,7 +37,7 @@ How To Use It:
 ### Basic Example
 
 ```swift
-class MyViewControlelr: : UIViewController, JFMinimalNotificationDelegate {
+class MyViewController: : UIViewController, JFMinimalNotificationDelegate {
 
     private var minimalNotification: JFMinimalNotification?
 
