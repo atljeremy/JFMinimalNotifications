@@ -44,9 +44,6 @@ class MyViewController: : UIViewController, JFMinimalNotificationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        titleLabelTextField.text = "Testing"
-        subTitleLabelTextField.text = "This is my awesome sub-title"
-
         // Create the notification
         minimalNotification = JFMinimalNotification(
             withStyle: .custom,
