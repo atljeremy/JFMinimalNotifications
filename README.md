@@ -1,13 +1,11 @@
 JFMinimalNotification
 ===========
 
-This is an iOS UIView for presenting a beautiful notification that is highly configurable and works for both iPhone and iPad. JFMinimalNotification is only available in ARC and targets iOS 7.0+.
+This is an iOS UIView for presenting a beautiful notification that is highly configurable and works for both iPhone and iPad.
 
 [![CocoaPods](https://img.shields.io/cocoapods/v/JFMinimalNotifications.svg)](https://cocoapods.org/pods/JFMinimalNotifications)
 [![CocoaPods](https://img.shields.io/cocoapods/l/JFMinimalNotifications.svg?maxAge=2592000)]() 
 [![CocoaPods](https://img.shields.io/cocoapods/p/JFMinimalNotifications.svg?maxAge=2592000)]()
-
-Looking for an Android version? Garrett Franks created one and it's awesome, check it out: [https://github.com/gfranks/GFMinimalNotifications](https://github.com/gfranks/GFMinimalNotifications)
 
 What It Looks Like:
 ------------------
@@ -25,7 +23,7 @@ Installation:
 
 ### CocoaPods
 
-`pod 'JFMinimalNotifications', '~> 0.0.8'`
+`pod 'JFMinimalNotifications', '~> 1.0.1'`
 
 ### Directly include source into your projects
 
@@ -38,54 +36,73 @@ How To Use It:
 
 ### Basic Example
 
-```objective-c
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    /**
-     * Create the notification
-     */
-    self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleDefault title:@"This is my awesome title" subTitle:@"This is my awesome sub-title"];
-    
-    /**
-     * Set the desired font for the title and sub-title labels
-     * Default is System Normal
-     */
-    UIFont* titleFont = [UIFont fontWithName:@"STHeitiK-Light" size:22];
-    [self.minimalNotification setTitleFont:titleFont];
-    UIFont* subTitleFont = [UIFont fontWithName:@"STHeitiK-Light" size:16];
-    [self.minimalNotification setSubTitleFont:subTitleFont];
+```swift
+class MyViewControlelr: : UIViewController, JFMinimalNotificationDelegate {
+
+    private var minimalNotification: JFMinimalNotification?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        titleLabelTextField.text = "Testing"
+        subTitleLabelTextField.text = "This is my awesome sub-title"
+
+        // Create the notification
+        minimalNotification = JFMinimalNotification(
+            withStyle: .custom,
+            title: "Title here",
+            subTitle: "Subtitle here"
+        ) {
+            self.minimalNotification?.dismiss()
+        }
+
+        // Set the delegate id you'd like to know when the notificaiton `will...` and `did...` show and dismiss
+        minimalNotification?.delegate = self
+
+        // Add any needed edge padding (safe areas are handled automatically)
+        minimalNotification?.edgePadding = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+        
+        // Customize the appearnace of the notification and it's labels
+        minimalNotification?.backgroundColor = .purple
+        minimalNotification?.titleLabel?.textColor = .white
+        minimalNotification?.subTitleLabel?.textColor = .white
+        minimalNotification?.subTitleLabel?.numberOfLines = 2
+
+        // Set the desired font for title and subtitle labels
+        if let titleFont = UIFont(name: "STHeitiK-Light", size: 22) {
+            minimalNotification?.setTitleFont(titleFont)
+        }
+        if let subTitleFont = UIFont(name: "STHeitiK-Light", size: 16) {
+            minimalNotification?.setSubTitleFont(subTitleFont)
+        }
+
+        // Uncomment to present notification from the top of the screen
+        // minimalNotification?.presentFromTop = true
+
+        // Add the notificaiton to the view
+        view.addSubview(minimalNotification!)
+    }
 
     /**
-     * Set any necessary edge padding as needed
-     */
-    self.minimalNotification.edgePadding = UIEdgeInsetsMake(0, 0, 10, 0);
+    * Showing the notification from a button handler
+    */
+    @IBAction func show(_ sender: Any? = nil) {
+        minimalNotification?.show()
+    }
 
     /**
-     * Add the notification to a view
-     */
-    [self.view addSubview:self.minimalNotification];
-}
+    * Hiding the notification from a button handler
+    */
+    @IBAction func dismiss(_ sender: Any? = nil) {
+        minimalNotification?.dismiss()
+    }
 
-/**
- * Showing the notification from a button handler
- */
-- (IBAction)show:(id)sender {
-    [self.minimalNotification show];
-}
-
-/**
- * Hiding the notification from a button handler
- */
-- (IBAction)dismiss:(id)sender {
-    [self.minimalNotification dismiss];
 }
 ```
 
 ### Constructors / Options
 
-```objective-c
+```swift
 /**
  * Note: passing a dismissalDelay of 0 means the notification will NOT be automatically dismissed, you will need to 
  * dismiss the notification yourself by calling -dismiss on the notification object. If you pass a dismissalDelay 
@@ -94,38 +111,47 @@ How To Use It:
  */
  
 // With dismissalDelay
-self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleError title:@"This is my awesome title" subTitle:@"This is my awesome sub-title" dismissalDelay:3.0];
+minimalNotification = JFMinimalNotification(
+    withStyle: .custom,
+    title: "Title here",
+    subTitle: "Subtitle here",
+    dismissalDelay: 3
+)
  
 // Without dismissalDelay and with touchHandler
-self.minimalNotification = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleError title:@"This is my awesome title" subTitle:@"This is my awesome sub-title" dismissalDelay:0.0 touchHandler:^{
-    [self.minimalNotification dismiss];
-}];
+minimalNotification = JFMinimalNotification(
+    withStyle: .custom,
+    title: titleLabelTextField.text ?? "",
+    subTitle: subTitleLabelTextField.text ?? "",
+) {
+    self.minimalNotification?.dismiss()
+}
 ```
 
-```objective-c
+```swift
 // Available Styles
-typedef NS_ENUM(NSInteger, JFMinimalNotificationStyle) {
-    JFMinimalNotificationStyleDefault,
-    JFMinimalNotificationStyleError,
-    JFMinimalNotificationStyleSuccess,
-    JFMinimalNotificationStyleInfo,
-    JFMinimalNotificationStyleWarning,
+public enum JFMinimalNotificationStyle {
+    case `default`
+    case error
+    case success
+    case info
+    case warning
     
     /**
-     * @return Used to get a title and subtitle, no accessory views, and white bg with black label text. Use the .bakgroundColor property on the notification to set the desired background color and .textColor property on the titleLabel and subTitleLabel UILabel's to change text color.
+     * Used to get a title and subtitle, no accessory views, and white background with black label text. Use the `backgroundColor` property on the notification to set the desired background color and `textColor` property on the titleLabel and subTitleLabel UILabels to change text color.
      */
-    JFMinimalNotificationStyleCustom,
+    case custom
     
     /**
-     * @return A dark blur with vibrancy effect in the bakground with white label text.
+     * A dark blur with vibrancy effect in the background with white label text.
      */
-    JFMinimalNotificationStyleBlurDark,
+    case blurDark
     
     /**
-     * @return A light blur with vibrancy effect in the bakground with black label text.
+     * A light blur with vibrancy effect in the background with black label text.
      */
-    JFMinimalNotificationStyleBlurLight
-};
+    case blurLight
+}
 ```
 
 Please see the example project include in this repo for an example of how to use this notification.
@@ -133,10 +159,14 @@ Please see the example project include in this repo for an example of how to use
 Delegate Methods:
 ----------------
 
-    - (void)minimalNotificationWillShowNotification:(JFMinimalNotification*)notification;
-    - (void)minimalNotificationDidShowNotification:(JFMinimalNotification*)notification;
-    - (void)minimalNotificationWillDisimissNotification:(JFMinimalNotification*)notification;
-    - (void)minimalNotificationDidDismissNotification:(JFMinimalNotification*)notification;
+```swift
+public protocol JFMinimalNotificationDelegate: AnyObject {
+    func minimalNotificationWillShow(notification: JFMinimalNotification)
+    func minimalNotificationDidShow(notification: JFMinimalNotification)
+    func minimalNotificationWillDismiss(notification: JFMinimalNotification)
+    func minimalNotificationDidDismiss(notification: JFMinimalNotification)
+}
+```
    
 License
 -------

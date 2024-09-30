@@ -16,17 +16,17 @@ public enum JFMinimalNotificationStyle {
     case warning
     
     /**
-     * @return Used to get a title and subtitle, no accessory views, and white background with black label text. Use the `backgroundColor` property on the notification to set the desired background color and `textColor` property on the titleLabel and subTitleLabel UILabels to change text color.
+     * Used to get a title and subtitle, no accessory views, and white background with black label text. Use the `backgroundColor` property on the notification to set the desired background color and `textColor` property on the titleLabel and subTitleLabel UILabels to change text color.
      */
     case custom
     
     /**
-     * @return A dark blur with vibrancy effect in the background with white label text.
+     * A dark blur with vibrancy effect in the background with white label text.
      */
     case blurDark
     
     /**
-     * @return A light blur with vibrancy effect in the background with black label text.
+     * A light blur with vibrancy effect in the background with black label text.
      */
     case blurLight
 }
