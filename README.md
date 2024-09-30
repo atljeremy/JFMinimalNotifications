@@ -10,13 +10,13 @@ This is an iOS UIView for presenting a beautiful notification that is highly con
 What It Looks Like:
 ------------------
 
-![Example](https://github.com/atljeremy/JFMinimalNotifications/blob/master/Resources/example.gif?raw=true) ![Example](https://github.com/atljeremy/JFMinimalNotifications/blob/master/Resources/exampletop.gif?raw=true)
+![Example](https://github.com/atljeremy/JFMinimalNotifications/blob/main/Resources/example.gif?raw=true) ![Example](https://github.com/atljeremy/JFMinimalNotifications/blob/main/Resources/exampletop.gif?raw=true)
 
 See a short video of this control here: [https://www.youtube.com/watch?v=jDYC-NYKl9A](https://www.youtube.com/watch?v=jDYC-NYKl9A)
 
 ### Screen Shots
 
-![Examples](https://github.com/atljeremy/JFMinimalNotifications/blob/master/Resources/notification-examples.png?raw=true)
+![Examples](https://github.com/atljeremy/JFMinimalNotifications/blob/main/Resources/notification-examples.png?raw=true)
 
 Installation:
 ------------
